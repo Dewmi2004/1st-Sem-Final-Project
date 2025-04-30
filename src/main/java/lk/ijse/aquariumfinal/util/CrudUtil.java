@@ -24,5 +24,6 @@ public class  CrudUtil {
             boolean isSuccess = i>0;
             return (T)(Boolean) isSuccess;
         }
+
     }
 }
