@@ -5,14 +5,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LogginController implements Initializable {
+public class DashBoardController implements Initializable {
 
     @FXML
     private AnchorPane ancDash;
@@ -55,9 +54,11 @@ public class LogginController implements Initializable {
     }
 
     public void btnsupplierOnAction(ActionEvent actionEvent) {
+        nevigateTo("/view/Supplier.fxml");
     }
 
     public void btnOrderOnAction(ActionEvent actionEvent) {
+        nevigateTo("/view/Order.fxml");
     }
 
     public void btnTicketOnAction(ActionEvent actionEvent) {

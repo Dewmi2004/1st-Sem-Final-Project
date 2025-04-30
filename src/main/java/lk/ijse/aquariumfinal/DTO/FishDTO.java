@@ -1,4 +1,21 @@
 package lk.ijse.aquariumfinal.DTO;
 
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Setter
+@Getter
 public class FishDTO {
-}
+    private String fishId;
+    private String name;
+    private String size;
+    private String tankId;
+    private String gender;
+    private String waterType;
+    private String country;
+    private String inventoryId;
+    private String colour;
+
+    }

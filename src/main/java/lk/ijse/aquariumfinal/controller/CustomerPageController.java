@@ -1,4 +1,4 @@
-package lk.ijse.firstsem.aquarium.Controller.DTO;
+package lk.ijse.aquariumfinal.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,13 +11,22 @@ public class CustomerPageController {
     private TableView<?> tblCustomer;
 
     @FXML
+    private TextField txtAddress;
+
+    @FXML
+    private TextField txtContact;
+
+    @FXML
+    private TextField txtDob;
+
+    @FXML
     private TextField txtEmail;
 
     @FXML
-    private TextField txtName;
+    private TextField txtGender;
 
     @FXML
-    private TextField txtNic;
+    private TextField txtName;
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
