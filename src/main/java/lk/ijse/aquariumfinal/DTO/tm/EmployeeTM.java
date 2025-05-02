@@ -1,20 +1,19 @@
-package lk.ijse.aquariumfinal.DTO;
+package lk.ijse.aquariumfinal.DTO.tm;
 
 import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Setter
 @Getter
-public class EmployeeDTO {
+@ToString
+public class EmployeeTM {
     private String id;
     private String name;
     private String address;
     private String gender;
     private String dob;
-    private String contact;
     private String email;
-
+    private String contact;
 
 }

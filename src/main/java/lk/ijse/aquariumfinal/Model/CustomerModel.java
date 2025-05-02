@@ -17,7 +17,7 @@ public class CustomerModel {
     }
 
     public static Boolean deleteCustomer(String cusid) throws SQLException, ClassNotFoundException {
-        System.out.println(cusid + " is deleted");
+
         return CrudUtil.execute("delete from customer where customer_Id= ?",cusid);
     }
 
@@ -30,6 +30,8 @@ public class CustomerModel {
     }
     return customerDtoArrayList;
 }
+
+
 
     public String getNextCustomer() throws SQLException, ClassNotFoundException {
         ResultSet rs = CrudUtil.execute("select customer_id from customer order by customer_id DESC limit 1");

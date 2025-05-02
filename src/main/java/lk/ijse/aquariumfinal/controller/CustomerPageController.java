@@ -125,13 +125,11 @@ loadtable();
     }
 
     @FXML
-    void btnGenarateROnAction(ActionEvent event) {
-
-    }
+    void btnGenarateROnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        }
 
     @FXML
     void btnResetOnAction(ActionEvent event) {
-
 
     }
 
