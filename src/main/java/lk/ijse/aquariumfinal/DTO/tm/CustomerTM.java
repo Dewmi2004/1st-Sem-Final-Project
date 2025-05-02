@@ -11,8 +11,9 @@ public class CustomerTM {
     private String id;
     private String name;
     private String address;
-    private String dob;
     private String gender;
-    private String contact;
+    private String dob;
     private String email;
+    private String contact;
+
 }

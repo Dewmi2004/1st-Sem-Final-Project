@@ -11,4 +11,14 @@ module lk.ijse.aquariumfinal {
 
     exports lk.ijse.aquariumfinal.controller;
     opens lk.ijse.aquariumfinal.controller to javafx.fxml;
+
+    exports lk.ijse.aquariumfinal.DTO;
+    opens lk.ijse.aquariumfinal.DTO to javafx.fxml;
+
+    exports lk.ijse.aquariumfinal.DTO.tm;
+
+    opens lk.ijse.aquariumfinal.DTO.tm;
+
+
+
 }

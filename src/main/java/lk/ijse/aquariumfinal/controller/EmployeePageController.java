@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class EmployeePageController {
+public class  EmployeePageController {
 
     @FXML
     private TableView<?> tblCustomer;

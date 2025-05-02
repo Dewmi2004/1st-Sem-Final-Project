@@ -8,11 +8,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CustomerModel {
-    public boolean saveCustomer(CustomerDTO customerDto) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("insert into customer values(?,?,?,?,?,?,? )", customerDto.getId(), customerDto.getName(), customerDto.getAddress(), customerDto.getDob(), customerDto.getGender(), customerDto.getContact(), customerDto.getEmail());
+    public static boolean saveCustomer(CustomerDTO customerDto) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("insert into customer values(?,?,?,?,?,?,? )", customerDto.getId(), customerDto.getName(), customerDto.getAddress(),  customerDto.getGender(),customerDto.getDob(), customerDto.getEmail(), customerDto.getContact());
     }
 
-public ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException {
+    public static Boolean updateCustomer(CustomerDTO cusDto) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("update customer set customer_Name=?,customer_Address=?,customer_Gender=?,customer_Dob=?,customer_Email=?,customer_Contact=? where customer_Id= ?",cusDto.getName(),cusDto.getAddress(),cusDto.getGender(),cusDto.getDob(),cusDto.getEmail(),cusDto.getContact(),cusDto.getId());
+    }
+
+    public static Boolean deleteCustomer(String cusid) throws SQLException, ClassNotFoundException {
+        System.out.println(cusid + " is deleted");
+        return CrudUtil.execute("delete from customer where customer_Id= ?",cusid);
+    }
+
+    public static ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException {
     ResultSet rs = CrudUtil.execute("select * from customer");
     ArrayList<CustomerDTO> customerDtoArrayList = new ArrayList<>();
     while (rs.next()) {

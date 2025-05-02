@@ -1,23 +1,64 @@
 package lk.ijse.aquariumfinal.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import lk.ijse.aquariumfinal.DTO.CustomerDTO;
+import lk.ijse.aquariumfinal.DTO.tm.CustomerTM;
+import lk.ijse.aquariumfinal.Model.CustomerModel;
+import lk.ijse.aquariumfinal.util.CrudUtil;
+
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 
 public class CustomerPageController {
+private final CustomerModel Cmodel = new CustomerModel();
+    public Button btnGReport;
+    public Button btnUpdate;
+    public Button btnDelete;
+    public Button btnReset;
+    public Button btnSave;
+    @FXML
+    private TableColumn<?, ?> clmAddress;
 
     @FXML
-    private TableView<?> tblCustomer;
+    private TableColumn<?, ?> clmContact;
+
+    @FXML
+    private TableColumn<?, ?> clmCusId;
+
+    @FXML
+    private TableColumn<?, ?> clmDob;
+
+    @FXML
+    private TableColumn<?, ?> clmEmail;
+
+    @FXML
+    private TableColumn<?, ?> clmGender;
+
+    @FXML
+    private TableColumn<?, ?> clmName;
+
+    @FXML
+    private DatePicker dpCustomer;
+
+    @FXML
+    private Label lblCusId;
+
+    @FXML
+    private TableView<CustomerTM> tblCustomer;
 
     @FXML
     private TextField txtAddress;
 
     @FXML
     private TextField txtContact;
-
-    @FXML
-    private TextField txtDob;
 
     @FXML
     private TextField txtEmail;
@@ -27,10 +68,60 @@ public class CustomerPageController {
 
     @FXML
     private TextField txtName;
+public void initialize() throws SQLException, ClassNotFoundException {
+    setCellValueFactory();
+    setNextId();
+loadtable();
+}
+
+    private void loadtable() throws SQLException, ClassNotFoundException {
+    ArrayList<CustomerDTO> customers = Cmodel.getAllCustomer();
+    ObservableList<CustomerTM> obc = FXCollections.observableArrayList();
+    for (CustomerDTO customer : customers) {
+        CustomerTM CTM = new CustomerTM(
+                customer.getId(),
+                customer.getName(),
+                customer.getAddress(),
+                customer.getGender(),
+                customer.getDob(),
+                customer.getEmail(),
+                customer.getContact()
+        );
+       obc.add(CTM);
+    }
+    tblCustomer.setItems(obc);
+    }
+
+
+    private void setNextId() throws SQLException, ClassNotFoundException {
+    String nextiD = Cmodel.getNextCustomer();
+    lblCusId.setText(nextiD);
+
+    }
+
+    private void setCellValueFactory() {
+    clmCusId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        clmName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        clmAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        clmGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+        clmDob.setCellValueFactory(new PropertyValueFactory<>("dob"));
+        clmEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        clmContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
+
+    }
 
     @FXML
-    void btnDeleteOnAction(ActionEvent event) {
+    void btnDeleteOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+    String id = lblCusId.getText();
+        Boolean isDelete = Cmodel.deleteCustomer(id);
 
+        if (isDelete) {
+            loadtable();
+            setNextId();
+            new Alert(Alert.AlertType.INFORMATION, "Customer Deleted", ButtonType.OK).show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Customer Not Deleted", ButtonType.OK).show();
+        }
     }
 
     @FXML
@@ -41,16 +132,78 @@ public class CustomerPageController {
     @FXML
     void btnResetOnAction(ActionEvent event) {
 
-    }
-
-    @FXML
-    void btnSaveOnAction(ActionEvent event) {
 
     }
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) {
+    void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+String id = lblCusId.getText();
+String name = txtName.getText();
+String address = txtAddress.getText();
+String gender = txtGender.getText();
+String Dob = String.valueOf(dpCustomer.getValue());
+String email = txtEmail.getText();
+String contact = txtContact.getText();
+
+CustomerDTO cusDto = new CustomerDTO(
+        id,name,address,gender,Dob,email,contact
+);
+boolean isSave = CustomerModel.saveCustomer(cusDto);
+
+        if (isSave) {
+            loadtable();
+            setNextId();
+           new Alert(Alert.AlertType.INFORMATION, "Customer Saved", ButtonType.OK).show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Customer Not Saved", ButtonType.OK).show();
+        }
+
 
     }
 
+    @FXML
+    void btnUpdateOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        String id = lblCusId.getText();
+        String name = txtName.getText();
+        String address = txtAddress.getText();
+        String gender = txtGender.getText();
+        String Dob = String.valueOf(dpCustomer.getValue());
+        String email = txtEmail.getText();
+        String contact = txtContact.getText();
+
+        CustomerDTO cusDto = new CustomerDTO(
+                id,name,address,gender,Dob,email,contact
+        );
+        Boolean isUpdate = CustomerModel.updateCustomer(cusDto);
+
+        if (isUpdate) {
+            loadtable();
+            setNextId();
+            new Alert(Alert.AlertType.INFORMATION, "Customer Updated", ButtonType.OK).show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Customer Not Updated", ButtonType.OK).show();
+        }
+
+    }
+
+    public void clickOnAction(MouseEvent mouseEvent) {
+        CustomerTM selectedItem = tblCustomer.getSelectionModel().getSelectedItem();
+
+        if (selectedItem != null) {
+            lblCusId.setText(selectedItem.getId());
+            txtName.setText(selectedItem.getName());
+            txtAddress.setText(selectedItem.getAddress());
+            txtGender.setText(selectedItem.getGender());
+            dpCustomer.setValue(LocalDate.parse(selectedItem.getDob()));
+            txtEmail.setText(selectedItem.getEmail());
+            txtContact.setText(selectedItem.getContact());
+
+            // save button disable
+            btnSave.setDisable(true);
+
+            // update, delete button enable
+            btnUpdate.setDisable(false);
+            btnDelete.setDisable(false);
+}
+    }
 }
