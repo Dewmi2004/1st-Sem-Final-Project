@@ -44,6 +44,6 @@ public class SupplierModel {
     }
 
     public Boolean deleteSupplier(String id) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("delete from supplier where sup_Id= ?",id);
+        return CrudUtil.execute("delete from supplier where sup_Id = ?",id);
     }
 }

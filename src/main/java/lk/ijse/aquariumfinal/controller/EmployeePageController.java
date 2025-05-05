@@ -7,11 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import lk.ijse.aquariumfinal.DTO.CustomerDTO;
 import lk.ijse.aquariumfinal.DTO.EmployeeDTO;
-import lk.ijse.aquariumfinal.DTO.tm.CustomerTM;
 import lk.ijse.aquariumfinal.DTO.tm.EmployeeTM;
-import lk.ijse.aquariumfinal.Model.CustomerModel;
 import lk.ijse.aquariumfinal.Model.EmployeeModel;
 
 import java.sql.SQLException;
@@ -42,9 +39,6 @@ private final EmployeeModel Emodel = new EmployeeModel();
 
     @FXML
     private TextField txtContact;
-
-//    @FXML
-//    private TextField txtDob;
 
     @FXML
     private TextField txtEmail;

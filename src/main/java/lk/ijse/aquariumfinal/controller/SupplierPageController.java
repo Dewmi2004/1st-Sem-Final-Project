@@ -154,7 +154,7 @@ public class SupplierPageController {
             txtName.setText(selectedItem.getName());
             txtContact.setText(selectedItem.getContact());
             txtAddress.setText(selectedItem.getCompany_Address());
-            cbSupplyType.setValue(LocalDate.parse(selectedItem.getSupply_Type()));
+            cbSupplyType.setValue(selectedItem.getSupply_Type());
             txtEmail.setText(selectedItem.getEmail());
 
 
