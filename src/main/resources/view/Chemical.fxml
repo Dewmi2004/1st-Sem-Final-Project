@@ -60,14 +60,11 @@
                                 </HBox>
                                 <HBox layoutX="10.0" layoutY="132.0" prefHeight="29.0" prefWidth="600.0">
                                     <children>
-                                        <Label prefHeight="29.0" prefWidth="107.0" text="Inventry_Id " textFill="#f2ebeb">
+                                        <Label prefHeight="25.0" prefWidth="120.0" text="Inventry_Id " textFill="#f2ebeb">
                                             <HBox.margin>
                                                 <Insets left="10.0" />
                                             </HBox.margin></Label>
-                                        <TextField fx:id="txtInventryId" prefHeight="26.0" prefWidth="485.0" promptText="I001" style="-fx-background-color: #130f40; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
-                                            <HBox.margin>
-                                                <Insets left="10.0" right="10.0" />
-                                            </HBox.margin></TextField>
+                              <ComboBox fx:id="CboxInventry" prefHeight="25.0" prefWidth="485.0" promptText="I001" />
                                     </children>
                                 </HBox>
                                 <HBox layoutX="10.0" layoutY="137.0" prefHeight="29.0" prefWidth="600.0">

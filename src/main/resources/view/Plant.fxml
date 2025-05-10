@@ -38,7 +38,7 @@
                                             <HBox.margin>
                                                 <Insets left="10.0" />
                                             </HBox.margin></Label>
-                                        <ComboBox fx:id="CBoxType" prefHeight="25.0" prefWidth="483.0" promptText="River Water">
+                                        <ComboBox fx:id="CBoxType" prefHeight="25.0" prefWidth="479.0" promptText="River Water">
                                             <HBox.margin>
                                                 <Insets left="10.0" right="10.0" />
                                             </HBox.margin>
@@ -47,39 +47,29 @@
                                 </HBox>
                                 <HBox layoutX="10.0" layoutY="103.0" prefHeight="29.0" prefWidth="600.0">
                                     <children>
-                                        <Label prefHeight="29.0" prefWidth="107.0" text="Inventry Id" textFill="#fff8f8">
+                                        <Label prefHeight="25.0" prefWidth="115.0" text="Inventry Id" textFill="#fff8f8">
                                             <HBox.margin>
                                                 <Insets left="10.0" />
                                             </HBox.margin></Label>
-                                        <TextField fx:id="txtInventryid" layoutX="126.0" layoutY="10.0" prefHeight="26.0" prefWidth="485.0" promptText="I001" style="-fx-background-color: #130f40; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
-                                            <HBox.margin>
-                                                <Insets left="10.0" right="10.0" />
-                                            </HBox.margin>
-                                        </TextField>
+                              <ComboBox fx:id="CBoxInventry" prefHeight="25.0" prefWidth="483.0" promptText="I001" />
                                     </children>
                                 </HBox>
                                 <HBox layoutX="10.0" layoutY="132.0" prefHeight="29.0" prefWidth="600.0">
                                     <children>
-                                        <Label prefHeight="29.0" prefWidth="107.0" text="Tank Id" textFill="#f2ebeb">
+                                        <Label prefHeight="25.0" prefWidth="115.0" text="Tank Id" textFill="#f2ebeb">
                                             <HBox.margin>
                                                 <Insets left="10.0" />
                                             </HBox.margin></Label>
-                                        <TextField fx:id="txtTankid" prefHeight="26.0" prefWidth="485.0" promptText="T001" style="-fx-background-color: #130f40; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
-                                            <HBox.margin>
-                                                <Insets left="10.0" right="10.0" />
-                                            </HBox.margin></TextField>
+                              <ComboBox fx:id="CBoxTank" prefHeight="25.0" prefWidth="483.0" promptText="T001" />
                                     </children>
                                 </HBox>
                                 <HBox layoutX="10.0" layoutY="137.0" prefHeight="29.0" prefWidth="600.0">
                                     <children>
-                                        <Label prefHeight="26.0" prefWidth="106.0" text="Size" textFill="#f5eeee">
+                                        <Label prefHeight="25.0" prefWidth="116.0" text="Size" textFill="#f5eeee">
                                             <HBox.margin>
                                                 <Insets left="10.0" />
                                             </HBox.margin></Label>
-                                        <TextField fx:id="txtSize" prefHeight="26.0" prefWidth="487.0" promptText="Small" style="-fx-background-color: #130f40; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
-                                            <HBox.margin>
-                                                <Insets left="10.0" right="10.0" />
-                                            </HBox.margin></TextField>
+                              <ComboBox fx:id="CBoxSize" prefHeight="25.0" prefWidth="483.0" promptText="Small" />
                                     </children>
                                 </HBox>
                                 <HBox layoutX="10.0" layoutY="157.0" prefHeight="29.0" prefWidth="600.0" />

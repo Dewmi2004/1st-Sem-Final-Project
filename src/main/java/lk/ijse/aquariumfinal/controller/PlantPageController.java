@@ -12,6 +12,9 @@ public class PlantPageController {
     public TextField txtTankid;
     public TextField txtSize;
     public TableView tblPlant;
+    public ComboBox CBoxInventry;
+    public ComboBox CBoxTank;
+    public ComboBox CBoxSize;
 
     public void btnGenarateROnAction(ActionEvent actionEvent) {
     }

@@ -30,9 +30,6 @@ public class CustomerModel {
     }
     return customerDtoArrayList;
 }
-
-
-
     public String getNextCustomer() throws SQLException, ClassNotFoundException {
         ResultSet rs = CrudUtil.execute("select customer_id from customer order by customer_id DESC limit 1");
         char tableCharactor ='C';

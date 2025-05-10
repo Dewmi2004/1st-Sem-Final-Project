@@ -12,6 +12,7 @@ public class ChemicalPageController {
     public TextField txtInventryId;
     public TextField txtName;
     public TableView tblChemical;
+    public ComboBox CboxInventry;
 
     public void btnGenarateROnAction(ActionEvent actionEvent) {
     }
