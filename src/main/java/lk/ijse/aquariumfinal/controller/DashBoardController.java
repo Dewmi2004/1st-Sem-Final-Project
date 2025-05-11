@@ -33,7 +33,7 @@ public class DashBoardController implements Initializable {
     private Label lblDash;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle)  {
         nevigateTo("/view/Customer.fxml");
     }
 

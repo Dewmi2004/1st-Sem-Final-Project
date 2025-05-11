@@ -7,15 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import lk.ijse.aquariumfinal.DTO.CustomerDTO;
 import lk.ijse.aquariumfinal.DTO.SupplierDTO;
-import lk.ijse.aquariumfinal.DTO.tm.CustomerTM;
 import lk.ijse.aquariumfinal.DTO.tm.SupplierTM;
-import lk.ijse.aquariumfinal.Model.CustomerModel;
 import lk.ijse.aquariumfinal.Model.SupplierModel;
-
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SupplierPageController {
@@ -38,10 +33,10 @@ public class SupplierPageController {
     public Button btnDelete;
     public Button btnReset;
     public Button btnSave;
-
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
         setNextId();
+        cbSupplyType.setItems(Smodel.getSupplyTypes());
         loadtable();
     }
 
@@ -70,12 +65,12 @@ public class SupplierPageController {
     }
 
     private void setCellValueFactory() {
-        clmSupplierID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        clmSupplierID.setCellValueFactory(new PropertyValueFactory<>("supId"));
         clmName.setCellValueFactory(new PropertyValueFactory<>("name"));
         clmContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
-        clmCompanyAddress.setCellValueFactory(new PropertyValueFactory<>("company Address"));
-        clmSupplierType.setCellValueFactory(new PropertyValueFactory<>("Supplier_Type"));
-        clmEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        clmCompanyAddress.setCellValueFactory(new PropertyValueFactory<>("companyAddress"));
+        clmSupplierType.setCellValueFactory(new PropertyValueFactory<>("supplyType"));
+        clmEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
 
     }
 
@@ -153,8 +148,8 @@ public class SupplierPageController {
             lblSupId.setText(selectedItem.getSupId());
             txtName.setText(selectedItem.getName());
             txtContact.setText(selectedItem.getContact());
-            txtAddress.setText(selectedItem.getCompany_Address());
-            cbSupplyType.setValue(selectedItem.getSupply_Type());
+            txtAddress.setText(selectedItem.getCompanyAddress());
+            cbSupplyType.setValue(selectedItem.getSupplyType());
             txtEmail.setText(selectedItem.getEmail());
 
 

@@ -1,5 +1,7 @@
 package lk.ijse.aquariumfinal.Model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lk.ijse.aquariumfinal.DTO.CustomerDTO;
 import lk.ijse.aquariumfinal.DTO.SupplierDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 
 public class SupplierModel {
     public static boolean saveSupplier(SupplierDTO supDTO) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("insert into supplier values(?,?,?,?,? )", supDTO.getSupId(), supDTO.getName(), supDTO.getContact(),  supDTO.getCompanyAddress(),supDTO.getSupplyType(), supDTO.getEmail());
+        return CrudUtil.execute("insert into supplier values(?,?,?,?,?,? )", supDTO.getSupId(), supDTO.getName(), supDTO.getContact(),  supDTO.getCompanyAddress(),supDTO.getSupplyType(), supDTO.getEmail());
 
     }
 
@@ -46,4 +48,16 @@ public class SupplierModel {
     public Boolean deleteSupplier(String id) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("delete from supplier where sup_Id = ?",id);
     }
-}
+
+    public ObservableList <String>  getSupplyTypes() {
+
+            return FXCollections.observableArrayList(
+                    "Fish Supplier",
+                    "Food Supplier",
+                    "Chemical Supplier",
+                    "Plant Supplier",
+                    "Tank Supplier"
+            );
+        }
+    }
+
