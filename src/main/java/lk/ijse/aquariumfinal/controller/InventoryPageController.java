@@ -1,29 +1,140 @@
 package lk.ijse.aquariumfinal.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import lk.ijse.aquariumfinal.DTO.InventoryDTO;
+import lk.ijse.aquariumfinal.DTO.tm.InventryTM;
+import lk.ijse.aquariumfinal.Model.InventoryModel;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class InventoryPageController {
-    public TextField txtSuppId;
+    private final InventoryModel Imodel = new InventoryModel();
     public DatePicker DPDate;
     public TableView tblInventry;
     public ComboBox CboxSupplier;
+    public Label lblInventryid;
+    public Button btnGenarateR;
+    public Button btnUpdate;
+    public Button btnDelete;
+    public Button btnReset;
+    public Button btnSave;
+    public TableColumn clmInventryId;
+    public TableColumn clmSupplierId;
+    public TableColumn clmDate;
+
+    public void initialize() throws SQLException, ClassNotFoundException {
+        setCellValueFactory();
+        setNextId();
+     CboxSupplier.setItems(Imodel.getAllSupplierId());
+        loadtable();
+    }
+
+    private void loadtable() throws SQLException, ClassNotFoundException {
+        ArrayList<InventoryDTO> inventrys = Imodel.getAllInventry();
+        ObservableList<InventryTM> obc = FXCollections.observableArrayList();
+        for (InventoryDTO Inventry : inventrys) {
+            InventryTM ITM = new InventryTM(
+                    Inventry.getInventoryId(),
+                    Inventry.getSupId(),
+                    Inventry.getDate()
+
+            );
+            obc.add(ITM);
+        }
+        tblInventry.setItems(obc);
+    }
+
+    private void setNextId() throws SQLException, ClassNotFoundException {
+        String nextiD = Imodel.getNextInventry();
+        lblInventryid.setText(nextiD);
+    }
+    private void setCellValueFactory() {
+        clmInventryId.setCellValueFactory(new PropertyValueFactory<>("inventoryId"));
+        clmSupplierId.setCellValueFactory(new PropertyValueFactory<>("supId"));
+        clmDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+    }
 
     public void btnGenarateROnAction(ActionEvent actionEvent) {
     }
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
+    public void btnUpdateOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String id = lblInventryid.getText();
+        String supid =  String.valueOf(CboxSupplier.getValue());
+        String date = String.valueOf(String.valueOf(DPDate.getValue()));
+
+
+        InventoryDTO inventryDTO = new InventoryDTO(
+                id,supid,date
+        );
+        Boolean isUpdate = Imodel.updateInventry(inventryDTO);
+
+        if (isUpdate) {
+            loadtable();
+            setNextId();
+            new Alert(Alert.AlertType.INFORMATION, "Inventry Updated", ButtonType.OK).show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Inventry Not Updated", ButtonType.OK).show();
+        }
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
+    public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String id = lblInventryid.getText();
+        Boolean isDelete = Imodel.deleteInventry(id);
+
+        if (isDelete) {
+            loadtable();
+            setNextId();
+            new Alert(Alert.AlertType.INFORMATION, "Inventry Deleted", ButtonType.OK).show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Inventry Not Deleted", ButtonType.OK).show();
+        }
     }
 
     public void btnResetOnAction(ActionEvent actionEvent) {
     }
 
-    public void btnSaveOnAction(ActionEvent actionEvent) {
+    public void btnSaveOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        String id = lblInventryid.getText();
+        String suppid = String.valueOf(CboxSupplier.getValue());
+        String date = String.valueOf(DPDate.getValue());
+
+
+        InventoryDTO inventoryDTO = new InventoryDTO(
+                id,suppid,date
+        );
+        boolean isSave = Imodel.saveInventry(inventoryDTO);
+
+        if (isSave) {
+            loadtable();
+            setNextId();
+            new Alert(Alert.AlertType.INFORMATION, "Inventry Saved", ButtonType.OK).show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "Inventry Not Saved", ButtonType.OK).show();
+        }
+    }
+
+    public void clickOnAction(MouseEvent mouseEvent) {
+        InventryTM selectedItem = (InventryTM) tblInventry.getSelectionModel().getSelectedItem();
+
+        if (selectedItem != null) {
+            lblInventryid.setText(selectedItem.getInventoryId());
+            CboxSupplier.setValue(selectedItem.getSupId());
+            DPDate.setValue(LocalDate.parse(selectedItem.getDate()));
+
+
+
+            // save button disable
+            btnSave.setDisable(true);
+
+            // update, delete button enable
+            btnUpdate.setDisable(false);
+            btnDelete.setDisable(false);
+        }
     }
 }
