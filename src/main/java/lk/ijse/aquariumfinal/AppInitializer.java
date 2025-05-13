@@ -9,7 +9,7 @@ import java.io.IOException;
 public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/DashBoard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/Logging.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Aquarium Management Project");
         stage.setScene(scene);

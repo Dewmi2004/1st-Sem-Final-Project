@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="440.0" prefWidth="720.0" style="-fx-background-color: #067e7f;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.LoggingPageController">
+
+    <children>
+
+
+        <VBox alignment="CENTER" layoutX="277.0" layoutY="20.0" prefHeight="361.0" prefWidth="419.0" spacing="15.0" style="-fx-background-color: #130f40; -fx-background-radius: 15; -fx-padding: 15;" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="20.0">
+
+            <effect>
+                <DropShadow color="#00000055" />
+            </effect>
+
+            <Label alignment="CENTER" prefHeight="46.0" prefWidth="182.0" text="Welcome Back" textFill="#e8b7b7">
+                <font>
+                    <Font name="Gabriola" size="39.0" />
+                </font>
+            </Label>
+
+            <Label text="Login to your account" textFill="#ebc8c8">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
+            </Label>
+
+            <TextField fx:id="txtUsername" maxWidth="250.0" promptText="Username">
+                <font>
+                    <Font name="System Bold" size="12.0" />
+                </font></TextField>
+            <PasswordField fx:id="txtPassword" maxWidth="250.0" promptText="Password">
+                <font>
+                    <Font name="System Bold" size="12.0" />
+                </font></PasswordField>
+
+            <Button fx:id="btnLogin" onAction="#loginOnAction" prefWidth="250.0" style="-fx-background-color: #067e7f; -fx-text-fill: white; -fx-background-radius: 10;" text="Login">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font></Button>
+
+            <Label fx:id="lblError" textFill="red" visible="false" />
+
+            <padding>
+                <Insets bottom="5.0" right="5.0" top="5.0" />
+            </padding>
+        </VBox>
+      <ImageView fitHeight="440.0" fitWidth="302.0" layoutX="-2.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../image/logging3.jpeg" />
+         </image>
+      </ImageView>
+
+    </children>
+</AnchorPane>
