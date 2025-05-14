@@ -33,9 +33,7 @@ public class DashBoardController implements Initializable {
     private Label lblDash;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)  {
-        nevigateTo("/view/Customer.fxml");
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle)  {nevigateTo("/view/Customer.fxml");}
 
     private void nevigateTo(String s) {
         try {
@@ -53,16 +51,13 @@ public class DashBoardController implements Initializable {
         }
     }
 
-    public void btnsupplierOnAction(ActionEvent actionEvent) {
-        nevigateTo("/view/Supplier.fxml");
-    }
+    public void btnsupplierOnAction(ActionEvent actionEvent) {nevigateTo("/view/Supplier.fxml");}
 
     public void btnOrderOnAction(ActionEvent actionEvent) {
         nevigateTo("/view/Order.fxml");
     }
 
-    public void btnTicketOnAction(ActionEvent actionEvent) {
-    }
+    public void btnTicketOnAction(ActionEvent actionEvent) {nevigateTo("/view/Ticket.fxml");}
 
     public void btnInventoryOnAction(ActionEvent actionEvent) {
         nevigateTo("/view/Inventory.fxml");

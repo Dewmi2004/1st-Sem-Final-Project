@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -26,7 +28,7 @@
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin></Label>
-                              <TextField fx:id="txtName" prefHeight="26.0" prefWidth="497.0" promptText="Customer" style="-fx-background-color: #130f40; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
+                              <TextField fx:id="txtName" prefHeight="26.0" prefWidth="497.0" promptText="Customer" style="-fx-background-color: #FFFFFF; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </HBox.margin></TextField>
@@ -38,7 +40,7 @@
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin></Label>
-                              <TextField fx:id="txtAddress" prefHeight="26.0" prefWidth="496.0" promptText="201/8 3rd Lane pallimulla panadura" style="-fx-background-color: #130f40; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
+                              <TextField fx:id="txtAddress" prefHeight="26.0" prefWidth="496.0" promptText="201/8 3rd Lane pallimulla panadura" style="-fx-background-color: #FFFFFF; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </HBox.margin></TextField>
@@ -63,7 +65,7 @@
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin></Label>
-                              <TextField fx:id="txtGender" prefHeight="26.0" prefWidth="496.0" promptText="male" style="-fx-background-color: #130f40; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
+                              <TextField fx:id="txtGender" prefHeight="26.0" prefWidth="496.0" promptText="male" style="-fx-background-color: #FFFFFF; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </HBox.margin></TextField>
@@ -75,7 +77,7 @@
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin></Label>
-                              <TextField fx:id="txtContact" prefHeight="26.0" prefWidth="497.0" promptText="0000000000" style="-fx-background-color: #130f40; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
+                              <TextField fx:id="txtContact" prefHeight="26.0" prefWidth="497.0" promptText="0000000000" style="-fx-background-color: #FFFFFF; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </HBox.margin></TextField>
@@ -87,7 +89,7 @@
                                  <HBox.margin>
                                     <Insets left="10.0" />
                                  </HBox.margin></Label>
-                              <TextField fx:id="txtEmail" prefHeight="26.0" prefWidth="498.0" promptText="imasha@gmail.com" style="-fx-background-color: #130f40; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
+                              <TextField fx:id="txtEmail" prefHeight="26.0" prefWidth="498.0" promptText="imasha@gmail.com" style="-fx-background-color: #FFFFFF; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
                                  <HBox.margin>
                                     <Insets left="10.0" right="10.0" />
                                  </HBox.margin></TextField>
@@ -98,26 +100,61 @@
                   </VBox>
                   <HBox prefHeight="46.0" prefWidth="600.0" style="-fx-background-color: #3A3773;">
                      <children>
-                        <Button fx:id="btnGReport" mnemonicParsing="false" onAction="#btnGenarateROnAction" style="-fx-background-color: #2c3e50;" text="Genarate Report" textFill="#f5f4f4">
+                        <Button fx:id="btnGReport" mnemonicParsing="false" onAction="#btnGenarateROnAction" style="-fx-background-color: #2980b9;" text="Genarate Report" textFill="#f5f4f4">
                            <HBox.margin>
                               <Insets left="10.0" top="10.0" />
-                           </HBox.margin></Button>
-                        <Button fx:id="btnUpdate" focusTraversable="false" mnemonicParsing="false" onAction="#btnUpdateOnAction" style="-fx-background-color: #2980b9;" text="Update" textFill="#f2efef">
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Icon/icons8-graph-report-script-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="btnUpdate" focusTraversable="false" mnemonicParsing="false" onAction="#btnUpdateOnAction" style="-fx-background-color: #f39c12;" text="Update" textFill="#f2efef">
                            <HBox.margin>
                               <Insets left="10.0" top="10.0" />
-                           </HBox.margin></Button>
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Icon/icons8-update-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                         <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDeleteOnAction" style="-fx-background-color: #c0392b;" text="Delete" textFill="#f5f5f5">
                            <HBox.margin>
                               <Insets left="10.0" top="10.0" />
-                           </HBox.margin></Button>
-                        <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnResetOnAction" style="-fx-background-color: #c0392b;" text="Reset" textFill="#f8f6f6">
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Icon/icons8-delete-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnResetOnAction" style="-fx-background-color: #27ae60;" text="Reset" textFill="#f8f6f6">
                            <HBox.margin>
                               <Insets left="10.0" top="10.0" />
-                           </HBox.margin></Button>
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Icon/icons8-reset-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #d35400;" text="Save" textFill="#f8f3f3">
                            <HBox.margin>
                               <Insets left="10.0" top="10.0" />
-                           </HBox.margin></Button>
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Icon/icons8-save-50.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                   </HBox>
                   <TableView fx:id="tblCustomer" onMouseClicked="#clickOnAction" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #636e72;" VBox.vgrow="ALWAYS">

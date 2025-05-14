@@ -33,7 +33,7 @@
                                                 <Insets left="10.0" />
                                             </HBox.margin>
                               </Label>
-                                        <TextField fx:id="txtName" focusTraversable="false" prefHeight="26.0" prefWidth="484.0" promptText="Food" style="-fx-background-color: #130f40; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
+                                        <TextField fx:id="txtName" focusTraversable="false" prefHeight="26.0" prefWidth="484.0" promptText="Food" style="-fx-background-color: #FFFFFF; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
                                             <HBox.margin>
                                                 <Insets left="10.0" right="10.0" />
                                             </HBox.margin>
@@ -46,7 +46,7 @@
                                             <HBox.margin>
                                                 <Insets left="10.0" />
                                             </HBox.margin></Label>
-                              <TextField fx:id="txtFishType" layoutX="132.0" layoutY="10.0" prefHeight="26.0" prefWidth="482.0" promptText="Gurami" style="-fx-background-color: #130f40; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;" />
+                              <TextField fx:id="txtFishType" layoutX="132.0" layoutY="10.0" prefHeight="26.0" prefWidth="482.0" promptText="Gurami" style="-fx-background-color: #FFFFFF; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;" />
                                     </children>
                                 </HBox>
                                 <HBox layoutX="10.0" layoutY="103.0" prefHeight="29.0" prefWidth="600.0">
