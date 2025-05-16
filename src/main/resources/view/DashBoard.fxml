@@ -9,26 +9,47 @@
 
 <AnchorPane prefHeight="602.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.DashBoardController">
    <children>
-      <AnchorPane fx:id="ancDash" prefHeight="400.0" prefWidth="227.0" style="-fx-background-color: #28264F;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="ancDash" prefHeight="400.0" prefWidth="227.0" style="-fx-background-color: #7b8ead;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="131.0" fitWidth="235.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="131.0" fitWidth="235.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ebf3f4;">
                <image>
                   <Image url="@../image/lighting-schedule-image.jpg" />
                </image>
             </ImageView>
-            <Label fx:id="lblDash" alignment="CENTER" layoutX="16.0" layoutY="32.0" prefHeight="34.0" prefWidth="198.0" style="-fx-background-color: #4B4794;" text="DashBoard" textAlignment="RIGHT" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+            <Label fx:id="lblDash" alignment="CENTER" layoutX="16.0" layoutY="32.0" prefHeight="34.0" prefWidth="198.0" style="-fx-background-color: #7b8ead;" text="DashBoard" textAlignment="RIGHT" textFill="#f8f8f8" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button layoutX="47.0" layoutY="148.0" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #BEB3FA;" text="Customer" />
-            <Button layoutX="47.0" layoutY="187.0" mnemonicParsing="false" onAction="#btnEmployeeOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #BEB3FA;" text="Employee" />
-            <Button layoutX="47.0" layoutY="225.0" mnemonicParsing="false" onAction="#btnsupplierOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #BEB3FA;" text="Supplier" />
-            <Button layoutX="47.0" layoutY="307.0" mnemonicParsing="false" onAction="#btnOrderOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #BEB3FA;" text="Order" />
-            <Button layoutX="47.0" layoutY="346.0" mnemonicParsing="false" onAction="#btnTicketOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #BEB3FA;" text="Ticket" />
-            <Button layoutX="47.0" layoutY="265.0" mnemonicParsing="false" onAction="#btnInventoryOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #BEB3FA;" text="Inventory" />
-            <Button layoutX="47.0" layoutY="389.0" mnemonicParsing="false" onAction="#btnItemOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #BEB3FA;" text="Item" />
-            <ImageView fitHeight="150.0" fitWidth="179.0" layoutX="28.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true">
+            <Button layoutX="47.0" layoutY="148.0" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #4b5b64;" text="Customer" textFill="#f2ecec" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font></Button>
+            <Button layoutX="47.0" layoutY="187.0" mnemonicParsing="false" onAction="#btnEmployeeOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #4b5b64;" text="Employee" textFill="#ebe3e3" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font></Button>
+            <Button layoutX="47.0" layoutY="225.0" mnemonicParsing="false" onAction="#btnsupplierOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #4b5b64;" text="Supplier" textFill="#ebe3e3" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font></Button>
+            <Button layoutX="47.0" layoutY="307.0" mnemonicParsing="false" onAction="#btnOrderOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #4b5b64;" text="Order" textFill="#ebe3e3" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font></Button>
+            <Button layoutX="47.0" layoutY="346.0" mnemonicParsing="false" onAction="#btnTicketOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #4b5b64;" text="Ticket" textFill="#ebe3e3" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font></Button>
+            <Button layoutX="47.0" layoutY="265.0" mnemonicParsing="false" onAction="#btnInventoryOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #4b5b64;" text="Inventory" textFill="#ebe3e3" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font></Button>
+            <Button layoutX="47.0" layoutY="389.0" mnemonicParsing="false" onAction="#btnItemOnAction" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: #4b5b64;" text="Item" textFill="#ebe3e3" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font></Button>
+            <ImageView fitHeight="150.0" fitWidth="179.0" layoutX="28.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ebf3f4;">
                <image>
                   <Image url="@../image/Aqua%20image.jpg" />
                </image>
