@@ -107,7 +107,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Icon/icons8-graph-report-script-50.png" />
+                                    <Image url="@../icon/icons8-graph-report-script-50.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
@@ -118,40 +118,40 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Icon/icons8-update-50.png" />
+                                    <Image url="@../icon/icons8-update-50.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDeleteOnAction" style="-fx-background-color: #dae9eb;" text="Delete" textFill="#0a0000">
+                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDeleteOnAction" style="-fx-background-color: #c0392b;" text="Delete" textFill="#0a0000">
                            <HBox.margin>
                               <Insets left="10.0" top="10.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Icon/icons8-delete-50.png" />
+                                    <Image url="@../icon/icons8-delete-50.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnResetOnAction" style="-fx-background-color: #dae9eb;" text="Reset" textFill="#460404">
+                        <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnResetOnAction" style="-fx-background-color: #2980b9;" text="Reset" textFill="#460404">
                            <HBox.margin>
                               <Insets left="10.0" top="10.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Icon/icons8-reset-50.png" />
+                                    <Image url="@../icon/icons8-reset-50.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #dae9eb;" text="Save" textFill="#280202">
+                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #27ae60;" text="Save" textFill="#280202">
                            <HBox.margin>
                               <Insets left="10.0" top="10.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Icon/icons8-save-50.png" />
+                                    <Image url="@../icon/icons8-save-50.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>

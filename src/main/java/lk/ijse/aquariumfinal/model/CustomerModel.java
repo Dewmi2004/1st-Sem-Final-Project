@@ -1,6 +1,6 @@
-package lk.ijse.aquariumfinal.Model;
+package lk.ijse.aquariumfinal.model;
 
-import lk.ijse.aquariumfinal.DTO.CustomerDTO;
+import lk.ijse.aquariumfinal.dto.CustomerDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
 
 import java.sql.ResultSet;

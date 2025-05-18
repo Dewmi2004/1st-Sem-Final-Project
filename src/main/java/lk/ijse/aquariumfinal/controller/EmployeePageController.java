@@ -7,9 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import lk.ijse.aquariumfinal.DTO.EmployeeDTO;
-import lk.ijse.aquariumfinal.DTO.tm.EmployeeTM;
-import lk.ijse.aquariumfinal.Model.EmployeeModel;
+import javafx.scene.layout.AnchorPane;
+import lk.ijse.aquariumfinal.dto.EmployeeDTO;
+import lk.ijse.aquariumfinal.dto.tm.EmployeeTM;
+import lk.ijse.aquariumfinal.model.EmployeeModel;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -53,6 +54,7 @@ private final EmployeeModel Emodel = new EmployeeModel();
         setNextId();
         loadtable();
     }
+
 
     private void loadtable() throws SQLException, ClassNotFoundException {
         ArrayList<EmployeeDTO> employees = Emodel.getAllEmployee();
@@ -138,8 +140,6 @@ private final EmployeeModel Emodel = new EmployeeModel();
             new Alert(Alert.AlertType.ERROR, "Employee Not Saved", ButtonType.OK).show();
         }
 
-
-
     }
 
     @FXML
@@ -166,9 +166,9 @@ private final EmployeeModel Emodel = new EmployeeModel();
         }
 
     }
+
     public void clickOnAction(MouseEvent mouseEvent) {
         EmployeeTM selectedItem = tblEmployee.getSelectionModel().getSelectedItem();
-
         if (selectedItem != null) {
             lblEmployeeid.setText(selectedItem.getId());
             txtName.setText(selectedItem.getName());

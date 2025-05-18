@@ -1,18 +1,13 @@
-package lk.ijse.aquariumfinal.DTO;
+package lk.ijse.aquariumfinal.dto.tm;
 
 import lombok.*;
-
-import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Setter
 @Getter
-public class InventoryDTO {
+public class InventryTM {
     private String inventoryId;
     private String supId;
     private String date;
-
-
-
 }

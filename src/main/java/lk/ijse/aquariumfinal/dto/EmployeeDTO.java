@@ -1,4 +1,4 @@
-package lk.ijse.aquariumfinal.DTO;
+package lk.ijse.aquariumfinal.dto;
 
 import lombok.*;
 
@@ -7,16 +7,14 @@ import lombok.*;
 @ToString
 @Setter
 @Getter
-public class CustomerDTO {
+public class EmployeeDTO {
     private String id;
     private String name;
     private String address;
     private String gender;
     private String dob;
-    private String email;
     private String contact;
-
+    private String email;
 
 
 }
-

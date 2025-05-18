@@ -7,9 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import lk.ijse.aquariumfinal.DTO.SupplierDTO;
-import lk.ijse.aquariumfinal.DTO.tm.SupplierTM;
-import lk.ijse.aquariumfinal.Model.SupplierModel;
+import lk.ijse.aquariumfinal.dto.SupplierDTO;
+import lk.ijse.aquariumfinal.dto.tm.SupplierTM;
+import lk.ijse.aquariumfinal.model.SupplierModel;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

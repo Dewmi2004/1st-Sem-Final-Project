@@ -55,7 +55,7 @@
                                  <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Icon/icons8-graph-report-script-50.png" />
+                                          <Image url="@../icon/icons8-graph-report-script-50.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -67,7 +67,7 @@
                                  <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Icon/icons8-update-50.png" />
+                                          <Image url="@../icon/icons8-update-50.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -79,7 +79,7 @@
                                  <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Icon/icons8-delete-50.png" />
+                                          <Image url="@../icon/icons8-delete-50.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -91,7 +91,7 @@
                                  <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Icon/icons8-reset-50.png" />
+                                          <Image url="@../icon/icons8-reset-50.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>
@@ -103,7 +103,7 @@
                                  <graphic>
                                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../Icon/icons8-save-50.png" />
+                                          <Image url="@../icon/icons8-save-50.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

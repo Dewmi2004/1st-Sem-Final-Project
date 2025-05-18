@@ -1,4 +1,4 @@
-package lk.ijse.aquariumfinal.DTO;
+package lk.ijse.aquariumfinal.dto;
 
 import lombok.*;
 

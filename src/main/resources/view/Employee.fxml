@@ -13,16 +13,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="632.0" style="-fx-background-color: #27ae60;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.EmployeePageController">
-   <children>
-      <AnchorPane layoutX="16.0" layoutY="14.0" prefHeight="427.0" prefWidth="632.0" style="-fx-background-image:url("../src/main/resources/image/Aqua image.jpg ") ;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane prefWidth="600.0" style="-fx-background-color: #7b8ead;" styleClass="root-background" stylesheets="@../style/app.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.EmployeePageController">
          <children>
-            <VBox layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+            <VBox prefHeight="414.0" prefWidth="600.0" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <VBox prefHeight="153.0" prefWidth="600.0">
                      <children>
                         <HBox prefHeight="35.0" prefWidth="600.0">
-                            <children>
+                           <children>
                               <Label prefHeight="32.0" prefWidth="311.0" text="Employee id" textFill="#f8f4f4">
                                  <HBox.margin>
                                     <Insets left="10.0" />
@@ -114,7 +112,7 @@
                            <graphic>
                               <ImageView fitHeight="2220.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Icon/icons8-graph-report-script-50.png" />
+                                    <Image url="@../icon/icons8-graph-report-script-50.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
@@ -125,7 +123,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Icon/icons8-update-50.png" />
+                                    <Image url="@../icon/icons8-update-50.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
@@ -136,7 +134,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Icon/icons8-delete-50.png" />
+                                    <Image url="@../icon/icons8-delete-50.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
@@ -147,7 +145,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Icon/icons8-reset-50.png" />
+                                    <Image url="@../icon/icons8-reset-50.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
@@ -158,7 +156,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Icon/icons8-save-50.png" />
+                                    <Image url="@../icon/icons8-save-50.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
@@ -182,5 +180,3 @@
             </VBox>
          </children>
       </AnchorPane>
-   </children>
-</AnchorPane>

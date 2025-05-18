@@ -1,13 +1,13 @@
-package lk.ijse.aquariumfinal.DTO.tm;
+package lk.ijse.aquariumfinal.dto;
 
 import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Setter
 @Getter
-@ToString
-public class EmployeeTM {
+public class CustomerDTO {
     private String id;
     private String name;
     private String address;
@@ -16,4 +16,7 @@ public class EmployeeTM {
     private String email;
     private String contact;
 
+
+
 }
+

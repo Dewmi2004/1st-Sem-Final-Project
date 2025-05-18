@@ -1,9 +1,8 @@
-package lk.ijse.aquariumfinal.Model;
+package lk.ijse.aquariumfinal.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lk.ijse.aquariumfinal.DTO.InventoryDTO;
-import lk.ijse.aquariumfinal.DTO.SupplierDTO;
+import lk.ijse.aquariumfinal.dto.InventoryDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
 
 import java.sql.ResultSet;
