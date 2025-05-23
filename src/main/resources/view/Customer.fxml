@@ -12,8 +12,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="494.0" prefWidth="624.0" style="-fx-background-color: #7b8ead;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.CustomerPageController">
+<AnchorPane prefHeight="494.0" prefWidth="624.0" style="-fx-background-color: #306899;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.CustomerPageController">
    <children>
       <AnchorPane layoutX="7.0" layoutY="14.0" prefHeight="415.0" prefWidth="611.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="14.0">
          <children>
@@ -27,7 +28,10 @@
                               <Label prefHeight="29.0" prefWidth="107.0" text="Name" textFill="#f5f2f2">
                                  <HBox.margin>
                                     <Insets left="10.0" />
-                                 </HBox.margin></Label>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
                               <TextField fx:id="txtName" prefHeight="26.0" prefWidth="497.0" promptText="Customer" style="-fx-background-color: #FFFFFF; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
@@ -39,19 +43,25 @@
                               <Label prefHeight="29.0" prefWidth="107.0" text="Address" textFill="#f2f0f0">
                                  <HBox.margin>
                                     <Insets left="10.0" />
-                                 </HBox.margin></Label>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
                               <TextField fx:id="txtAddress" prefHeight="26.0" prefWidth="496.0" promptText="201/8 3rd Lane pallimulla panadura" style="-fx-background-color: #FFFFFF; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
                                  </HBox.margin></TextField>
                            </children>
                         </HBox>
-                        <HBox layoutX="10.0" layoutY="74.0" prefHeight="29.0" prefWidth="600.0" style="-fx-background-color: #7b8ead;">
+                        <HBox layoutX="10.0" layoutY="74.0" prefHeight="29.0" prefWidth="600.0" style="-fx-background-color: #306899;">
                            <children>
-                              <Label prefHeight="25.0" prefWidth="118.0" text="Dob" textFill="#f8f6f6">
+                              <Label prefHeight="25.0" prefWidth="107.0" text="Dob" textFill="#f8f6f6">
                                  <HBox.margin>
                                     <Insets left="10.0" />
-                                 </HBox.margin></Label>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
                               <DatePicker fx:id="dpCustomer" prefHeight="25.0" prefWidth="495.0" promptText="24/07/2024">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
@@ -64,7 +74,10 @@
                               <Label prefHeight="29.0" prefWidth="107.0" text="Gender" textFill="#fff8f8">
                                  <HBox.margin>
                                     <Insets left="10.0" />
-                                 </HBox.margin></Label>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
                               <TextField fx:id="txtGender" prefHeight="26.0" prefWidth="496.0" promptText="male" style="-fx-background-color: #FFFFFF; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
@@ -76,7 +89,10 @@
                               <Label prefHeight="29.0" prefWidth="107.0" text="Contact" textFill="#f2ebeb">
                                  <HBox.margin>
                                     <Insets left="10.0" />
-                                 </HBox.margin></Label>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
                               <TextField fx:id="txtContact" prefHeight="26.0" prefWidth="497.0" promptText="0000000000" style="-fx-background-color: #FFFFFF; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
@@ -88,7 +104,10 @@
                               <Label prefHeight="26.0" prefWidth="106.0" text="Email" textFill="#f5eeee">
                                  <HBox.margin>
                                     <Insets left="10.0" />
-                                 </HBox.margin></Label>
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
                               <TextField fx:id="txtEmail" prefHeight="26.0" prefWidth="498.0" promptText="imasha@gmail.com" style="-fx-background-color: #FFFFFF; -fx-border-color: #000; -fx-border-width: 0 0 1px 0;">
                                  <HBox.margin>
                                     <Insets bottom="5.0" />
@@ -98,11 +117,11 @@
                         <HBox layoutX="10.0" layoutY="157.0" prefHeight="29.0" prefWidth="600.0" />
                      </children>
                   </VBox>
-                  <HBox prefHeight="46.0" prefWidth="600.0" style="-fx-background-color: #7b8ead;">
+                  <HBox prefHeight="110.0" prefWidth="600.0" style="-fx-background-color: #306899;">
                      <children>
-                        <Button fx:id="btnGReport" mnemonicParsing="false" onAction="#btnGenarateROnAction" style="-fx-background-color: #dae9eb;" text="Genarate Report" textFill="#220101">
+                        <Button fx:id="btnGReport" mnemonicParsing="false" onAction="#btnGenarateROnAction" style="-fx-background-color: #cadded;" text="Genarate Report" textFill="#220101">
                            <HBox.margin>
-                              <Insets left="10.0" top="10.0" />
+                              <Insets left="10.0" right="5.0" top="20.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -110,10 +129,13 @@
                                     <Image url="@../icon/icons8-graph-report-script-50.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
-                        <Button fx:id="btnUpdate" focusTraversable="false" mnemonicParsing="false" onAction="#btnUpdateOnAction" style="-fx-background-color: #dae9eb;" text="Update" textFill="#2f0303">
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btnUpdate" focusTraversable="false" mnemonicParsing="false" onAction="#btnUpdateOnAction" style="-fx-background-color: #cadded;" text="Update" textFill="#2f0303">
                            <HBox.margin>
-                              <Insets left="10.0" top="10.0" />
+                              <Insets left="10.0" right="5.0" top="20.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -121,10 +143,13 @@
                                     <Image url="@../icon/icons8-update-50.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
-                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDeleteOnAction" style="-fx-background-color: #c0392b;" text="Delete" textFill="#0a0000">
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDeleteOnAction" style="-fx-background-color: #cadded;" text="Delete" textFill="#0a0000">
                            <HBox.margin>
-                              <Insets left="10.0" top="10.0" />
+                              <Insets left="10.0" right="5.0" top="20.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -132,10 +157,13 @@
                                     <Image url="@../icon/icons8-delete-50.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
-                        <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnResetOnAction" style="-fx-background-color: #2980b9;" text="Reset" textFill="#460404">
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnResetOnAction" style="-fx-background-color: #cadded;" text="Reset" textFill="#460404">
                            <HBox.margin>
-                              <Insets left="10.0" top="10.0" />
+                              <Insets left="10.0" right="5.0" top="20.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -143,10 +171,13 @@
                                     <Image url="@../icon/icons8-reset-50.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
-                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #27ae60;" text="Save" textFill="#280202">
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #cadded;" text="Save" textFill="#280202">
                            <HBox.margin>
-                              <Insets left="10.0" top="10.0" />
+                              <Insets left="10.0" right="5.0" top="20.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -154,10 +185,13 @@
                                     <Image url="@../icon/icons8-save-50.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
                      </children>
                   </HBox>
-                  <TableView fx:id="tblCustomer" onMouseClicked="#clickOnAction" prefHeight="247.0" prefWidth="611.0" style="-fx-background-color: #7b8ead;" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="tblCustomer" onMouseClicked="#clickOnAction" prefHeight="247.0" prefWidth="611.0" style="-fx-background-color: #306899;" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="clmCusId" prefWidth="75.0" text="Customer id" />
                         <TableColumn fx:id="clmName" prefWidth="75.0" text="Name" />
@@ -173,7 +207,10 @@
                   </TableView>
                </children>
             </VBox>
-            <Label layoutX="6.0" layoutY="-9.0" prefHeight="32.0" prefWidth="311.0" text="Customer id" textFill="#fcf6f6" />
+            <Label layoutX="6.0" layoutY="-9.0" prefHeight="32.0" prefWidth="311.0" text="Customer id" textFill="#fcf6f6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
             <Label fx:id="lblCusId" layoutX="197.0" layoutY="-13.0" prefHeight="26.0" prefWidth="185.0" text="1" textFill="#f5efef" />
          </children>
       </AnchorPane>
