@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefWidth="600.0" style="-fx-background-color: #7b8ead;" styleClass="root-background" stylesheets="@../style/app.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.EmployeePageController">
+<AnchorPane prefWidth="600.0" style="-fx-background-color: #306899;" styleClass="root-background" stylesheets="@../style/app.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.EmployeePageController">
          <children>
             <VBox prefHeight="414.0" prefWidth="600.0" AnchorPane.bottomAnchor="-14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -125,11 +125,11 @@
                         <HBox layoutX="10.0" layoutY="157.0" prefHeight="29.0" prefWidth="600.0" />
                      </children>
                   </VBox>
-                  <HBox prefHeight="130.0" prefWidth="600.0" style="-fx-background-color: #7b8ead;">
+                  <HBox prefHeight="110.0" prefWidth="600.0" style="-fx-background-color: #306899;">
                      <children>
-                        <Button fx:id="btnGenarateR" mnemonicParsing="false" onAction="#btnGenarateROnAction" style="-fx-background-color: #dae9eb;" text="Genarate Report" textFill="#2c0101">
+                        <Button fx:id="btnGenarateR" mnemonicParsing="false" onAction="#btnGenarateROnAction" style="-fx-background-color: #cadded;" text="Genarate Report" textFill="#2c0101">
                            <HBox.margin>
-                              <Insets left="10.0" right="5.0" top="20.0" />
+                              <Insets left="10.0" right="5.0" top="15.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="2220.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -141,9 +141,9 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                        <Button fx:id="btnUpdate" focusTraversable="false" mnemonicParsing="false" onAction="#btnUpdateOnAction" style="-fx-background-color: #dae9eb;" text="Update" textFill="#2c0101">
+                        <Button fx:id="btnUpdate" focusTraversable="false" mnemonicParsing="false" onAction="#btnUpdateOnAction" style="-fx-background-color: #cadded;" text="Update" textFill="#2c0101">
                            <HBox.margin>
-                              <Insets left="10.0" right="5.0" top="20.0" />
+                              <Insets left="10.0" right="5.0" top="15.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -155,9 +155,9 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDeleteOnAction" style="-fx-background-color: #c0392b;" text="Delete" textFill="#2c0101">
+                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnDeleteOnAction" style="-fx-background-color: #cadded;" text="Delete" textFill="#2c0101">
                            <HBox.margin>
-                              <Insets left="10.0" right="5.0" top="20.0" />
+                              <Insets left="10.0" right="5.0" top="15.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -169,9 +169,9 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                        <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnResetOnAction" style="-fx-background-color: #2980b9;" text="Reset" textFill="#2c0101">
+                        <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnResetOnAction" style="-fx-background-color: #cadded;" text="Reset" textFill="#2c0101">
                            <HBox.margin>
-                              <Insets left="10.0" right="5.0" top="20.0" />
+                              <Insets left="10.0" right="5.0" top="15.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -183,9 +183,9 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #27ae60;" text="Save" textFill="#2c0101">
+                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #cadded;" text="Save" textFill="#2c0101">
                            <HBox.margin>
-                              <Insets left="10.0" right="5.0" top="20.0" />
+                              <Insets left="10.0" right="5.0" top="15.0" />
                            </HBox.margin>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -199,7 +199,7 @@
                      </font></Button>
                      </children>
                   </HBox>
-                  <TableView fx:id="tblEmployee" onMouseClicked="#clickOnAction" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #7b8ead;" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="tblEmployee" onMouseClicked="#clickOnAction" prefHeight="200.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="clmEmployeeId" prefWidth="75.0" text="Employee id" />
                         <TableColumn fx:id="clmName" prefWidth="75.0" text="Name" />

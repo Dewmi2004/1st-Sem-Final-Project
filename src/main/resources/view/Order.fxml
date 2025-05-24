@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #3A3773;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.OrderPageController">
+<AnchorPane prefHeight="600.0" prefWidth="850.0" style="-fx-background-color: #306899;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.OrderPageController">
     <children>
-        <VBox layoutY="-14.0" prefHeight="612.0" prefWidth="850.0" spacing="20.0" style="-fx-background-color: #3A3773;" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-14.0">
+        <VBox layoutY="-14.0" prefHeight="612.0" prefWidth="850.0" spacing="20.0" style="-fx-background-color: #306899;" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-14.0">
             <padding>
                 <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
             </padding>

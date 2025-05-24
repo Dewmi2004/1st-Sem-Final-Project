@@ -1,10 +1,7 @@
 package lk.ijse.aquariumfinal.controller;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class TicketPageController {
     public TextField txtTicketId;
@@ -15,6 +12,11 @@ public class TicketPageController {
     public ComboBox cboxCustomerId;
     public ComboBox cboxEmployeeId;
     public TableView tblTicket;
+    public Button btnReset1;
+    public Button btnSave1;
+    public Button btnDelete1;
+    public Button btnUpdate1;
+    public Button btnGenarateR1;
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
     }
@@ -26,5 +28,9 @@ public class TicketPageController {
     }
 
     public void btnResetOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnGenarateROnAction(ActionEvent actionEvent) {
+
     }
 }

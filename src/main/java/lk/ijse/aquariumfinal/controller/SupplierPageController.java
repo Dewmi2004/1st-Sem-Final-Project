@@ -28,11 +28,12 @@ public class SupplierPageController {
     public TableColumn clmContact;
     public TableColumn clmName;
     public TableColumn clmSupplierID;
-    public Button btnGenarateOnAction;
-    public Button btnUpdate;
-    public Button btnDelete;
-    public Button btnReset;
-    public Button btnSave;
+    public Button btnSave1;
+    public Button btnReset1;
+    public Button btnDelete1;
+    public Button btnUpdate1;
+    public Button btnGenarateR1;
+
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
         setNextId();
@@ -154,11 +155,11 @@ public class SupplierPageController {
 
 
             // save button disable
-            btnSave.setDisable(true);
+            btnSave1.setDisable(true);
 
             // update, delete button enable
-            btnUpdate.setDisable(false);
-            btnDelete.setDisable(false);
+            btnUpdate1.setDisable(false);
+            btnDelete1.setDisable(false);
         }
     }
     public void btnGenarateROnAction(ActionEvent actionEvent) {

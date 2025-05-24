@@ -1,10 +1,7 @@
 package lk.ijse.aquariumfinal.controller;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class FoodPageController {
     public TextField txtName;
@@ -14,6 +11,11 @@ public class FoodPageController {
     public TextField txtInventryId;
     public TableView tblFood;
     public ComboBox CboxInventry;
+    public Button btnGenarateR;
+    public Button btnUpdate;
+    public Button btnDelete;
+    public Button btnReset;
+    public Button btnSave;
 
     public void btnGenarateROnAction(ActionEvent actionEvent) {
     }

@@ -19,14 +19,14 @@ public class InventoryPageController {
     public TableView tblInventry;
     public ComboBox CboxSupplier;
     public Label lblInventryid;
-    public Button btnGenarateR;
-    public Button btnUpdate;
-    public Button btnDelete;
-    public Button btnReset;
-    public Button btnSave;
     public TableColumn clmInventryId;
     public TableColumn clmSupplierId;
     public TableColumn clmDate;
+    public Button btnSave1;
+    public Button btnReset1;
+    public Button btnDelete1;
+    public Button btnUpdate1;
+    public Button btnGenarateR1;
 
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
@@ -130,11 +130,11 @@ public class InventoryPageController {
 
 
             // save button disable
-            btnSave.setDisable(true);
+            btnSave1.setDisable(true);
 
             // update, delete button enable
-            btnUpdate.setDisable(false);
-            btnDelete.setDisable(false);
+            btnUpdate1.setDisable(false);
+            btnDelete1.setDisable(false);
         }
     }
 }

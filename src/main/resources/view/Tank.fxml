@@ -6,11 +6,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="436.0" prefWidth="624.0" style="-fx-background-color: #3A3773;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.TankPageCotroller">
+<AnchorPane prefHeight="436.0" prefWidth="624.0" style="-fx-background-color: #306899;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.TankPageCotroller">
     <children>
         <AnchorPane layoutX="7.0" layoutY="14.0" prefHeight="415.0" prefWidth="611.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="14.0">
             <children>
@@ -24,7 +27,10 @@
                                         <Label prefHeight="29.0" prefWidth="107.0" text="Glass Type" textFill="#f2f0f0">
                                             <HBox.margin>
                                                 <Insets left="10.0" />
-                                            </HBox.margin></Label>
+                                            </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
                               <ComboBox fx:id="CBoxGlass" layoutX="132.0" layoutY="10.0" prefHeight="25.0" prefWidth="483.0" promptText="Standerd Float Glass" />
                                     </children>
                                 </HBox>
@@ -33,7 +39,10 @@
                                         <Label prefHeight="29.0" prefWidth="107.0" text="Tank Type" textFill="#f8f6f6">
                                             <HBox.margin>
                                                 <Insets left="10.0" />
-                                            </HBox.margin></Label>
+                                            </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
                               <ComboBox fx:id="CBoxTank" layoutX="132.0" layoutY="10.0" prefHeight="25.0" prefWidth="483.0" promptText="Fish" />
                                     </children>
                                 </HBox>
@@ -42,7 +51,10 @@
                                         <Label prefHeight="29.0" prefWidth="95.0" text="Water Type" textFill="#fff8f8">
                                             <HBox.margin>
                                                 <Insets left="10.0" />
-                                            </HBox.margin></Label>
+                                            </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
                                         <ComboBox fx:id="CBoxWater" prefHeight="25.0" prefWidth="483.0" promptText="River Water">
                                             <HBox.margin>
                                                 <Insets left="10.0" right="10.0" />
@@ -51,32 +63,87 @@
                                     </children>
                                 </HBox>
                                 <HBox layoutX="10.0" layoutY="157.0" prefHeight="29.0" prefWidth="600.0" />
+                        <HBox prefHeight="110.0" prefWidth="600.0" style="-fx-background-color: #306899;">
+                           <children>
+                              <Button fx:id="btnGenarateR1" mnemonicParsing="false" onAction="#btnGenarateROnAction" style="-fx-background-color: #cadded;" text="Genarate Report" textFill="#2c0101">
+                                 <graphic>
+                                    <ImageView fitHeight="2220.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icon/icons8-graph-report-script-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="25.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnUpdate1" focusTraversable="false" mnemonicParsing="false" onAction="#btnUpdateOnAction" style="-fx-background-color: #cadded;" text="Update" textFill="#2c0101">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icon/icons8-update-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="25.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnDelete1" mnemonicParsing="false" onAction="#btnDeleteOnAction" style="-fx-background-color: #cadded;" text="Delete" textFill="#2c0101">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icon/icons8-delete-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="25.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnReset1" mnemonicParsing="false" onAction="#btnResetOnAction" style="-fx-background-color: #cadded;" text="Reset" textFill="#2c0101">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icon/icons8-reset-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="25.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnSave1" mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #cadded;" text="Save" textFill="#2c0101">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icon/icons8-save-50.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="25.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
                             </children>
                         </VBox>
-                        <HBox prefHeight="46.0" prefWidth="600.0" style="-fx-background-color: #3A3773;">
-                            <children>
-                                <Button mnemonicParsing="false" onAction="#btnGenarateROnAction" style="-fx-background-color: #2c3e50;" text="Genarate Report" textFill="#f5f4f4">
-                                    <HBox.margin>
-                                        <Insets left="10.0" />
-                                    </HBox.margin></Button>
-                                <Button focusTraversable="false" mnemonicParsing="false" onAction="#btnUpdateOnAction" style="-fx-background-color: #2980b9;" text="Update" textFill="#f2efef">
-                                    <HBox.margin>
-                                        <Insets left="10.0" />
-                                    </HBox.margin></Button>
-                                <Button mnemonicParsing="false" onAction="#btnDeleteOnAction" style="-fx-background-color: #c0392b;" text="Delete" textFill="#f5f5f5">
-                                    <HBox.margin>
-                                        <Insets left="10.0" />
-                                    </HBox.margin></Button>
-                                <Button mnemonicParsing="false" onAction="#btnResetOnAction" style="-fx-background-color: #c0392b;" text="Reset" textFill="#f8f6f6">
-                                    <HBox.margin>
-                                        <Insets left="10.0" />
-                                    </HBox.margin></Button>
-                                <Button mnemonicParsing="false" onAction="#btnSaveOnAction" style="-fx-background-color: #d35400;" text="Save" textFill="#f8f3f3">
-                                    <HBox.margin>
-                                        <Insets left="10.0" />
-                                    </HBox.margin></Button>
-                            </children>
-                        </HBox>
                         <TableView fx:id="tblTank" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #636e72;" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn prefWidth="75.0" text="Tank Id" />
@@ -90,7 +157,10 @@
                         </TableView>
                     </children>
                 </VBox>
-                <Label layoutX="6.0" layoutY="-9.0" prefHeight="32.0" prefWidth="311.0" text="Tank id" textFill="#fcf6f6" />
+                <Label layoutX="6.0" layoutY="-9.0" prefHeight="32.0" prefWidth="311.0" text="Tank id" textFill="#fcf6f6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Label>
                 <Label layoutX="197.0" layoutY="-4.0" prefHeight="26.0" prefWidth="185.0" text="1" textFill="#f5efef" />
             </children>
         </AnchorPane>

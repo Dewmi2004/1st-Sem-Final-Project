@@ -191,7 +191,7 @@
                            </font></Button>
                      </children>
                   </HBox>
-                  <TableView fx:id="tblCustomer" onMouseClicked="#clickOnAction" prefHeight="247.0" prefWidth="611.0" style="-fx-background-color: #306899;" VBox.vgrow="ALWAYS">
+                  <TableView fx:id="tblCustomer" onMouseClicked="#clickOnAction" prefHeight="247.0" prefWidth="611.0" VBox.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="clmCusId" prefWidth="75.0" text="Customer id" />
                         <TableColumn fx:id="clmName" prefWidth="75.0" text="Name" />
