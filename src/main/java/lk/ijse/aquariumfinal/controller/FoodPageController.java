@@ -16,6 +16,7 @@ public class FoodPageController {
     public Button btnDelete;
     public Button btnReset;
     public Button btnSave;
+    public Label lblFoodId;
 
     public void btnGenarateROnAction(ActionEvent actionEvent) {
     }

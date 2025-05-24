@@ -18,16 +18,12 @@
 <children>
    <VBox spacing="20" alignment="TOP_CENTER" prefWidth="860"
          AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0">
-      <!-- Title -->
       <Label style="-fx-font-size: 26px; -fx-text-fill: #1b263b; -fx-font-weight: bold;" text="Customer Management" />
 
-      <!-- Customer ID -->
       <HBox alignment="CENTER_LEFT" spacing="10">
          <Label style="-fx-font-size: 16px; -fx-text-fill: #2e4053; -fx-font-weight: bold;" text="Customer ID:" />
          <Label fx:id="lblCusId" style="-fx-font-size: 16px; -fx-text-fill: #49759c;" text="Auto-generated" />
       </HBox>
-
-      <!-- Form Fields -->
       <GridPane hgap="15" vgap="15">
          <children>
             <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
@@ -62,7 +58,6 @@
             </rowConstraints>
       </GridPane>
 
-      <!-- Buttons -->
       <HBox alignment="CENTER_LEFT" spacing="12">
          <Button fx:id="btnSave" onAction="#btnSaveOnAction" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Save" />
          <Button fx:id="btnUpdate" onAction="#btnUpdateOnAction" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;" text="Update" />
@@ -70,11 +65,7 @@
          <Button fx:id="btnReset" onAction="#btnResetOnAction" style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-font-weight: bold;" text="Reset" />
          <Button fx:id="btnGReport" onAction="#btnGenarateROnAction" style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold;" text="Generate Report" />
       </HBox>
-
-      <!-- Table View -->
       <VBox alignment="TOP_CENTER" prefWidth="860" spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-
-         <!-- Other children like labels, gridpane, buttons -->
 
          <TableView fx:id="tblCustomer" focusTraversable="false" onMouseClicked="#clickOnAction"
                     style="-fx-border-color: #4a4a4a; -fx-background-color: #d9dbdb;" VBox.vgrow="ALWAYS">

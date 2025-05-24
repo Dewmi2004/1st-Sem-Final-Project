@@ -34,6 +34,20 @@ public class FishPageController {
     public TableColumn clmFishId;
     public Button btnGReport;
     public Label lblFishId;
+    public ComboBox cmbSize;
+    public ComboBox cmbTankId;
+    public ComboBox cmbGender;
+    public ComboBox cmbWaterType;
+    public ComboBox cmbCountry;
+    public ComboBox cmbInventoryId;
+    public TextField txtColor;
+    public TableColumn clmSize;
+    public TableColumn clmTankId;
+    public TableColumn clmGender;
+    public TableColumn clmWaterType;
+    public TableColumn clmCountry;
+    public TableColumn clmInventoryId;
+    public TableColumn clmColor;
 
     public void btnGenarateROnAction(ActionEvent actionEvent) {
     }

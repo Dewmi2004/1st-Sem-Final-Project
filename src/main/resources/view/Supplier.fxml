@@ -1,86 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600" prefWidth="800"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="lk.ijse.aquariumfinal.controller.SupplierPageController"
-            style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6);">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="600" prefWidth="800" style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.SupplierPageController">
 
    <children>
-      <VBox spacing="10" alignment="TOP_CENTER"
-            AnchorPane.topAnchor="10.0" AnchorPane.bottomAnchor="10.0"
-            AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-
-         <!-- Title -->
-         <Label text="Supplier Management"
-                style="-fx-font-size: 22px; -fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
-
-         <!-- Supplier ID display -->
-         <HBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Supplier ID:"
-                   style="-fx-text-fill: #2c3e50; -fx-font-weight: bold; -fx-font-size: 14px;" />
-            <Label fx:id="lblSupplierId" text="Auto-generated"
-                   style="-fx-text-fill: #2c3e50; -fx-font-size: 14px;" />
+      <VBox alignment="TOP_CENTER" spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <Label style="-fx-font-size: 22px; -fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Supplier Management" />
+         <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold; -fx-font-size: 14px;" text="Supplier ID:" />
+            <Label fx:id="lblSupplierId" style="-fx-text-fill: #2c3e50; -fx-font-size: 14px;" text="Auto-generated" />
          </HBox>
-
-         <!-- Form Section -->
          <GridPane hgap="15" vgap="15">
             <children>
-               <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"
-                      style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
-               <TextField fx:id="txtName" promptText="John Supplier" prefWidth="300"
-                          style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;"
-                          GridPane.rowIndex="0" GridPane.columnIndex="1" />
+               <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+               <TextField fx:id="txtName" prefWidth="300" promptText="John Supplier" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-               <Label text="Contact:" GridPane.rowIndex="1" GridPane.columnIndex="0"
-                      style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
-               <TextField fx:id="txtContact" promptText="+94 71 234 5678" prefWidth="300"
-                          style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;"
-                          GridPane.rowIndex="1" GridPane.columnIndex="1" />
+               <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Contact:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+               <TextField fx:id="txtContact" prefWidth="300" promptText="+94 71 234 5678" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-               <Label text="Company Address:" GridPane.rowIndex="2" GridPane.columnIndex="0"
-                      style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
-               <TextField fx:id="txtAddress" promptText="123 Marine Lane, Colombo" prefWidth="300"
-                          style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;"
-                          GridPane.rowIndex="2" GridPane.columnIndex="1" />
+               <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Company Address:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+               <TextField fx:id="txtAddress" prefWidth="300" promptText="123 Marine Lane, Colombo" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-               <Label text="Supply Type:" GridPane.rowIndex="3" GridPane.columnIndex="0"
-                      style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
-               <ComboBox fx:id="CBoxSupplyType" promptText="Fish / Plants / Chemicals" prefWidth="300"
-                         GridPane.rowIndex="3" GridPane.columnIndex="1" />
+               <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Supply Type:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+               <ComboBox fx:id="CBoxSupplyType" prefWidth="300" promptText="Fish / Plants / Chemicals" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-               <Label text="Email:" GridPane.rowIndex="4" GridPane.columnIndex="0"
-                      style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
-               <TextField fx:id="txtEmail" promptText="supplier@example.com" prefWidth="300"
-                          style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;"
-                          GridPane.rowIndex="4" GridPane.columnIndex="1" />
+               <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+               <TextField fx:id="txtEmail" prefWidth="300" promptText="supplier@example.com" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             </children>
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
          </GridPane>
-
-         <!-- Buttons Section -->
          <HBox alignment="CENTER_LEFT" spacing="12">
-            <Button fx:id="btnSave1" onAction="#btnSaveOnAction"
-                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"
-                    text="Save" />
-            <Button fx:id="btnUpdate1" onAction="#btnUpdateOnAction"
-                    style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;"
-                    text="Update" />
-            <Button fx:id="btnDelete1" onAction="#btnDeleteOnAction"
-                    style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"
-                    text="Delete" />
-            <Button fx:id="btnReset1" onAction="#btnResetOnAction"
-                    style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-font-weight: bold;"
-                    text="Reset" />
-            <Button fx:id="btnGenerateR1" onAction="#btnGenerateROnAction"
-                    style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold;"
-                    text="Generate Report" />
+            <Button fx:id="btnSave1" onAction="#btnSaveOnAction" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Save" />
+            <Button fx:id="btnUpdate1" onAction="#btnUpdateOnAction" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;" text="Update" />
+            <Button fx:id="btnDelete1" onAction="#btnDeleteOnAction" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;" text="Delete" />
+            <Button fx:id="btnReset1" onAction="#btnResetOnAction" style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-font-weight: bold;" text="Reset" />
+            <Button fx:id="btnGenerateR1" onAction="#btnGenerateROnAction" style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold;" text="Generate Report" />
          </HBox>
-
-         <!-- Table Section -->
-         <TableView fx:id="tblSupplier" VBox.vgrow="ALWAYS"
-                    style="-fx-background-color: #f0f3f7; -fx-border-color: #7f8c8d;">
+         <TableView fx:id="tblSupplier" onMouseClicked="#clickOnAction" style="-fx-background-color: #f0f3f7; -fx-border-color: #7f8c8d;" VBox.vgrow="ALWAYS">
             <columns>
                <TableColumn fx:id="colSupplierId" text="Supplier ID" />
                <TableColumn fx:id="colName" text="Name" />
@@ -90,7 +68,7 @@
                <TableColumn fx:id="colEmail" text="Email" />
             </columns>
             <columnResizePolicy>
-               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
          </TableView>
 

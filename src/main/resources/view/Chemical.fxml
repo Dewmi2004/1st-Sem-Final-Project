@@ -12,11 +12,9 @@
         <VBox spacing="10" alignment="TOP_CENTER" AnchorPane.topAnchor="10.0" AnchorPane.bottomAnchor="10.0"
               AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
 
-            <!-- Title -->
             <Label text="Chemical Management"
                    style="-fx-font-size: 22px; -fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
 
-            <!-- Chemical ID display -->
             <HBox spacing="10" alignment="CENTER_LEFT">
                 <Label text="Chemical ID:"
                        style="-fx-text-fill: #2c3e50; -fx-font-weight: bold; -fx-font-size: 14px;" />
@@ -24,7 +22,6 @@
                        style="-fx-text-fill: #2c3e50; -fx-font-size: 14px;" />
             </HBox>
 
-            <!-- Form Section -->
             <GridPane hgap="15" vgap="15">
                 <children>
                     <Label text="Type:" GridPane.rowIndex="0" GridPane.columnIndex="0"
@@ -57,7 +54,6 @@
                 </children>
             </GridPane>
 
-            <!-- Buttons Section -->
             <HBox alignment="CENTER_LEFT" spacing="12">
                 <Button fx:id="btnSave" onAction="#btnSaveOnAction"
                         style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"
@@ -76,7 +72,6 @@
                         text="Generate Report" />
             </HBox>
 
-            <!-- Table Section -->
             <TableView fx:id="tblChemical" VBox.vgrow="ALWAYS" style="-fx-background-color: #f0f3f7; -fx-border-color: #7f8c8d;">
                 <columns>
                     <TableColumn text="Chemical ID" />

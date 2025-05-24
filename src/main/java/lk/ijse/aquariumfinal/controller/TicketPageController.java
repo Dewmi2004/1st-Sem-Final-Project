@@ -17,6 +17,14 @@ public class TicketPageController {
     public Button btnDelete1;
     public Button btnUpdate1;
     public Button btnGenarateR1;
+    public TableColumn colEmployeeId;
+    public TableColumn colCustomerId;
+    public TableColumn colTime;
+    public TableColumn colDate;
+    public TableColumn colPrice;
+    public TableColumn colAge;
+    public TableColumn colTicketId;
+    public Label lblTicketId;
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
     }

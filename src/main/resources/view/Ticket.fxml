@@ -21,12 +21,8 @@
     <children>
         <VBox spacing="15" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10"
               style="-fx-padding: 20;">
-
-            <!-- Title -->
             <Label text="Ticket Management"
                    style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
-
-            <!-- Ticket Id Display -->
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <Label text="Ticket Id:"
                        style="-fx-text-fill: #2c3e50; -fx-font-weight: bold; -fx-font-size: 14px;" />
@@ -34,43 +30,27 @@
                        text="Auto-generated"
                        style="-fx-text-fill: #2c3e50; -fx-font-size: 14px;" />
             </HBox>
-
-            <!-- Form Grid -->
             <GridPane hgap="20" vgap="15">
-
-                <!-- Age -->
                 <Label text="Age:" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" GridPane.rowIndex="0" GridPane.columnIndex="0" />
                 <TextField fx:id="txtAge" promptText="18" GridPane.rowIndex="0" GridPane.columnIndex="1"
                            style="-fx-background-color: white; -fx-border-color: #7f8c8d; -fx-border-width: 0 0 2px 0;" />
-
-                <!-- Price -->
                 <Label text="Price:" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" GridPane.rowIndex="1" GridPane.columnIndex="0" />
                 <TextField fx:id="txtPrice" promptText="1000.00" GridPane.rowIndex="1" GridPane.columnIndex="1"
                            style="-fx-background-color: white; -fx-border-color: #7f8c8d; -fx-border-width: 0 0 2px 0;" />
-
-                <!-- Date -->
                 <Label text="Date:" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" GridPane.rowIndex="2" GridPane.columnIndex="0" />
                 <DatePicker fx:id="dpDate" GridPane.rowIndex="2" GridPane.columnIndex="1"
                             style="-fx-border-color: #7f8c8d; -fx-border-width: 0 0 2px 0;" />
-
-                <!-- Time -->
                 <Label text="Time:" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" GridPane.rowIndex="3" GridPane.columnIndex="0" />
                 <TextField fx:id="txtTime" promptText="HH:MM:SS" GridPane.rowIndex="3" GridPane.columnIndex="1"
                            style="-fx-background-color: white; -fx-border-color: #7f8c8d; -fx-border-width: 0 0 2px 0;" />
-
-                <!-- Customer Id -->
                 <Label text="Customer Id:" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" GridPane.rowIndex="4" GridPane.columnIndex="0" />
                 <ComboBox fx:id="cboxCustomerId" promptText="C001" GridPane.rowIndex="4" GridPane.columnIndex="1"
                           style="-fx-border-color: #7f8c8d; -fx-border-width: 0 0 2px 0;" />
-
-                <!-- Employee Id -->
                 <Label text="Employee Id:" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;" GridPane.rowIndex="5" GridPane.columnIndex="0" />
                 <ComboBox fx:id="cboxEmployeeId" promptText="E001" GridPane.rowIndex="5" GridPane.columnIndex="1"
                           style="-fx-border-color: #7f8c8d; -fx-border-width: 0 0 2px 0;" />
 
             </GridPane>
-
-            <!-- Buttons -->
             <HBox spacing="12" style="-fx-padding: 15 0 0 0;">
                 <Button fx:id="btnSave1" text="Save" onAction="#btnSaveOnAction"
                         style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" />
@@ -83,8 +63,6 @@
                 <Button fx:id="btnGenarateR1" text="Generate Report" onAction="#btnGenarateROnAction"
                         style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold;" />
             </HBox>
-
-            <!-- TableView -->
             <TableView fx:id="tblTicket" VBox.vgrow="ALWAYS" style="-fx-background-color: #f0f3f7; -fx-border-color: #7f8c8d;">
                 <columns>
                     <TableColumn fx:id="colTicketId" text="Ticket Id" />

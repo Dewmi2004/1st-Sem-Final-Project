@@ -1,9 +1,7 @@
 package lk.ijse.aquariumfinal.controller;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 public class TankPageCotroller {
     public ComboBox CBoxGlass;
@@ -15,6 +13,11 @@ public class TankPageCotroller {
     public Button btnDelete1;
     public Button btnUpdate1;
     public Button btnGenarateR1;
+    public TableColumn colWaterType;
+    public TableColumn colTankType;
+    public TableColumn colGlassType;
+    public TableColumn colTankId;
+    public Label lblTankId;
 
     public void btnGenarateROnAction(ActionEvent actionEvent) {
     }

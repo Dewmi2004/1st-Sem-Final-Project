@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
 <AnchorPane prefHeight="600" prefWidth="900" style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.EmployeePageController">
@@ -18,17 +17,11 @@
    <children>
       <VBox spacing="20" alignment="TOP_CENTER" prefWidth="860"
             AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0">
-
-         <!-- Title -->
          <Label style="-fx-font-size: 26px; -fx-text-fill: #1b263b; -fx-font-weight: bold;" text="Employee Management" />
-
-         <!-- Employee ID -->
          <HBox alignment="CENTER_LEFT" spacing="10">
             <Label style="-fx-font-size: 16px; -fx-text-fill: #2e4053; -fx-font-weight: bold;" text="Employee ID:" />
             <Label fx:id="lblEmployeeid" style="-fx-font-size: 16px; -fx-text-fill: #49759c;" text="Auto-generated" />
          </HBox>
-
-         <!-- Form Fields -->
          <GridPane hgap="15" vgap="15">
             <children>
                <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
@@ -62,8 +55,6 @@
                <RowConstraints />
             </rowConstraints>
          </GridPane>
-
-         <!-- Buttons -->
          <HBox alignment="CENTER_LEFT" spacing="12">
             <Button fx:id="btnSave" onAction="#btnSaveOnAction" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Save" />
             <Button fx:id="btnUpdate" onAction="#btnUpdateOnAction" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;" text="Update" />
@@ -71,8 +62,6 @@
             <Button fx:id="btnReset" onAction="#btnResetOnAction" style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-font-weight: bold;" text="Reset" />
             <Button fx:id="btnGReport" onAction="#btnGenarateROnAction" style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold;" text="Generate Report" />
          </HBox>
-
-         <!-- Table View -->
          <TableView fx:id="tblEmployee" focusTraversable="false" onMouseClicked="#clickOnAction"
                     style="-fx-border-color: #4a4a4a; -fx-background-color: #d9dbdb;" VBox.vgrow="ALWAYS">
             <columns>
@@ -88,7 +77,6 @@
                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
          </TableView>
-
       </VBox>
    </children>
 </AnchorPane>

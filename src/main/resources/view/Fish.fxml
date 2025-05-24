@@ -2,26 +2,17 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <AnchorPane prefHeight="600" prefWidth="900" style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.FishPageController">
-
     <children>
         <VBox spacing="20" alignment="TOP_CENTER" prefWidth="860"
               AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0">
-
-            <!-- Title -->
             <Label style="-fx-font-size: 26px; -fx-text-fill: #1b263b; -fx-font-weight: bold;" text="Fish Management" />
-
-            <!-- Fish ID -->
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <Label style="-fx-font-size: 16px; -fx-text-fill: #2e4053; -fx-font-weight: bold;" text="Fish ID:" />
                 <Label fx:id="lblFishId" style="-fx-font-size: 16px; -fx-text-fill: #49759c;" text="Auto-generated" />
             </HBox>
-
-            <!-- Form Fields -->
             <GridPane hgap="15" vgap="15">
                 <children>
-                    <!-- Left Column -->
                     <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"
                            style="-fx-font-size: 14px; -fx-text-fill: #34495e;" />
                     <TextField fx:id="txtName" promptText="Enter fish name"
@@ -45,8 +36,6 @@
                     <ComboBox fx:id="cmbGender" promptText="Select gender"
                               style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;"
                               GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-                    <!-- Right Column -->
                     <Label text="Water Type:" GridPane.columnIndex="2" GridPane.rowIndex="0"
                            style="-fx-font-size: 14px; -fx-text-fill: #34495e;" />
                     <ComboBox fx:id="cmbWaterType" promptText="Select water type"
@@ -84,8 +73,6 @@
                     <RowConstraints />
                 </rowConstraints>
             </GridPane>
-
-            <!-- Buttons -->
             <HBox alignment="CENTER_LEFT" spacing="12">
                 <Button fx:id="btnSave" onAction="#btnSaveOnAction" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Save" />
                 <Button fx:id="btnUpdate" onAction="#btnUpdateOnAction" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;" text="Update" />
@@ -93,8 +80,6 @@
                 <Button fx:id="btnReset" onAction="#btnResetOnAction" style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-font-weight: bold;" text="Reset" />
                 <Button fx:id="btnGReport" onAction="#btnGenerateROnAction" style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold;" text="Generate Report" />
             </HBox>
-
-            <!-- Table View -->
             <TableView fx:id="tblFish" focusTraversable="false" onMouseClicked="#clickOnAction"
                        style="-fx-border-color: #4a4a4a; -fx-background-color: #d9dbdb;" VBox.vgrow="ALWAYS">
                 <columns>

@@ -24,15 +24,11 @@
             <padding>
                 <Insets top="20.0" bottom="20.0" left="30.0" right="30.0"/>
             </padding>
-
-            <!-- Title -->
             <Label text="Order" textFill="#2c3e50">
                 <font>
                     <Font name="Segoe UI Bold" size="30.0"/>
                 </font>
             </Label>
-
-            <!-- Order ID -->
             <HBox spacing="10.0">
                 <Label text="Order ID" textFill="#34495e">
                     <font>
@@ -41,15 +37,11 @@
                 </Label>
                 <Label fx:id="lblOrderrid" text="1" textFill="#34495e"/>
             </HBox>
-
-            <!-- Order Date -->
             <VBox spacing="5.0">
                 <Label text="Order Date" textFill="#34495e"/>
                 <DatePicker fx:id="datePickerDate" prefWidth="300.0"
                             style="-fx-background-radius: 8; -fx-border-radius: 8;"/>
             </VBox>
-
-            <!-- Customer ID -->
             <VBox spacing="5.0">
                 <Label text="Customer ID" textFill="#34495e"/>
                 <HBox spacing="10.0">
@@ -60,8 +52,6 @@
                     <Label fx:id="Customerdetails" text="Customer" textFill="#2f3542"/>
                 </HBox>
             </VBox>
-
-            <!-- Item Info -->
             <VBox spacing="5.0">
                 <Label text="Item ID" textFill="#34495e"/>
                 <HBox spacing="10.0">
@@ -72,8 +62,6 @@
                     <Label fx:id="Itemdetails" text="Item" textFill="#2f3542"/>
                 </HBox>
             </VBox>
-
-            <!-- Payment Info -->
             <VBox spacing="5.0">
                 <Label text="Payment ID" textFill="#34495e"/>
                 <HBox spacing="10.0">
@@ -81,12 +69,8 @@
                               style="-fx-background-radius: 8; -fx-border-radius: 8;"/>
                 </HBox>
             </VBox>
-
-            <!-- Add to Cart Button -->
             <Button fx:id="btnAddToCart" text="Add to Cart" prefWidth="200.0"
                     style="-fx-background-color: #2d98da; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-size: 14px;"/>
-
-            <!-- Cart Table -->
             <TableView fx:id="tblCart" prefHeight="150.0"
                        style="-fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10;">
                 <columns>
@@ -101,8 +85,6 @@
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
             </TableView>
-
-            <!-- Place Order Button -->
             <Button fx:id="btnPlaceOrder" text="Place Order" prefWidth="200.0"
                     style="-fx-background-color: #20bf6b; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-size: 14px;"/>
         </VBox>

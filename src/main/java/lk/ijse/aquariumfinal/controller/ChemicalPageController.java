@@ -1,9 +1,7 @@
 package lk.ijse.aquariumfinal.controller;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class ChemicalPageController {
     public ComboBox CBoxType;
@@ -13,6 +11,14 @@ public class ChemicalPageController {
     public TextField txtName;
     public TableView tblChemical;
     public ComboBox CboxInventry;
+    public Label lblChemicalId;
+    public ComboBox cBoxType;
+    public ComboBox cBoxInventory;
+    public Button btnSave;
+    public Button btnUpdate;
+    public Button btnDelete;
+    public Button btnReset;
+    public Button btnGReport;
 
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
