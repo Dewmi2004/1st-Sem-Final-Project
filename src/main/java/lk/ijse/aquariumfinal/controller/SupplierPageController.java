@@ -20,24 +20,25 @@ public class SupplierPageController {
     public TextField txtEmail;
     public TableView tblSupplier;
     public TextField txtContact;
-    public ComboBox cbSupplyType;
-    public Label lblSupId;
-    public TableColumn clmEmail;
-    public TableColumn clmSupplierType;
-    public TableColumn clmCompanyAddress;
-    public TableColumn clmContact;
-    public TableColumn clmName;
-    public TableColumn clmSupplierID;
     public Button btnSave1;
     public Button btnReset1;
     public Button btnDelete1;
     public Button btnUpdate1;
     public Button btnGenarateR1;
+    public TableColumn colSupplierId;
+    public TableColumn colName;
+    public TableColumn colEmail;
+    public TableColumn colContact;
+    public TableColumn colCompanyAddress;
+    public TableColumn colSupplyType;
+    public Label lblSupplierId;
+    public ComboBox CBoxSupplyType;
+    public Button btnGenerateR1;
 
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
         setNextId();
-        cbSupplyType.setItems(Smodel.getSupplyTypes());
+        CBoxSupplyType.setItems(Smodel.getSupplyTypes());
         loadtable();
     }
 
@@ -61,23 +62,23 @@ public class SupplierPageController {
 
     private void setNextId() throws SQLException, ClassNotFoundException {
         String nextiD = Smodel.getNextSupplier();
-        lblSupId.setText(nextiD);
+        lblSupplierId.setText(nextiD);
 
     }
 
     private void setCellValueFactory() {
-        clmSupplierID.setCellValueFactory(new PropertyValueFactory<>("supId"));
-        clmName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        clmContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
-        clmCompanyAddress.setCellValueFactory(new PropertyValueFactory<>("companyAddress"));
-        clmSupplierType.setCellValueFactory(new PropertyValueFactory<>("supplyType"));
-        clmEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
+        colSupplierId.setCellValueFactory(new PropertyValueFactory<>("supId"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        colCompanyAddress.setCellValueFactory(new PropertyValueFactory<>("companyAddress"));
+        colSupplyType.setCellValueFactory(new PropertyValueFactory<>("supplyType"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
 
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
-        String id = lblSupId.getText();
+        String id = lblSupplierId.getText();
         Boolean isDelete = Smodel.deleteSupplier(id);
 
         if (isDelete) {
@@ -93,11 +94,11 @@ public class SupplierPageController {
 
     @FXML
     void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
-        String id = lblSupId.getText();
+        String id = lblSupplierId.getText();
         String name = txtName.getText();
         String contact = txtContact.getText();
         String Address = txtAddress.getText();
-        String SupplierType = String.valueOf(cbSupplyType.getValue());
+        String SupplierType = String.valueOf(CBoxSupplyType.getValue());
         String email = txtEmail.getText();
 
 
@@ -119,11 +120,11 @@ public class SupplierPageController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
-        String id = lblSupId.getText();
+        String id = lblSupplierId.getText();
         String name = txtName.getText();
         String contact = txtContact.getText();
         String address = txtAddress.getText();
-        String supplyType = String.valueOf(cbSupplyType.getValue());
+        String supplyType = String.valueOf(CBoxSupplyType.getValue());
         String email = txtEmail.getText();
 
 
@@ -146,11 +147,11 @@ public class SupplierPageController {
         SupplierTM selectedItem = (SupplierTM) tblSupplier.getSelectionModel().getSelectedItem();
 
         if (selectedItem != null) {
-            lblSupId.setText(selectedItem.getSupId());
+            lblSupplierId.setText(selectedItem.getSupId());
             txtName.setText(selectedItem.getName());
             txtContact.setText(selectedItem.getContact());
             txtAddress.setText(selectedItem.getCompanyAddress());
-            cbSupplyType.setValue(selectedItem.getSupplyType());
+            CBoxSupplyType.setValue(selectedItem.getSupplyType());
             txtEmail.setText(selectedItem.getEmail());
 
 
@@ -171,4 +172,6 @@ public class SupplierPageController {
     }
 
 
+    public void btnGenerateROnAction(ActionEvent actionEvent) {
+    }
 }
