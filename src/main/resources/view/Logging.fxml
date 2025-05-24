@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -12,54 +10,59 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="440.0" prefWidth="720.0" style="-fx-background-color: #067e7f;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.LoggingPageController">
+<AnchorPane prefHeight="440.0" prefWidth="720.0"
+            style="-fx-background-color: linear-gradient(to bottom right, #2980b9, #6dd5fa);"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="lk.ijse.aquariumfinal.controller.LoggingPageController">
+
     <children>
-      <ImageView fitHeight="509.0" fitWidth="728.0" layoutY="-46.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/20250517_1847_AquariumDelight_simple_compose_01jvf6676cf0etpz269ndzhsq0.png" />
-         </image>
-      </ImageView>
-        <VBox alignment="CENTER" layoutX="277.0" layoutY="20.0" prefHeight="361.0" prefWidth="419.0" spacing="15.0" style="-fx-background-color: #130f40; -fx-background-radius: 15; -fx-padding: 15;" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="20.0">
+        <ImageView fitHeight="509.0" fitWidth="728.0" layoutY="-46.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../image/20250517_1847_AquariumDelight_simple_compose_01jvf6676cf0etpz269ndzhsq0.png" />
+            </image>
+        </ImageView>
+
+        <VBox fx:id="vboxwant" alignment="CENTER" spacing="20.0" prefWidth="420.0" prefHeight="400.0"
+              style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6); -fx-background-radius: 20; -fx-padding: 30;"
+              AnchorPane.topAnchor="20.0" AnchorPane.rightAnchor="26.0" AnchorPane.bottomAnchor="20.0">
 
             <effect>
-                <DropShadow color="#00000055" />
+                <DropShadow color="#00000044" offsetX="2.0" offsetY="2.0" radius="10.0"/>
             </effect>
 
-            <Label alignment="CENTER" prefHeight="46.0" prefWidth="182.0" text="Welcome Back" textFill="#e8b7b7">
+            <Label text="Welcome Back" textFill="#2c3e50" alignment="CENTER">
                 <font>
-                    <Font name="Gabriola" size="39.0" />
+                    <Font name="Segoe UI Bold" size="28.0"/>
                 </font>
             </Label>
 
-            <Label text="Login to your account" textFill="#ebc8c8">
+            <Label text="Login to your account" textFill="#34495e">
                 <font>
-                    <Font name="System Bold" size="14.0" />
+                    <Font name="Segoe UI" size="14.0"/>
                 </font>
             </Label>
 
-            <TextField fx:id="txtUsername" maxWidth="250.0" promptText="Username">
+            <TextField fx:id="txtUsername" promptText="Username" maxWidth="280.0"
+                       style="-fx-background-color: white; -fx-border-color: #95a5a6; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 6;">
                 <font>
-                    <Font name="System Bold" size="12.0" />
-                </font></TextField>
-            <PasswordField fx:id="txtPassword" maxWidth="250.0" promptText="Password">
-                <font>
-                    <Font name="System Bold" size="12.0" />
-                </font></PasswordField>
+                    <Font name="Segoe UI" size="13.0"/>
+                </font>
+            </TextField>
 
-            <Button fx:id="btnLogin" onAction="#loginOnAction" prefWidth="250.0" style="-fx-background-color: #067e7f; -fx-text-fill: white; -fx-background-radius: 10;" text="Login">
+            <PasswordField fx:id="txtPassword" promptText="Password" maxWidth="280.0"
+                           style="-fx-background-color: white; -fx-border-color: #95a5a6; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 6;">
                 <font>
-                    <Font name="System Bold" size="14.0" />
-                </font></Button>
-         <Button focusTraversable="false" mnemonicParsing="false" prefHeight="25.0" prefWidth="133.0" style="-fx-background-color: #ebc8c8; -fx-background-radius: 5;" text="Forget Password">
-            <opaqueInsets>
-               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </opaqueInsets>
-         </Button>
+                    <Font name="Segoe UI" size="13.0"/>
+                </font>
+            </PasswordField>
 
-            <padding>
-                <Insets bottom="5.0" right="5.0" top="5.0" />
-            </padding>
+            <Button fx:id="btnLogin" text="Login" onAction="#loginOnAction" prefWidth="280.0"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 10; -fx-font-size: 14px;" />
+
+            <Button text="Forget Password?" mnemonicParsing="false" focusTraversable="false"
+                    style="-fx-background-color: transparent; -fx-text-fill: #34495e; -fx-font-size: 12px;" />
+
         </VBox>
-
     </children>
 </AnchorPane>

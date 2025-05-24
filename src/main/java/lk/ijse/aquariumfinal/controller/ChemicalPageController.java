@@ -14,8 +14,6 @@ public class ChemicalPageController {
     public TableView tblChemical;
     public ComboBox CboxInventry;
 
-    public void btnGenarateROnAction(ActionEvent actionEvent) {
-    }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
     }
@@ -27,5 +25,8 @@ public class ChemicalPageController {
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnGenerateROnAction(ActionEvent actionEvent) {
     }
 }

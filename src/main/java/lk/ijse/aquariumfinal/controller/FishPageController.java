@@ -1,10 +1,8 @@
 package lk.ijse.aquariumfinal.controller;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 public class FishPageController {
     public TextField txtName;
@@ -26,6 +24,16 @@ public class FishPageController {
     public Button btnDelete;
     public Button btnReset;
     public Button btnSave;
+    public TextField txtPrice;
+    public TextField txtQty;
+    public TextField txtType;
+    public TableColumn clmPrice;
+    public TableColumn clmQty;
+    public TableColumn clmType;
+    public TableColumn clmName;
+    public TableColumn clmFishId;
+    public Button btnGReport;
+    public Label lblFishId;
 
     public void btnGenarateROnAction(ActionEvent actionEvent) {
     }
@@ -40,5 +48,11 @@ public class FishPageController {
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
+    }
+
+    public void clickOnAction(MouseEvent mouseEvent) {
+    }
+
+    public void btnGenerateROnAction(ActionEvent actionEvent) {
     }
 }

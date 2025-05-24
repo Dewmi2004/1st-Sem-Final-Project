@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lk.ijse.aquariumfinal.User;
 
@@ -15,6 +16,7 @@ public class LoggingPageController {
     public PasswordField txtPassword;
     public Button btnLogin;
     public Label lblError;
+    public VBox vboxwant;
     private User user = new User("dew", "0410");
 
     public void loginOnAction(ActionEvent actionEvent) {

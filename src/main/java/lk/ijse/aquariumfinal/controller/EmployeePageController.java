@@ -31,7 +31,7 @@ private final EmployeeModel Emodel = new EmployeeModel();
     public Button btnReset;
     public Button btnDelete;
     public Button btnUpdate;
-    public Button btnGenarateR;
+    public Button btnGReport;
     @FXML
     private TableView<EmployeeTM> tblEmployee;
 
