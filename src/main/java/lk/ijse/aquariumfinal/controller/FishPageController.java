@@ -44,7 +44,7 @@ public class FishPageController {
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
         setNextId();
-        cmbSize.setItems(Fmodel.getFishSize());
+//        cmbSize.setItems(Fmodel.getFishSize());
         loadtable();
     }
 

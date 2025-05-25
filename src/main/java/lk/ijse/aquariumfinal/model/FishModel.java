@@ -46,14 +46,14 @@ public class FishModel {
 
     }
 
-    public ObservableList<String> getFishSize() {
-
-        return FXCollections.observableArrayList(
-                "Fish Supplier",
-                "Food Supplier",
-                "Chemical Supplier",
-                "Plant Supplier",
-                "Tank Supplier"
-        );
-    }
+//    public ObservableList<String> getFishSize() {
+//
+//        return FXCollections.observableArrayList(
+//                "Fish Supplier",
+//                "Food Supplier",
+//                "Chemical Supplier",
+//                "Plant Supplier",
+//                "Tank Supplier"
+//        );
+//    }
 }
