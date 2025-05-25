@@ -4,13 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 
 public class ChemicalPageController {
-    public ComboBox CBoxType;
     public TextField txtConcentration;
     public TextField txtStoreType;
-    public TextField txtInventryId;
     public TextField txtName;
     public TableView tblChemical;
-    public ComboBox CboxInventry;
     public Label lblChemicalId;
     public ComboBox cBoxType;
     public ComboBox cBoxInventory;

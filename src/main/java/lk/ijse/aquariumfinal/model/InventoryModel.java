@@ -45,12 +45,5 @@ public class InventoryModel {
     public boolean saveInventry(InventoryDTO inventoryDTO) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("insert into inventory values(?,?,? )", inventoryDTO.getInventoryId(), inventoryDTO.getSupId(), inventoryDTO.getDate());
     }
-    public ObservableList getAllSupplierId() throws SQLException, ClassNotFoundException {
-        ResultSet rs = CrudUtil.execute("select sup_Id from supplier");
-        ObservableList<String> supplierDtoArrayList = FXCollections.observableArrayList();
-        while (rs.next()) {
-            supplierDtoArrayList.add(rs.getString("sup_Id"));
-        }
-        return  supplierDtoArrayList;
-    }
+
 }

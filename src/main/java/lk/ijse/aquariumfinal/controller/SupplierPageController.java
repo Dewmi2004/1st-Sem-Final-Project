@@ -24,7 +24,6 @@ public class SupplierPageController {
     public Button btnReset1;
     public Button btnDelete1;
     public Button btnUpdate1;
-    public Button btnGenarateR1;
     public TableColumn colSupplierId;
     public TableColumn colName;
     public TableColumn colEmail;

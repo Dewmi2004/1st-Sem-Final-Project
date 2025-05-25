@@ -17,7 +17,6 @@ public class CustomerModel {
     }
 
     public static Boolean deleteCustomer(String cusid) throws SQLException, ClassNotFoundException {
-
         return CrudUtil.execute("delete from customer where customer_Id= ?",cusid);
     }
 

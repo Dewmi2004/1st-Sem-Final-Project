@@ -9,6 +9,8 @@ import javafx.scene.input.MouseEvent;
 import lk.ijse.aquariumfinal.dto.InventoryDTO;
 import lk.ijse.aquariumfinal.dto.tm.InventryTM;
 import lk.ijse.aquariumfinal.model.InventoryModel;
+import lk.ijse.aquariumfinal.model.SupplierModel;
+
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ public class InventoryPageController {
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
         setNextId();
-     CboxSupplier.setItems(Imodel.getAllSupplierId());
+     CboxSupplier.setItems(SupplierModel.getAllSupplierId());
         loadtable();
     }
 
