@@ -15,18 +15,19 @@ import lk.ijse.aquariumfinal.model.EmployeeModel;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class  EmployeePageController {
 private final EmployeeModel Emodel = new EmployeeModel();
     public DatePicker dpEmployee;
     public Label lblEmployeeid;
-    public TableColumn clmName;
-    public TableColumn clmEmployeeId;
-    public TableColumn clmAddress;
-    public TableColumn clmDob;
-    public TableColumn clmGender;
-    public TableColumn clmContact;
-    public TableColumn clmEmail;
+    public TableColumn<?,?> clmName;
+    public TableColumn<?,?> clmEmployeeId;
+    public TableColumn<?,?> clmAddress;
+    public TableColumn<?,?> clmDob;
+    public TableColumn<?,?> clmGender;
+    public TableColumn<?,?> clmContact;
+    public TableColumn<?,?> clmEmail;
     public Button btnSave;
     public Button btnReset;
     public Button btnDelete;
@@ -55,7 +56,6 @@ private final EmployeeModel Emodel = new EmployeeModel();
         loadtable();
     }
 
-
     private void loadtable() throws SQLException, ClassNotFoundException {
         ArrayList<EmployeeDTO> employees = Emodel.getAllEmployee();
         ObservableList<EmployeeTM> obc = FXCollections.observableArrayList();
@@ -74,7 +74,6 @@ private final EmployeeModel Emodel = new EmployeeModel();
         tblEmployee.setItems(obc);
     }
 
-
     private void setNextId() throws SQLException, ClassNotFoundException {
         String nextiD = Emodel.getNextEmployee();
         lblEmployeeid.setText(nextiD);
@@ -89,32 +88,74 @@ private final EmployeeModel Emodel = new EmployeeModel();
         clmDob.setCellValueFactory(new PropertyValueFactory<>("dob"));
         clmEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         clmContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
-
     }
-
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String id = lblEmployeeid.getText();
-        Boolean isDelete = Emodel.deleteEmployee(id);
 
-        if (isDelete) {
-            loadtable();
-            setNextId();
-            new Alert(Alert.AlertType.INFORMATION, "Employee Deleted", ButtonType.OK).show();
-        }else {
-            new Alert(Alert.AlertType.ERROR, "Employee Not Deleted", ButtonType.OK).show();
+        if (id.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please select a Employee to delete").show();
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this Employee ?");
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(no, yes);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == yes) {
+            try {
+                boolean isDeleted = Emodel.deleteEmployee(id);
+
+                if (isDeleted) {
+                    loadtable();
+                    clearFields();
+                    new Alert(Alert.AlertType.INFORMATION, "Employee Deleted").show();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Employee Not Deleted").show();
+                }
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Error occurred while deleting Employee").show();
+            }
         }
     }
 
-    @FXML
+        private void clearFields() throws SQLException, ClassNotFoundException {
+
+            txtName.clear();
+            txtAddress.clear();
+            txtGender.clear();
+            dpEmployee.getEditor().clear();
+            txtEmail.clear();
+            txtContact.clear();
+            setNextId();
+        }
+
+  @FXML
     void btnGenarateROnAction(ActionEvent event) {
 
     }
 
     @FXML
-    void btnResetOnAction(ActionEvent event) {
+    void btnResetOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+            txtName.clear();
+            txtAddress.clear();
+            txtGender.clear();
+            dpEmployee.getEditor().clear();
+            txtEmail.clear();
+            txtContact.clear();
 
+            setNextId();
+
+            btnSave.setDisable(false);
+            btnUpdate.setDisable(true);
+            btnDelete.setDisable(true);
+
+            tblEmployee.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -135,11 +176,11 @@ private final EmployeeModel Emodel = new EmployeeModel();
         if (isSave) {
             loadtable();
             setNextId();
+            clearFields();
             new Alert(Alert.AlertType.INFORMATION, "Employee Saved", ButtonType.OK).show();
         }else {
             new Alert(Alert.AlertType.ERROR, "Employee Not Saved", ButtonType.OK).show();
         }
-
     }
 
     @FXML
@@ -160,11 +201,11 @@ private final EmployeeModel Emodel = new EmployeeModel();
         if (isUpdate) {
             loadtable();
             setNextId();
+            clearFields();
             new Alert(Alert.AlertType.INFORMATION, "Employee Updated", ButtonType.OK).show();
         }else {
             new Alert(Alert.AlertType.ERROR, "Employee Not Updated", ButtonType.OK).show();
         }
-
     }
 
     public void clickOnAction(MouseEvent mouseEvent) {

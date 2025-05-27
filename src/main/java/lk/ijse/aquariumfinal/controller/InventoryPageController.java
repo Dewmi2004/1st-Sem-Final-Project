@@ -18,12 +18,12 @@ import java.util.ArrayList;
 public class InventoryPageController {
     private final InventoryModel Imodel = new InventoryModel();
     public DatePicker DPDate;
-    public TableView tblInventry;
+    public TableView<InventryTM> tblInventry;
     public ComboBox CboxSupplier;
     public Label lblInventryid;
-    public TableColumn clmInventryId;
-    public TableColumn clmSupplierId;
-    public TableColumn clmDate;
+    public TableColumn<?,?> clmInventryId;
+    public TableColumn<?,?> clmSupplierId;
+    public TableColumn<?,?> clmDate;
     public Button btnSave1;
     public Button btnReset1;
     public Button btnDelete1;
@@ -122,7 +122,7 @@ public class InventoryPageController {
     }
 
     public void clickOnAction(MouseEvent mouseEvent) {
-        InventryTM selectedItem = (InventryTM) tblInventry.getSelectionModel().getSelectedItem();
+        InventryTM selectedItem =  tblInventry.getSelectionModel().getSelectedItem();
 
         if (selectedItem != null) {
             lblInventryid.setText(selectedItem.getInventoryId());

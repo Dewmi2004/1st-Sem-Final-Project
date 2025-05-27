@@ -12,26 +12,27 @@ import lk.ijse.aquariumfinal.dto.tm.SupplierTM;
 import lk.ijse.aquariumfinal.model.SupplierModel;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class SupplierPageController {
     private final SupplierModel Smodel = new SupplierModel();
     public TextField txtName;
     public TextField txtAddress;
     public TextField txtEmail;
-    public TableView tblSupplier;
+    public TableView<SupplierTM> tblSupplier;
     public TextField txtContact;
     public Button btnSave1;
     public Button btnReset1;
     public Button btnDelete1;
     public Button btnUpdate1;
-    public TableColumn colSupplierId;
-    public TableColumn colName;
-    public TableColumn colEmail;
-    public TableColumn colContact;
-    public TableColumn colCompanyAddress;
-    public TableColumn colSupplyType;
+    public TableColumn<?,?> colSupplierId;
+    public TableColumn<?,?> colName;
+    public TableColumn<?,?> colEmail;
+    public TableColumn<?,?> colContact;
+    public TableColumn<?,?> colCompanyAddress;
+    public TableColumn<?,?> colSupplyType;
     public Label lblSupplierId;
-    public ComboBox CBoxSupplyType;
+    public ComboBox<String> CBoxSupplyType;
     public Button btnGenerateR1;
 
     public void initialize() throws SQLException, ClassNotFoundException {
@@ -77,17 +78,57 @@ public class SupplierPageController {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
-        String id = lblSupplierId.getText();
-        Boolean isDelete = Smodel.deleteSupplier(id);
+            String id = lblSupplierId.getText();
 
-        if (isDelete) {
-            loadtable();
-            setNextId();
-            new Alert(Alert.AlertType.INFORMATION, "Supplier Deleted", ButtonType.OK).show();
-        }else {
-            new Alert(Alert.AlertType.ERROR, "Supplier Not Deleted", ButtonType.OK).show();
+            if (id.isEmpty()) {
+                new Alert(Alert.AlertType.WARNING, "Please select a supplier to delete").show();
+                return;
+            }
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this supplier?");
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.LEFT);
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.RIGHT);
+            alert.getButtonTypes().setAll(no, yes);
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            result.ifPresent(buttonType -> {
+                if (buttonType == yes) {
+                    try {
+                        if (Smodel.hasInventoryReferences(id)) {
+                            new Alert(Alert.AlertType.WARNING, "Cannot delete supplier: It is referenced in Inventory").show();
+                            return;
+                        }
+
+                        boolean isDeleted = Smodel.deleteSupplier(id);
+                        if (isDeleted) {
+                            loadtable();
+                            setNextId();
+                            clearFields();
+                            new Alert(Alert.AlertType.INFORMATION, "Supplier Deleted").show();
+                        } else {
+                            new Alert(Alert.AlertType.ERROR, "Supplier Not Deleted").show();
+                        }
+                    } catch (SQLException | ClassNotFoundException e) {
+                        e.printStackTrace();
+                        new Alert(Alert.AlertType.ERROR, "Error occurred while deleting supplier").show();
+                    }
+                } else {
+                    new Alert(Alert.AlertType.INFORMATION, "Supplier not deleted").show();
+                }
+            });
         }
-    }
+
+    private void clearFields() throws SQLException, ClassNotFoundException {
+
+            txtName.clear();
+            txtContact.clear();
+            txtAddress.clear();
+            txtEmail.clear();
+            CBoxSupplyType.getSelectionModel().clearSelection();
+            setNextId();
+        }
+
 
 
 
@@ -109,6 +150,7 @@ public class SupplierPageController {
         if (isSave) {
             loadtable();
             setNextId();
+            clearFields();
             new Alert(Alert.AlertType.INFORMATION, "Supplier Saved", ButtonType.OK).show();
         }else {
             new Alert(Alert.AlertType.ERROR, "Supplier Not Saved", ButtonType.OK).show();
@@ -135,6 +177,7 @@ public class SupplierPageController {
         if (isUpdate) {
             loadtable();
             setNextId();
+            clearFields();
             new Alert(Alert.AlertType.INFORMATION, "Supplier Updated", ButtonType.OK).show();
         }else {
             new Alert(Alert.AlertType.ERROR, "Supplier Not Updated", ButtonType.OK).show();
@@ -143,7 +186,7 @@ public class SupplierPageController {
     }
 
     public void clickOnAction(MouseEvent mouseEvent) {
-        SupplierTM selectedItem = (SupplierTM) tblSupplier.getSelectionModel().getSelectedItem();
+        SupplierTM selectedItem = tblSupplier.getSelectionModel().getSelectedItem();
 
         if (selectedItem != null) {
             lblSupplierId.setText(selectedItem.getSupId());
@@ -162,13 +205,21 @@ public class SupplierPageController {
             btnDelete1.setDisable(false);
         }
     }
-    public void btnGenarateROnAction(ActionEvent actionEvent) {
-    }
+    public void btnResetOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+            txtName.clear();
+            txtContact.clear();
+            txtAddress.clear();
+            txtEmail.clear();
+            CBoxSupplyType.setValue(null);
 
+            setNextId();
 
+            btnSave1.setDisable(false);
+            btnUpdate1.setDisable(true);
+            btnDelete1.setDisable(true);
 
-    public void btnResetOnAction(ActionEvent actionEvent) {
-    }
+            tblSupplier.getSelectionModel().clearSelection();
+        }
 
 
     public void btnGenerateROnAction(ActionEvent actionEvent) {

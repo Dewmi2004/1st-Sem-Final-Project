@@ -15,6 +15,7 @@ import lk.ijse.aquariumfinal.model.CustomerModel;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 
 
 public class CustomerPageController {
@@ -112,16 +113,47 @@ loadtable();
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
-    String id = lblCusId.getText();
-        Boolean isDelete = Cmodel.deleteCustomer(id);
+           String id = lblCusId.getText();
 
-        if (isDelete) {
-            loadtable();
-            setNextId();
-            new Alert(Alert.AlertType.INFORMATION, "Customer Deleted", ButtonType.OK).show();
-        }else {
-            new Alert(Alert.AlertType.ERROR, "Customer Not Deleted", ButtonType.OK).show();
+            if (id.isEmpty()) {
+                new Alert(Alert.AlertType.WARNING, "Please select a Customer to delete").show();
+                return;
+            }
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this Customer?");
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            alert.getButtonTypes().setAll(no, yes);
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == yes) {
+                try {
+                    boolean isDeleted = Cmodel.deleteCustomer(id);
+
+                    if (isDeleted) {
+                        loadtable();
+                        clearFields();
+                        new Alert(Alert.AlertType.INFORMATION, "Customer Deleted").show();
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "Customer Not Deleted").show();
+                    }
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "Error occurred while deleting Customer").show();
+                }
+            }
         }
+
+        private void clearFields() throws SQLException, ClassNotFoundException {
+
+        txtName.clear();
+        txtAddress.clear();
+        txtGender.clear();
+        dpCustomer.getEditor().clear();
+        txtEmail.clear();
+        txtContact.clear();
+        setNextId();
     }
 
     @FXML
@@ -129,7 +161,22 @@ loadtable();
         }
 
     @FXML
-    void btnResetOnAction(ActionEvent event) {
+    void btnResetOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        txtName.clear();
+        txtAddress.clear();
+        txtGender.clear();
+        dpCustomer.getEditor().clear();
+        txtEmail.clear();
+        txtContact.clear();
+
+        setNextId();
+
+        btnSave.setDisable(false);
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
+
+        tblCustomer.getSelectionModel().clearSelection();
+
 
     }
 
@@ -151,6 +198,7 @@ boolean isSave = CustomerModel.saveCustomer(cusDto);
         if (isSave) {
             loadtable();
             setNextId();
+            clearFields();
            new Alert(Alert.AlertType.INFORMATION, "Customer Saved", ButtonType.OK).show();
         }else {
             new Alert(Alert.AlertType.ERROR, "Customer Not Saved", ButtonType.OK).show();
@@ -177,6 +225,7 @@ boolean isSave = CustomerModel.saveCustomer(cusDto);
         if (isUpdate) {
             loadtable();
             setNextId();
+            clearFields();
             new Alert(Alert.AlertType.INFORMATION, "Customer Updated", ButtonType.OK).show();
         }else {
             new Alert(Alert.AlertType.ERROR, "Customer Not Updated", ButtonType.OK).show();

@@ -1,6 +1,6 @@
 package lk.ijse.aquariumfinal.model;
 
-import lk.ijse.aquariumfinal.dto.CustomerDTO;
+import  lk.ijse.aquariumfinal.dto.CustomerDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
 
 import java.sql.ResultSet;
@@ -14,10 +14,6 @@ public class CustomerModel {
 
     public static Boolean updateCustomer(CustomerDTO cusDto) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("update customer set customer_Name=?,customer_Address=?,customer_Gender=?,customer_Dob=?,customer_Email=?,customer_Contact=? where customer_Id= ?",cusDto.getName(),cusDto.getAddress(),cusDto.getGender(),cusDto.getDob(),cusDto.getEmail(),cusDto.getContact(),cusDto.getId());
-    }
-
-    public static Boolean deleteCustomer(String cusid) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("delete from customer where customer_Id= ?",cusid);
     }
 
     public static ArrayList<CustomerDTO> getAllCustomer() throws SQLException, ClassNotFoundException {
@@ -41,5 +37,9 @@ public class CustomerModel {
             return nextIdString;
         }
         return tableCharactor+"001";
+    }
+
+    public boolean deleteCustomer(String id) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("delete from customer where customer_Id = ?",id);
     }
 }

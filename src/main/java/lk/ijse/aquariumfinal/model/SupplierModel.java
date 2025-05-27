@@ -66,5 +66,10 @@ public class SupplierModel {
         }
         return  supplierDtoArrayList;
     }
+
+    public boolean hasInventoryReferences(String id) throws SQLException, ClassNotFoundException {
+        ResultSet resultSet = CrudUtil.execute("SELECT sup_Id FROM inventory WHERE sup_Id = ?", id);
+        return resultSet.next();
     }
+}
 
