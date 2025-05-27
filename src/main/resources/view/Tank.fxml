@@ -12,22 +12,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600" prefWidth="800"
-            style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6);"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="lk.ijse.aquariumfinal.controller.TankPageCotroller">
+<AnchorPane prefHeight="600" prefWidth="800" style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.TankPageCotroller">
 
     <children>
-        <VBox alignment="TOP_CENTER" spacing="10" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
-            <Label text="Tank Management"
-                   style="-fx-font-size: 22px; -fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
+        <VBox alignment="TOP_CENTER" spacing="10" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+            <Label style="-fx-font-size: 22px; -fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Tank Management" />
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <Label text="Tank ID:"
-                       style="-fx-text-fill: #2c3e50; -fx-font-weight: bold; -fx-font-size: 14px;" />
-                <Label fx:id="lblTankId"
-                       text="Auto-generated"
-                       style="-fx-text-fill: #2c3e50; -fx-font-size: 14px;" />
+                <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold; -fx-font-size: 14px;" text="Tank ID:" />
+                <Label fx:id="lblTankId" style="-fx-text-fill: #2c3e50; -fx-font-size: 14px;" text="Auto-generated" />
             </HBox>
             <GridPane hgap="15" vgap="15">
                 <columnConstraints>
@@ -41,45 +33,24 @@
                 </rowConstraints>
 
                 <children>
-                    <Label text="Glass Type:"
-                           style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"
-                           GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <ComboBox fx:id="CBoxGlass" prefWidth="300" promptText="Standard Float Glass"
-                              GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Glass Type:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <ComboBox fx:id="CBoxGlass" prefWidth="300" promptText="Standard Float Glass" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                    <Label text="Tank Type:"
-                           style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"
-                           GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <ComboBox fx:id="CBoxTank" prefWidth="300" promptText="Fish"
-                              GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Tank Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <ComboBox fx:id="CBoxTank" prefWidth="300" promptText="Fish" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                    <Label text="Water Type:"
-                           style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"
-                           GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <ComboBox fx:id="CBoxWater" prefWidth="300" promptText="River Water"
-                              GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Water Type:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <ComboBox fx:id="CBoxWater" prefWidth="300" promptText="River Water" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 </children>
             </GridPane>
             <HBox alignment="CENTER_LEFT" spacing="12">
-                <Button fx:id="btnSave1" onAction="#btnSaveOnAction"
-                        style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"
-                        text="Save" />
-                <Button fx:id="btnUpdate1" onAction="#btnUpdateOnAction"
-                        style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;"
-                        text="Update" />
-                <Button fx:id="btnDelete1" onAction="#btnDeleteOnAction"
-                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"
-                        text="Delete" />
-                <Button fx:id="btnReset1" onAction="#btnResetOnAction"
-                        style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-font-weight: bold;"
-                        text="Reset" />
-                <Button fx:id="btnGenarateR1" onAction="#btnGenarateROnAction"
-                        style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold;"
-                        text="Generate Report" />
+                <Button fx:id="btnSave1" onAction="#btnSaveOnAction" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Save" />
+                <Button fx:id="btnUpdate1" onAction="#btnUpdateOnAction" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;" text="Update" />
+                <Button fx:id="btnDelete1" onAction="#btnDeleteOnAction" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;" text="Delete" />
+                <Button fx:id="btnReset1" onAction="#btnResetOnAction" style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-font-weight: bold;" text="Reset" />
+                <Button fx:id="btnGenarateR1" onAction="#btnGenarateROnAction" style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold;" text="Generate Report" />
             </HBox>
-            <TableView fx:id="tblTank"
-                       style="-fx-background-color: #f0f3f7; -fx-border-color: #7f8c8d;"
-                       VBox.vgrow="ALWAYS">
+            <TableView fx:id="tblTank" onMouseClicked="#btnclickOnAction" style="-fx-background-color: #f0f3f7; -fx-border-color: #7f8c8d;" VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn fx:id="colTankId" text="Tank ID" />
                     <TableColumn fx:id="colGlassType" text="Glass Type" />

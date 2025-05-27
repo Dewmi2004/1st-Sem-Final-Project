@@ -3,6 +3,7 @@ package lk.ijse.aquariumfinal.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -14,12 +15,13 @@ import lk.ijse.aquariumfinal.model.SupplierModel;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class InventoryPageController {
     private final InventoryModel Imodel = new InventoryModel();
     public DatePicker DPDate;
     public TableView<InventryTM> tblInventry;
-    public ComboBox CboxSupplier;
+    public ComboBox<String> CboxSupplier;
     public Label lblInventryid;
     public TableColumn<?,?> clmInventryId;
     public TableColumn<?,?> clmSupplierId;
@@ -79,28 +81,68 @@ public class InventoryPageController {
         if (isUpdate) {
             loadtable();
             setNextId();
-            new Alert(Alert.AlertType.INFORMATION, "Inventry Updated", ButtonType.OK).show();
+            clearFields();
+            new Alert(Alert.AlertType.INFORMATION, "Inventory Updated", ButtonType.OK).show();
         }else {
-            new Alert(Alert.AlertType.ERROR, "Inventry Not Updated", ButtonType.OK).show();
+            new Alert(Alert.AlertType.ERROR, "Inventory Not Updated", ButtonType.OK).show();
         }
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        String id = lblInventryid.getText();
-        Boolean isDelete = Imodel.deleteInventry(id);
+            String id = lblInventryid.getText();
 
-        if (isDelete) {
-            loadtable();
-            setNextId();
-            new Alert(Alert.AlertType.INFORMATION, "Inventry Deleted", ButtonType.OK).show();
-        }else {
-            new Alert(Alert.AlertType.ERROR, "Inventry Not Deleted", ButtonType.OK).show();
+            if (id.isEmpty()) {
+                new Alert(Alert.AlertType.WARNING, "Please select a Inventory to delete").show();
+                return;
+            }
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this Inventory ?");
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            alert.getButtonTypes().setAll(no, yes);
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == yes) {
+                try {
+                    boolean isDeleted = Imodel.deleteInventry(id);
+
+                    if (isDeleted) {
+                        loadtable();
+                        clearFields();
+                        new Alert(Alert.AlertType.INFORMATION, "Inventory Deleted").show();
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "Inventory Not Deleted").show();
+                    }
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "Error occurred while deleting Inventory").show();
+                }
+            }
         }
-    }
 
-    public void btnResetOnAction(ActionEvent actionEvent) {
-    }
+        private void clearFields() throws SQLException, ClassNotFoundException {
 
+            CboxSupplier.getSelectionModel().clearSelection();
+         DPDate.getEditor().clear();
+            setNextId();
+        }
+
+        @FXML
+        void btnResetOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+            CboxSupplier.getSelectionModel().clearSelection();
+            DPDate.getEditor().clear();
+
+            setNextId();
+
+            btnSave1.setDisable(false);
+            btnUpdate1.setDisable(true);
+            btnDelete1.setDisable(true);
+
+            tblInventry.getSelectionModel().clearSelection();
+
+
+        }
     public void btnSaveOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String id = lblInventryid.getText();
         String suppid = String.valueOf(CboxSupplier.getValue());
@@ -115,9 +157,10 @@ public class InventoryPageController {
         if (isSave) {
             loadtable();
             setNextId();
-            new Alert(Alert.AlertType.INFORMATION, "Inventry Saved", ButtonType.OK).show();
+            clearFields();
+            new Alert(Alert.AlertType.INFORMATION, "Inventory Saved", ButtonType.OK).show();
         }else {
-            new Alert(Alert.AlertType.ERROR, "Inventry Not Saved", ButtonType.OK).show();
+            new Alert(Alert.AlertType.ERROR, "Inventory Not Saved", ButtonType.OK).show();
         }
     }
 

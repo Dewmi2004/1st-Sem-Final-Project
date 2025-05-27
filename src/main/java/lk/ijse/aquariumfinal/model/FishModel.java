@@ -1,27 +1,27 @@
 package lk.ijse.aquariumfinal.model;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lk.ijse.aquariumfinal.dto.FishDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FishModel {
     public static boolean saveFish(FishDTO fishDto) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("insert into fish values(?,?,?,?,?,?,?,?,? )", fishDto.getFishId(),fishDto.getName(),fishDto.getSize(),fishDto.getTankId(),fishDto.getGender(),fishDto.getWaterType(),fishDto.getCountry(),fishDto.getInventoryId(),fishDto.getColour());
+        return CrudUtil.execute("insert into fish values(?,?,?,?,?,?,?,? )", fishDto.getFishId(),fishDto.getName(),fishDto.getSize(),fishDto.getTankId(),fishDto.getGender(),fishDto.getWaterType(),fishDto.getCountry(),fishDto.getColour());
     }
 
     public static boolean UpdateFish(FishDTO fishDto) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("update fish set name = ?,size = ?,tank_Id = ?,gender = ?,water_Type = ? ,country = ? ,inventory_Id =?,colour = ?  where fish_Id = ?",fishDto.getName(),fishDto.getSize(),fishDto.getTankId(),fishDto.getGender(),fishDto.getWaterType(),fishDto.getCountry(),fishDto.getInventoryId(),fishDto.getColour(),fishDto.getFishId());
+        return CrudUtil.execute("update fish set name = ?,size = ?,tank_Id = ?,gender = ?,water_Type = ? ,country = ? ,colour = ?  where fish_Id = ?",fishDto.getName(),fishDto.getSize(),fishDto.getTankId(),fishDto.getGender(),fishDto.getWaterType(),fishDto.getCountry(),fishDto.getColour(),fishDto.getFishId());
     }
 
     public ArrayList<FishDTO> getAllFish() throws SQLException, ClassNotFoundException {
         ResultSet rs = CrudUtil.execute("select * from fish");
         ArrayList<FishDTO> fishDtoArrayList = new ArrayList<>();
         while (rs.next()) {
-            FishDTO fishDto = new FishDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
+            FishDTO fishDto = new FishDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
             fishDtoArrayList.add(fishDto);
         }
         return fishDtoArrayList;
@@ -46,14 +46,49 @@ public class FishModel {
 
     }
 
-//    public ObservableList<String> getFishSize() {
-//
-//        return FXCollections.observableArrayList(
-//                "Fish Supplier",
-//                "Food Supplier",
-//                "Chemical Supplier",
-//                "Plant Supplier",
-//                "Tank Supplier"
-//        );
-//    }
+    public ObservableList<String> getFishSize() {
+
+        return FXCollections.observableArrayList(
+                "Fry Fish",
+                "Juvenile Fish",
+                "Young Adult Fish",
+                "Adult age",
+                "Mature Adult Fish"
+        );
+    }
+
+    public ObservableList<String> getFishGender() {
+        return FXCollections.observableArrayList(
+                "Male",
+                "Female"
+        );
+    }
+
+    public ObservableList<String> getFishWatertype() {
+        return FXCollections.observableArrayList(
+                "Fresh Water",
+                "Brackish  Water",
+                "Salt Water (Marian)",
+                "Soft Water",
+                "Hard Water",
+                "Cold Water",
+                "Tropical Water"
+        );
+    }
+
+    public ObservableList<String> getFishCountry() {
+        return FXCollections.observableArrayList(
+                "Sri Lanka",
+                "Maldives",
+                "Djibouti",
+                "Australia",
+                "Japan",
+                "Brazil",
+                "Somalia",
+                "United States",
+                "Indonesia",
+                "Ghana",
+                "Malaysia"
+        );
+    }
 }

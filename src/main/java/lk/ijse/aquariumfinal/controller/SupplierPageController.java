@@ -77,7 +77,7 @@ public class SupplierPageController {
     }
 
     @FXML
-    void btnDeleteOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+   public void btnDeleteOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
             String id = lblSupplierId.getText();
 
             if (id.isEmpty()) {
@@ -129,11 +129,8 @@ public class SupplierPageController {
             setNextId();
         }
 
-
-
-
     @FXML
-    void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+   public void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String id = lblSupplierId.getText();
         String name = txtName.getText();
         String contact = txtContact.getText();
@@ -160,7 +157,7 @@ public class SupplierPageController {
     }
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+   public void btnUpdateOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String id = lblSupplierId.getText();
         String name = txtName.getText();
         String contact = txtContact.getText();

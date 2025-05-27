@@ -15,7 +15,6 @@ public class FishDTO {
     private String gender;
     private String waterType;
     private String country;
-    private String inventoryId;
     private String colour;
 
     }

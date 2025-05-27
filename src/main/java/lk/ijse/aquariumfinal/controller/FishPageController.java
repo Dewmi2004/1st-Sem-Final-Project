@@ -9,9 +9,11 @@ import javafx.scene.input.MouseEvent;
 import lk.ijse.aquariumfinal.dto.FishDTO;
 import lk.ijse.aquariumfinal.dto.tm.FishTM;
 import lk.ijse.aquariumfinal.model.FishModel;
+import lk.ijse.aquariumfinal.model.TankModel;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class FishPageController {
     private final FishModel Fmodel = new FishModel();
@@ -23,19 +25,18 @@ public class FishPageController {
     public Button btnSave;
     public Button btnGReport;
     public Label lblFishId;
-    public ComboBox cmbSize;
-    public ComboBox cmbTankId;
-    public ComboBox cmbGender;
-    public ComboBox cmbWaterType;
-    public ComboBox cmbCountry;
-    public ComboBox cmbInventoryId;
+    public ComboBox<String> cmbSize;
+    public ComboBox<String> cmbTankId;
+    public ComboBox<String> cmbGender;
+    public ComboBox<String> cmbWaterType;
+    public ComboBox <String> cmbCountry;
+    public ComboBox <String> cmbInventoryId;
     public TextField txtColor;
     public TableColumn<?,?> clmSize;
     public TableColumn<?,?>  clmTankId;
     public TableColumn<?,?>  clmGender;
     public TableColumn<?,?>  clmWaterType;
     public TableColumn<?,?>  clmCountry;
-    public TableColumn<?,?>  clmInventoryId;
     public TableColumn<?,?>  clmColor;
     public TextField txtName;
     public TableColumn<?,?>  clmName;
@@ -44,8 +45,16 @@ public class FishPageController {
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
         setNextId();
-//        cmbSize.setItems(Fmodel.getFishSize());
+        ComboDataSet();
         loadtable();
+    }
+
+    private void ComboDataSet() throws SQLException, ClassNotFoundException {
+        cmbSize.setItems(Fmodel.getFishSize());
+        cmbTankId.setItems(TankModel.getFishTankId());
+        cmbGender.setItems(Fmodel.getFishGender());
+        cmbWaterType.setItems(Fmodel.getFishWatertype());
+        cmbCountry.setItems(Fmodel.getFishCountry());
     }
 
     private void setCellValueFactory() {
@@ -56,7 +65,6 @@ public class FishPageController {
         clmGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
         clmWaterType.setCellValueFactory(new PropertyValueFactory<>("waterType"));
         clmCountry.setCellValueFactory(new PropertyValueFactory<>("country"));
-        clmInventoryId.setCellValueFactory(new PropertyValueFactory<>("inventoryId"));
         clmColor.setCellValueFactory(new PropertyValueFactory<>("colour"));
     }
 
@@ -73,7 +81,6 @@ public class FishPageController {
                     fish.getGender(),
                     fish.getWaterType(),
                     fish.getCountry(),
-                    fish.getInventoryId(),
                     fish.getColour()
             );
             obc.add(FTM);
@@ -95,11 +102,10 @@ public class FishPageController {
         String gender = (String) cmbGender.getValue();
         String watertype = (String) cmbWaterType.getValue();
         String country = (String) cmbCountry.getValue();
-        String inventryid = (String) cmbInventoryId.getValue();
         String colour = txtColor.getText();
 
         FishDTO fishDto = new FishDTO(
-                id,name,size,tankid,gender,watertype,country,inventryid,colour
+                id,name,size,tankid,gender,watertype,country,colour
         );
         boolean isUpdate = FishModel.UpdateFish(fishDto);
 
@@ -114,19 +120,48 @@ public class FishPageController {
 
     public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String id = lblFishId.getText();
-        Boolean isDelete = Fmodel.deleteFish(id);
 
-        if (isDelete) {
-            loadtable();
-            setNextId();
-            new Alert(Alert.AlertType.INFORMATION, "Fish Deleted", ButtonType.OK).show();
-        }else {
-            new Alert(Alert.AlertType.ERROR, "Fish Not Deleted", ButtonType.OK).show();
+        if (id.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please select a Fish to delete").show();
+            return;
         }
-    }
 
-    public void btnResetOnAction(ActionEvent actionEvent) {
-    }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this Fish ?");
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(no, yes);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == yes) {
+            try {
+                boolean isDeleted = Fmodel.deleteFish(id);
+
+                if (isDeleted) {
+                    loadtable();
+                    clearFields();
+                    new Alert(Alert.AlertType.INFORMATION, "Fish Deleted").show();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Fish Not Deleted").show();
+                }
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Error occurred while deleting Fish").show();
+            }
+        }
+        }
+
+        private void clearFields() throws SQLException, ClassNotFoundException {
+
+            txtName.clear();
+           cmbSize.getSelectionModel().clearSelection();
+           cmbTankId.getSelectionModel().clearSelection();
+           cmbGender.getSelectionModel().clearSelection();
+           cmbWaterType.getSelectionModel().clearSelection();
+           cmbCountry.getSelectionModel().clearSelection();
+           txtColor.clear();
+            setNextId();
+        }
 
     public void btnSaveOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         String id = lblFishId.getText();
@@ -136,11 +171,10 @@ public class FishPageController {
         String gender = (String) cmbGender.getValue();
         String watertype = (String) cmbWaterType.getValue();
         String country = (String) cmbCountry.getValue();
-        String inventryid = (String) cmbInventoryId.getValue();
         String colour = txtColor.getText();
 
         FishDTO fishDto = new FishDTO(
-                id,name,size,tankid,gender,watertype,country,inventryid,colour
+                id,name,size,tankid,gender,watertype,country,colour
         );
         boolean isSave = FishModel.saveFish(fishDto);
 
@@ -165,7 +199,6 @@ public class FishPageController {
             cmbGender.setValue(selectedItem.getGender());
             cmbWaterType.setValue(selectedItem.getWaterType());
             cmbCountry.setValue(selectedItem.getCountry());
-            cmbInventoryId.setValue(selectedItem.getInventoryId());
             txtColor.setText(selectedItem.getColour());
 
 
@@ -179,5 +212,23 @@ public class FishPageController {
     }
 
     public void btnGenerateROnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnResetOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        txtName.clear();
+       cmbSize.getSelectionModel().clearSelection();
+       cmbTankId.getSelectionModel().clearSelection();
+       cmbGender.getSelectionModel().clearSelection();
+       cmbWaterType.getSelectionModel().clearSelection();
+       cmbCountry.getSelectionModel().clearSelection();
+       txtColor.clear();
+
+        setNextId();
+
+        btnSave.setDisable(false);
+        btnUpdate.setDisable(true);
+        btnDelete.setDisable(true);
+
+        tblFish.getSelectionModel().clearSelection();
     }
 }

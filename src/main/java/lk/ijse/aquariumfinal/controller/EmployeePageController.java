@@ -136,12 +136,12 @@ private final EmployeeModel Emodel = new EmployeeModel();
         }
 
   @FXML
-    void btnGenarateROnAction(ActionEvent event) {
+   public void btnGenarateROnAction(ActionEvent event) {
 
     }
 
     @FXML
-    void btnResetOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+   public void btnResetOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
             txtName.clear();
             txtAddress.clear();
             txtGender.clear();
