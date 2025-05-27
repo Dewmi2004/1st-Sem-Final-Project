@@ -6,9 +6,6 @@ import javafx.scene.control.*;
 public class PlantPageController {
     public ComboBox CBoxType;
     public TextField txtName;
-    public TextField txtInventryid;
-    public TextField txtTankid;
-    public TextField txtSize;
     public TableView tblPlant;
     public ComboBox CBoxInventry;
     public ComboBox CBoxTank;

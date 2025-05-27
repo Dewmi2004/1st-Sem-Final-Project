@@ -112,6 +112,7 @@ public class FishPageController {
         if (isUpdate) {
             loadtable();
             setNextId();
+            clearFields();
             new Alert(Alert.AlertType.INFORMATION, " Fish Updated", ButtonType.OK).show();
         }else {
             new Alert(Alert.AlertType.ERROR, " Fish Not Updated", ButtonType.OK).show();
@@ -148,6 +149,8 @@ public class FishPageController {
                 e.printStackTrace();
                 new Alert(Alert.AlertType.ERROR, "Error occurred while deleting Fish").show();
             }
+        }else{
+            new Alert(Alert.AlertType.WARNING, " Fish is not deleted !").show();
         }
         }
 
@@ -181,6 +184,7 @@ public class FishPageController {
         if (isSave) {
             loadtable();
             setNextId();
+            clearFields();
             new Alert(Alert.AlertType.INFORMATION, " Fish Saved", ButtonType.OK).show();
         }else {
             new Alert(Alert.AlertType.ERROR, " Fish Not Saved", ButtonType.OK).show();
@@ -215,15 +219,7 @@ public class FishPageController {
     }
 
     public void btnResetOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        txtName.clear();
-       cmbSize.getSelectionModel().clearSelection();
-       cmbTankId.getSelectionModel().clearSelection();
-       cmbGender.getSelectionModel().clearSelection();
-       cmbWaterType.getSelectionModel().clearSelection();
-       cmbCountry.getSelectionModel().clearSelection();
-       txtColor.clear();
-
-        setNextId();
+      clearFields();
 
         btnSave.setDisable(false);
         btnUpdate.setDisable(true);

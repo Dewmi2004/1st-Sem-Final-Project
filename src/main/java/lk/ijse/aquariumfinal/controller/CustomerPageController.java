@@ -142,6 +142,8 @@ loadtable();
                     e.printStackTrace();
                     new Alert(Alert.AlertType.ERROR, "Error occurred while deleting Customer").show();
                 }
+            }else{
+                new Alert(Alert.AlertType.WARNING, " Customer is not deleted !").show();
             }
         }
 

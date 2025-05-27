@@ -118,6 +118,8 @@ public class InventoryPageController {
                     e.printStackTrace();
                     new Alert(Alert.AlertType.ERROR, "Error occurred while deleting Inventory").show();
                 }
+            }else{
+                new Alert(Alert.AlertType.WARNING, " Inventory is not deleted !").show();
             }
         }
 

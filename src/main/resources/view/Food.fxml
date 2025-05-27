@@ -1,76 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600" prefWidth="800"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="lk.ijse.aquariumfinal.controller.FoodPageController"
-            style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6);">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="600" prefWidth="800" style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.FoodPageController">
 
     <children>
-        <VBox spacing="10" alignment="TOP_CENTER" AnchorPane.topAnchor="10.0" AnchorPane.bottomAnchor="10.0"
-              AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-            <Label text="Food Management"
-                   style="-fx-font-size: 22px; -fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <Label text="Food ID:"
-                       style="-fx-text-fill: #2c3e50; -fx-font-weight: bold; -fx-font-size: 14px;" />
-                <Label fx:id="lblFoodId" text="Auto-generated"
-                       style="-fx-text-fill: #2c3e50; -fx-font-size: 14px;" />
+        <VBox alignment="TOP_CENTER" spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <Label style="-fx-font-size: 22px; -fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Food Management" />
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold; -fx-font-size: 14px;" text="Food ID:" />
+                <Label fx:id="lblFoodId" style="-fx-text-fill: #2c3e50; -fx-font-size: 14px;" text="Auto-generated" />
             </HBox>
             <GridPane hgap="15" vgap="15">
                 <children>
-                    <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"
-                           style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
-                    <TextField fx:id="txtName" promptText="Food" prefWidth="300"
-                               style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;"
-                               GridPane.rowIndex="0" GridPane.columnIndex="1" />
+                    <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="txtName" prefWidth="300" promptText="Food" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                    <Label text="Fish Type:" GridPane.rowIndex="1" GridPane.columnIndex="0"
-                           style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
-                    <TextField fx:id="txtFishType" promptText="Gurami" prefWidth="300"
-                               style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;"
-                               GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                    <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Fish Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextField fx:id="txtFishType" prefWidth="300" promptText="Gurami" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                    <Label text="Ex Date:" GridPane.rowIndex="2" GridPane.columnIndex="0"
-                           style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
-                    <DatePicker fx:id="DPExDate" promptText="23/04/2025" prefWidth="300"
-                                GridPane.rowIndex="2" GridPane.columnIndex="1" />
-
-                    <Label text="Inventory ID:" GridPane.rowIndex="3" GridPane.columnIndex="0"
-                           style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" />
-                    <ComboBox fx:id="CboxInventry" promptText="I001" prefWidth="300"
-                              GridPane.rowIndex="3" GridPane.columnIndex="1" />
+                    <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Ex Date:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <DatePicker fx:id="DPExDate" prefWidth="300" promptText="23/04/2025" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 </children>
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
             </GridPane>
             <HBox alignment="CENTER_LEFT" spacing="12">
-                <Button fx:id="btnSave" onAction="#btnSaveOnAction"
-                        style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"
-                        text="Save" />
-                <Button fx:id="btnUpdate" onAction="#btnUpdateOnAction"
-                        style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;"
-                        text="Update" />
-                <Button fx:id="btnDelete" onAction="#btnDeleteOnAction"
-                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"
-                        text="Delete" />
-                <Button fx:id="btnReset" onAction="#btnResetOnAction"
-                        style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-font-weight: bold;"
-                        text="Reset" />
-                <Button fx:id="btnGenarateR" onAction="#btnGenarateROnAction"
-                        style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold;"
-                        text="Generate Report" />
+                <Button fx:id="btnSave" onAction="#btnSaveOnAction" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Save" />
+                <Button fx:id="btnUpdate" onAction="#btnUpdateOnAction" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold;" text="Update" />
+                <Button fx:id="btnDelete" onAction="#btnDeleteOnAction" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;" text="Delete" />
+                <Button fx:id="btnReset" onAction="#btnResetOnAction" style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-font-weight: bold;" text="Reset" />
+                <Button fx:id="btnGenarateR" onAction="#btnGenarateROnAction" style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold;" text="Generate Report" />
             </HBox>
-            <TableView fx:id="tblFood" VBox.vgrow="ALWAYS" style="-fx-background-color: #f0f3f7; -fx-border-color: #7f8c8d;">
+            <TableView fx:id="tblFood" onMouseClicked="#btnClickOnACtion" style="-fx-background-color: #f0f3f7; -fx-border-color: #7f8c8d;" VBox.vgrow="ALWAYS">
                 <columns>
-                    <TableColumn text="Food ID" />
-                    <TableColumn text="Name" />
-                    <TableColumn text="Fish Type" />
-                    <TableColumn text="Ex Date" />
-                    <TableColumn text="Inventory ID" />
+                    <TableColumn fx:id="clmFoodId" text="Food ID" />
+                    <TableColumn fx:id="clmName" text="Name" />
+                    <TableColumn fx:id="clmFishType" text="Fish Type" />
+                    <TableColumn fx:id="dpExDate" text="Ex Date" />
                 </columns>
                 <columnResizePolicy>
-                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                 </columnResizePolicy>
             </TableView>
 

@@ -121,6 +121,8 @@ private final EmployeeModel Emodel = new EmployeeModel();
                 e.printStackTrace();
                 new Alert(Alert.AlertType.ERROR, "Error occurred while deleting Employee").show();
             }
+        }else{
+            new Alert(Alert.AlertType.WARNING, " Employee is not deleted !").show();
         }
     }
 

@@ -1,4 +1,4 @@
-package lk.ijse.aquariumfinal.dto;
+package lk.ijse.aquariumfinal.dto.tm;
 
 import lombok.*;
 
@@ -8,12 +8,9 @@ import java.sql.Date;
 @ToString
 @Setter
 @Getter
-public class FoodDTO {
+public class FoodTM {
     private String foodId;
     private String name;
     private String fishType;
     private Date exDate;
-
-
-
 }

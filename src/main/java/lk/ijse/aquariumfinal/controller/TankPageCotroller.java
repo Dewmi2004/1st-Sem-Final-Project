@@ -96,6 +96,8 @@ public class TankPageCotroller {
             } else {
                 new Alert(Alert.AlertType.ERROR, "Tank Not Deleted").show();
             }
+        }else{
+            new Alert(Alert.AlertType.WARNING, " Tank is not deleted !").show();
         }
     }
 
