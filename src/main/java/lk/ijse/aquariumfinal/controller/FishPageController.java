@@ -51,7 +51,7 @@ public class FishPageController {
 
     private void ComboDataSet() throws SQLException, ClassNotFoundException {
         cmbSize.setItems(Fmodel.getFishSize());
-        cmbTankId.setItems(TankModel.getFishTankId());
+        cmbTankId.setItems(TankModel.getTankId());
         cmbGender.setItems(Fmodel.getFishGender());
         cmbWaterType.setItems(Fmodel.getFishWatertype());
         cmbCountry.setItems(Fmodel.getFishCountry());

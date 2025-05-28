@@ -34,13 +34,13 @@
 
                 <children>
                     <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Glass Type:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <ComboBox fx:id="CBoxGlass" prefWidth="300" promptText="Standard Float Glass" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <ComboBox fx:id="CBoxGlass" focusTraversable="false" prefWidth="300" promptText="Standard Float Glass" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                     <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Tank Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <ComboBox fx:id="CBoxTank" prefWidth="300" promptText="Fish" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <ComboBox fx:id="CBoxTank" focusTraversable="false" prefWidth="300" promptText="Fish" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                     <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Water Type:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <ComboBox fx:id="CBoxWater" prefWidth="300" promptText="River Water" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <ComboBox fx:id="CBoxWater" focusTraversable="false" prefWidth="300" promptText="River Water" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 </children>
             </GridPane>
             <HBox alignment="CENTER_LEFT" spacing="12">

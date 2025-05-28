@@ -1,4 +1,4 @@
-package lk.ijse.aquariumfinal.dto;
+package lk.ijse.aquariumfinal.dto.tm;
 
 import lombok.*;
 
@@ -7,8 +7,7 @@ import lombok.*;
 @ToString
 @Setter
 @Getter
-public class PlantDTO {
-
+public class PlantTM {
     private String plantId;
     private String name;
     private String waterType;

@@ -25,13 +25,13 @@
             <GridPane hgap="15" vgap="15">
                 <children>
                     <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="txtName" prefWidth="300" promptText="Food" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField fx:id="txtName" focusTraversable="false" prefWidth="300" promptText="Food" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                     <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Fish Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <TextField fx:id="txtFishType" prefWidth="300" promptText="Gurami" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField fx:id="txtFishType" focusTraversable="false" prefWidth="300" promptText="Gurami" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                     <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Ex Date:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <DatePicker fx:id="DPExDate" prefWidth="300" promptText="23/04/2025" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <DatePicker fx:id="DPExDate" focusTraversable="false" prefWidth="300" promptText="23/04/2025" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 </children>
             <columnConstraints>
                <ColumnConstraints />

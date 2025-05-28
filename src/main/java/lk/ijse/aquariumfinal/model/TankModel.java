@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TankModel {
-    public static ObservableList<String> getFishTankId() throws SQLException, ClassNotFoundException {
+    public static ObservableList<String> getTankId() throws SQLException, ClassNotFoundException {
         ResultSet rs = CrudUtil.execute("select tank_Id from tank");
         ObservableList<String> TankDtoArrayList = FXCollections.observableArrayList();
         while (rs.next()) {
@@ -29,6 +29,7 @@ public class TankModel {
         return CrudUtil.execute("UPDATE tank SET glass_Type = ?, fish_Or_Plant = ?, water_Type = ? WHERE tank_Id = ?",
                 tankDto.getGlassType(), tankDto.getFishOrPlant(), tankDto.getWaterType(), tankDto.getTankId());
     }
+
 
     public ArrayList<TankDTO> getAllTanks() throws SQLException, ClassNotFoundException {
         ResultSet rs = CrudUtil.execute("SELECT * FROM tank");

@@ -24,24 +24,24 @@
             <GridPane hgap="15" vgap="15">
                 <children>
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="txtName" promptText="Enter fish name" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField fx:id="txtName" focusTraversable="false" promptText="Enter fish name" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Size:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <ComboBox fx:id="cmbSize" promptText="Select size" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <ComboBox fx:id="cmbSize" focusTraversable="false" promptText="Select size" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Tank ID:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <ComboBox fx:id="cmbTankId" promptText="Select tank ID" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <ComboBox fx:id="cmbTankId" focusTraversable="false" promptText="Select tank ID" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Gender:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <ComboBox fx:id="cmbGender" promptText="Select gender" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <ComboBox fx:id="cmbGender" focusTraversable="false" promptText="Select gender" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Water Type:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                    <ComboBox fx:id="cmbWaterType" promptText="Select water type" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                    <ComboBox fx:id="cmbWaterType" focusTraversable="false" promptText="Select water type" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="3" GridPane.rowIndex="0" />
 
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Country:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                    <ComboBox fx:id="cmbCountry" promptText="Select country" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                    <ComboBox fx:id="cmbCountry" focusTraversable="false" promptText="Select country" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="3" GridPane.rowIndex="1" />
 
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Color:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                    <TextField fx:id="txtColor" promptText="Enter color" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                    <TextField fx:id="txtColor" focusTraversable="false" promptText="Enter color" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                 </children>
                 <columnConstraints>
                     <ColumnConstraints />
