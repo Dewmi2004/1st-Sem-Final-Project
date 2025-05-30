@@ -17,7 +17,6 @@ public class TankModel {
             TankDtoArrayList.add(rs.getString("tank_Id"));
         }
         return  TankDtoArrayList ;
-
     }
 
     public static boolean saveTank(TankDTO tankDto) throws SQLException, ClassNotFoundException {

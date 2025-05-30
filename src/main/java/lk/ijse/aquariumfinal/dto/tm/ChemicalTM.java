@@ -1,4 +1,4 @@
-package lk.ijse.aquariumfinal.dto;
+package lk.ijse.aquariumfinal.dto.tm;
 
 import lombok.*;
 
@@ -7,13 +7,12 @@ import lombok.*;
 @ToString
 @Setter
 @Getter
-public class ChemicalDTO {
+public class ChemicalTM{
 
     private String chemicalId;
     private String acidOrBase;
     private String concentration;
     private String storeType;
     private String name;
-
 
 }
