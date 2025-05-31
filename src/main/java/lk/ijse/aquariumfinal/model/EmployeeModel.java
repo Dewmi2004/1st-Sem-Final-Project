@@ -1,5 +1,7 @@
 package lk.ijse.aquariumfinal.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lk.ijse.aquariumfinal.dto.EmployeeDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
 
@@ -32,7 +34,16 @@ public class EmployeeModel {
             return employeeDtoArrayList;
         }
 
-        public String getNextEmployee() throws SQLException, ClassNotFoundException {
+    public static ObservableList<String> getAllEmployeeId() throws SQLException, ClassNotFoundException {
+        ResultSet rs = CrudUtil.execute("select employee_Id from employee");
+        ObservableList<String> employeeDtoArrayList = FXCollections.observableArrayList();
+        while (rs.next()) {
+            employeeDtoArrayList.add(rs.getString("employee_Id"));
+        }
+        return  employeeDtoArrayList;
+    }
+
+    public String getNextEmployee() throws SQLException, ClassNotFoundException {
             ResultSet rs = CrudUtil.execute("select employee_Id from employee order by employee_Id DESC limit 1");
             char tableCharactor ='E';
             if(rs.next()){

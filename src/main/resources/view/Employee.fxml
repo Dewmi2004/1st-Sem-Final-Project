@@ -7,16 +7,16 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
 <AnchorPane prefHeight="600" prefWidth="900" style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.EmployeePageController">
 
    <children>
-      <VBox spacing="20" alignment="TOP_CENTER" prefWidth="860"
-            AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0">
+      <VBox alignment="TOP_CENTER" prefWidth="860" spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <Label style="-fx-font-size: 26px; -fx-text-fill: #1b263b; -fx-font-weight: bold;" text="Employee Management" />
          <HBox alignment="CENTER_LEFT" spacing="10">
             <Label style="-fx-font-size: 16px; -fx-text-fill: #2e4053; -fx-font-weight: bold;" text="Employee ID:" />
@@ -35,18 +35,20 @@
 
                <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Gender:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                <TextField fx:id="txtGender" promptText="Enter gender" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-
-               <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Contact:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-               <TextField fx:id="txtContact" promptText="07XXXXXXXX" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-
-               <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-               <TextField fx:id="txtEmail" promptText="Enter email" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+   
+                  <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Email:" GridPane.rowIndex="4" />
+               <TextField fx:id="txtEmail" promptText="Enter email" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               <TextField fx:id="txtContact" promptText="07XXXXXXXX" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      
+                     <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Contact:" GridPane.rowIndex="5" />
             </children>
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
             </columnConstraints>
             <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
                <RowConstraints />
                <RowConstraints />
                <RowConstraints />
@@ -62,8 +64,7 @@
             <Button fx:id="btnReset" onAction="#btnResetOnAction" style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-font-weight: bold;" text="Reset" />
             <Button fx:id="btnGReport" onAction="#btnGenarateROnAction" style="-fx-background-color: #1a237e; -fx-text-fill: white; -fx-font-weight: bold;" text="Generate Report" />
          </HBox>
-         <TableView fx:id="tblEmployee" focusTraversable="false" onMouseClicked="#clickOnAction"
-                    style="-fx-border-color: #4a4a4a; -fx-background-color: #d9dbdb;" VBox.vgrow="ALWAYS">
+         <TableView fx:id="tblEmployee" focusTraversable="false" onMouseClicked="#clickOnAction" style="-fx-border-color: #4a4a4a; -fx-background-color: #d9dbdb;" VBox.vgrow="ALWAYS">
             <columns>
                <TableColumn fx:id="clmEmployeeId" text="Employee ID" />
                <TableColumn fx:id="clmName" text="Name" />

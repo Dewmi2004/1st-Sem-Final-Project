@@ -7,14 +7,9 @@ import lombok.*;
 @ToString
 @Setter
 @Getter
-public class EmployeeDTO {
+public class CustomerDtoLite {
     private String id;
     private String name;
-    private String address;
-    private String gender;
-    private String dob;
-    private String email;
-    private String contact;
 
 
 }
