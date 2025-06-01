@@ -1,16 +1,22 @@
 package lk.ijse.aquariumfinal.controller;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.aquariumfinal.dto.CartDTO;
 import lk.ijse.aquariumfinal.dto.CustomerDTO;
 import lk.ijse.aquariumfinal.dto.OrderDTO;
+import lk.ijse.aquariumfinal.dto.PlantDTO;
+import lk.ijse.aquariumfinal.dto.tm.CartTM;
+import lk.ijse.aquariumfinal.dto.tm.PlantTM;
 import lk.ijse.aquariumfinal.model.CustomerModel;
 import lk.ijse.aquariumfinal.model.OrderModel;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class OrderPageController {
     public TextField txtCustomerPhone;
@@ -104,12 +110,6 @@ public class OrderPageController {
         }
     }
 
-//    public void btnResetOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-//        clearFields();
-//        setNextOrderId();
-//        setNextPaymentId();
-//    }
-
     private void clearFields() {
         datePickerDate.setValue(null);
         cmbItemId.getSelectionModel().clearSelection();
@@ -126,8 +126,27 @@ public class OrderPageController {
     }
 
     public void btnAddtoCartOnAction(ActionEvent actionEvent) {
+        ArrayList<CartDTO> cartArray = new ArrayList<>( );
+        ObservableList<CartTM>  obj = FXCollections.observableArrayList();
+
+
     }
 
     public void btnCheckBalanceOnAction(ActionEvent actionEvent) {
+    }
+    private void loadTable() throws SQLException, ClassNotFoundException {
+        ArrayList<CartDTO> carts = OrderModel.getAllCart();
+        ObservableList<CartTM> obList = FXCollections.observableArrayList();
+
+        for (CartDTO dto : carts) {
+            CartTM tm = new CartTM(
+                   dto.getItemId(),
+                    dto.getName(),
+                    dto.getQuantity(),
+                    dto.getUnitPrice()
+            );
+            obList.add(tm);
+        }
+        tblCart.setItems(obList);
     }
 }

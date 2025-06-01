@@ -1,5 +1,6 @@
 package lk.ijse.aquariumfinal.model;
 
+import lk.ijse.aquariumfinal.dto.CartDTO;
 import lk.ijse.aquariumfinal.dto.CustomerDTO;
 import lk.ijse.aquariumfinal.dto.OrderDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
@@ -9,6 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderModel {
+
+    public static ArrayList<CartDTO> getAllCart() {
+    }
 
     public boolean saveOrder(OrderDTO dto) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("INSERT INTO orders VALUES (?, ?, ?, ?, ?)",

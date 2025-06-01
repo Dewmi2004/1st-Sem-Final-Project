@@ -41,7 +41,7 @@ public class PlantPageController {
         loadComboData();
         loadTable();
     }
-
+    
     private void setCellValueFactory() {
         colplantId.setCellValueFactory(new PropertyValueFactory<>("plantId"));
         colname.setCellValueFactory(new PropertyValueFactory<>("name"));
