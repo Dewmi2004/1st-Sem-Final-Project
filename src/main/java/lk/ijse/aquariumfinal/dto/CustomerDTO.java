@@ -15,7 +15,10 @@ public class CustomerDTO {
     private String dob;
     private String email;
     private String contact;
-
+public CustomerDTO(String id, String name) {
+    this.id = id;
+    this.name = name;
+}
 
 
 }

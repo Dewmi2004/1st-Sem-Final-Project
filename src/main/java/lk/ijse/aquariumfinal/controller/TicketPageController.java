@@ -6,13 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import lk.ijse.aquariumfinal.dto.CustomerDtoLite;
+import lk.ijse.aquariumfinal.dto.CustomerDTO;
 import lk.ijse.aquariumfinal.dto.TicketDTO;
 import lk.ijse.aquariumfinal.dto.tm.TicketTM;
+import lk.ijse.aquariumfinal.model.CustomerModel;
 import lk.ijse.aquariumfinal.model.EmployeeModel;
-import lk.ijse.aquariumfinal.model.SupplierModel;
 import lk.ijse.aquariumfinal.model.TicketModel;
-
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -30,17 +29,16 @@ public class TicketPageController {
     public TableColumn<?, ?> colCustomerId;
     public TableColumn<?, ?> colEmployeeId;
     public TableColumn<?, ?> colQuantity;
-
+    public TableColumn<?,?> colFullPrice;
+    public ComboBox<String> cmbEmployeeId;
     public TextField txtAge;
     public TextField txtPrice;
     public DatePicker dpDate;
     public TextField txtTime;
     public TextField txtQuantity;
-    public TextField txtEmployeePhone;
     public TextField txtCustomerPhone;
     public Label lblTicketId;
     public Label lblCustomerId;
-    public Label lblEmployeeId;
     public Label lblCustomerInfo;
     public Button btnSave1;
     public Button btnUpdate1;
@@ -49,8 +47,7 @@ public class TicketPageController {
     public Button btnGenarateR1;
     public Button btnSearchCustomer;
     private final TicketModel ticketModel = new TicketModel();
-    public TableColumn<?,?> colFullPrice;
-    public ComboBox<String> cmbEmployeeId;
+
 
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
@@ -99,10 +96,10 @@ public class TicketPageController {
         txtPrice.clear();
         txtTime.clear();
         txtQuantity.clear();
-        lblCustomerId.setText("C001");
+        lblCustomerId.setText("Enter Customer");
+        lblCustomerInfo.setText("Customer Name");
         cmbEmployeeId.getSelectionModel().clearSelection();
         txtCustomerPhone.clear();
-        txtEmployeePhone.clear();
         dpDate.setValue(null);
         setNextTicketId();
     }
@@ -199,7 +196,7 @@ public class TicketPageController {
         String customerPhone = txtCustomerPhone.getText();
 
         try {
-            CustomerDtoLite customer1 = ticketModel.searchCustomerByPhone(customerPhone);
+            CustomerDTO customer1 = CustomerModel.searchCustomerByPhone(customerPhone);
 
             if (customer1 != null) {
                 lblCustomerId.setText(customer1.getId());
