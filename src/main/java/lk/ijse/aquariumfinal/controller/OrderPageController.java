@@ -3,14 +3,14 @@ package lk.ijse.aquariumfinal.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.aquariumfinal.dto.CartDTO;
 import lk.ijse.aquariumfinal.dto.CustomerDTO;
 import lk.ijse.aquariumfinal.dto.OrderDTO;
-import lk.ijse.aquariumfinal.dto.PlantDTO;
 import lk.ijse.aquariumfinal.dto.tm.CartTM;
-import lk.ijse.aquariumfinal.dto.tm.PlantTM;
 import lk.ijse.aquariumfinal.model.CustomerModel;
 import lk.ijse.aquariumfinal.model.OrderModel;
 
@@ -24,37 +24,63 @@ public class OrderPageController {
     public Label lblPaymentId;
     public Button btnSearchCustomer;
     public Button btnPlaceOrder;
-
-    private final OrderModel orderModel = new OrderModel();
     public DatePicker datePickerDate;
     public Label lblChange;
     public Button btnCheckBalance;
     public TextField txtPaidAmount;
     public Label lblTotalAmount;
-    public ComboBox cmbMethod;
-    public TableColumn colRemove;
-    public TableColumn colTotal;
-    public TableColumn colQty;
-    public TableColumn colUnitPrice;
-    public TableColumn colItemId;
-    public TableColumn colName;
-    public TableView tblCart;
+    public ComboBox<String> cmbMethod;
+    public TableColumn<CartTM, String> colItemId;
+    public TableColumn<CartTM, String> colName;
+    public TableColumn<CartTM, Integer> colQty;
+    public TableColumn<CartTM, Double> colUnitPrice;
+    public TableColumn<CartTM, Double> colTotal;
+    public TableColumn<CartTM, Button> colRemove;
+    public TableView<CartTM> tblCart;
     public AnchorPane itemUiLoadPane;
     public Button btnAddToCart;
     public Button btnSearchItem;
-    public ComboBox cmbItemId;
+    public ComboBox<String> cmbItemId;
     public Label Customerdetails;
     public Label lblCustomerName;
+
+    private final OrderModel orderModel = new OrderModel();
+    private final ObservableList<CartTM> cartList = FXCollections.observableArrayList();
 
     public void initialize() throws SQLException, ClassNotFoundException {
         setNextOrderId();
         setNextPaymentId();
         loadItemTypes();
+        setupTableColumns();
     }
 
     private void loadItemTypes() {
         cmbItemId.setItems(FXCollections.observableArrayList("Plant Order", "Fish Order"));
-        cmbMethod.setItems(FXCollections.observableArrayList("Card ","Cash "));
+        cmbMethod.setItems(FXCollections.observableArrayList("Card", "Cash"));
+    }
+    private void nevigateTo(String s) {
+        try {
+            itemUiLoadPane.getChildren().clear();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource(s));
+
+            pane.prefWidthProperty().bind(itemUiLoadPane.widthProperty());
+            pane.prefHeightProperty().bind(itemUiLoadPane.heightProperty());
+
+            itemUiLoadPane.getChildren().add(pane);
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR,"Page Not Found!").show();
+            e.printStackTrace();
+
+        }
+    }
+    private void setupTableColumns() {
+        colItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+        colRemove.setCellValueFactory(new PropertyValueFactory<>("btn"));
+        tblCart.setItems(cartList);
     }
 
     private void setNextOrderId() throws SQLException, ClassNotFoundException {
@@ -82,32 +108,46 @@ public class OrderPageController {
     }
 
     public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
-        if (datePickerDate.getValue() == null || cmbItemId.getValue() == null) {
-            showAlert(Alert.AlertType.WARNING, "Fill all required fields");
+        if (datePickerDate.getValue() == null || cmbItemId.getValue() == null || cartList.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Please complete the form and add items to cart.");
             return;
         }
 
-        OrderDTO dto = new OrderDTO(
+        OrderDTO order = new OrderDTO(
                 lblOrderrid.getText(),
                 lblPaymentId.getText(),
                 Date.valueOf(datePickerDate.getValue()),
                 Customerdetails.getText(),
-                (String) cmbItemId.getValue()
+                cmbItemId.getValue()
         );
 
+        ArrayList<CartDTO> cartDTOList = new ArrayList<>();
+        for (CartTM tm : cartList) {
+            CartDTO dto = new CartDTO(tm.getItemId(), tm.getName(), tm.getQuantity(), tm.getUnitPrice(), tm.getTotal());
+            cartDTOList.add(dto);
+        }
+
         try {
-            boolean saved = orderModel.saveOrder(dto);
-            if (saved) {
-                showAlert(Alert.AlertType.INFORMATION, "Order Placed Successfully");
+            boolean isPlaced = orderModel.saveOrder(order, cartDTOList);
+            if (isPlaced) {
+                showAlert(Alert.AlertType.INFORMATION, "Order placed successfully!");
                 clearFields();
                 setNextOrderId();
                 setNextPaymentId();
             } else {
-                showAlert(Alert.AlertType.ERROR, "Failed to place order");
+                showAlert(Alert.AlertType.ERROR, "Failed to place order.");
             }
         } catch (SQLException | ClassNotFoundException e) {
             showAlert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
         }
+    }
+
+    private void calculateTotal() {
+        double total = 0;
+        for (CartTM tm : cartList) {
+            total += tm.getTotal();
+        }
+        lblTotalAmount.setText(String.format("Rs. %.2f", total));
     }
 
     private void clearFields() {
@@ -116,6 +156,8 @@ public class OrderPageController {
         txtCustomerPhone.clear();
         Customerdetails.setText("Customer ID");
         lblCustomerName.setText("Customer Name");
+        cartList.clear();
+        lblTotalAmount.setText("Rs. 0.00");
     }
 
     private void showAlert(Alert.AlertType type, String msg) {
@@ -123,30 +165,43 @@ public class OrderPageController {
     }
 
     public void btnSearchItemOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnAddtoCartOnAction(ActionEvent actionEvent) {
-        ArrayList<CartDTO> cartArray = new ArrayList<>( );
-        ObservableList<CartTM>  obj = FXCollections.observableArrayList();
-
-
+      if(cmbItemId.getSelectionModel().getSelectedItem().equals("Plant Order")) {
+          nevigateTo("/view/PlantCartPage.fxml");
+      } else if (cmbItemId.getSelectionModel().getSelectedItem().equals( "Fish Order")) {
+         nevigateTo("/view/FishCartPage.fxml");
+      }
     }
 
     public void btnCheckBalanceOnAction(ActionEvent actionEvent) {
-    }
-    private void loadTable() throws SQLException, ClassNotFoundException {
-        ArrayList<CartDTO> carts = OrderModel.getAllCart();
-        ObservableList<CartTM> obList = FXCollections.observableArrayList();
+        try {
+            double paid = Double.parseDouble(txtPaidAmount.getText());
+            String totalStr = lblTotalAmount.getText().replace("Rs. ", "");
+            double total = Double.parseDouble(totalStr);
 
-        for (CartDTO dto : carts) {
-            CartTM tm = new CartTM(
-                   dto.getItemId(),
-                    dto.getName(),
-                    dto.getQuantity(),
-                    dto.getUnitPrice()
-            );
-            obList.add(tm);
+            double change = paid - total;
+            lblChange.setText(String.format("Rs. %.2f", change));
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.WARNING, "Invalid amount");
         }
-        tblCart.setItems(obList);
+    }
+
+    public void btnAddtoCartOnAction(ActionEvent actionEvent) {
+
+        String itemId = "PL001";
+        String name = "Anubias";
+        int qty = 2;
+        double unitPrice = 150.0;
+        double total = qty * unitPrice;
+
+        Button btn = new Button("Remove");
+        CartTM cartTM = new CartTM(itemId, name, qty, unitPrice, total, btn);
+        cartList.add(cartTM);
+
+        btn.setOnAction(e -> {
+            cartList.remove(cartTM);
+            calculateTotal();
+        });
+
+        calculateTotal();
     }
 }

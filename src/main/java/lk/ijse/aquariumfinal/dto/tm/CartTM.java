@@ -1,4 +1,5 @@
 package lk.ijse.aquariumfinal.dto.tm;
+import javafx.scene.control.Button;
 import lombok.*;
 
 @NoArgsConstructor
@@ -9,6 +10,9 @@ import lombok.*;
 public class CartTM {
     private String ItemId;
     private String Name;
-    private String Quantity;
-    private String UnitPrice;
+    private int Quantity;
+    private double UnitPrice;
+private double Total;
+private Button btn ;
+
 }
