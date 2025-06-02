@@ -18,7 +18,7 @@
                         <Label prefHeight="39.0" prefWidth="61.0" style="-fx-font-size: 16px; -fx-text-fill: #2c3e50;" text="Plant ID:" />
                         <ComboBox fx:id="cmbPlantId" prefWidth="300" />
                         <Label prefHeight="17.0" prefWidth="44.0" />
-                        <Button mnemonicParsing="false" onAction="#btnSearchOnAction" text="Search" />
+                        <Button mnemonicParsing="false" onAction="#btnSearchplantOnAction" text="Search" />
 
                         <Label prefHeight="25.0" prefWidth="94.0" style="-fx-font-size: 16px; -fx-text-fill: #2c3e50;" text="  Name:" />
                         <Label fx:id="lblName" prefHeight="27.0" prefWidth="193.0" text="Label" />
@@ -30,10 +30,10 @@
             <children>
 
                 <Label prefHeight="25.0" prefWidth="100.0" style="-fx-font-size: 16px; -fx-text-fill: #2c3e50;" text=" Unit Price:" />
-                <Label fx:id="lblUnitPrice" prefHeight="31.0" prefWidth="242.0" text="Label" />
+                <Label fx:id="lblUnitplantPrice" prefHeight="31.0" prefWidth="242.0" text="Label" />
 
                 <Label prefHeight="25.0" prefWidth="110.0" style="-fx-font-size: 16px; -fx-text-fill: #2c3e50;" text="Quantity:" />
-                <TextField fx:id="txtQty" prefWidth="300" />
+                <TextField fx:id="txtplantQty" prefWidth="300" />
             </children>
         </HBox>
     </children>

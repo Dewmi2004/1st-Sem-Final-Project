@@ -7,16 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.aquariumfinal.dto.CartDTO;
 import lk.ijse.aquariumfinal.dto.CustomerDTO;
-import lk.ijse.aquariumfinal.dto.OrderDTO;
 import lk.ijse.aquariumfinal.dto.tm.CartTM;
 import lk.ijse.aquariumfinal.model.CustomerModel;
 import lk.ijse.aquariumfinal.model.OrderModel;
-
-import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 
 public class OrderPageController {
     public TextField txtCustomerPhone;
@@ -46,6 +42,7 @@ public class OrderPageController {
 
     private final OrderModel orderModel = new OrderModel();
     private final ObservableList<CartTM> cartList = FXCollections.observableArrayList();
+
 
     public void initialize() throws SQLException, ClassNotFoundException {
         setNextOrderId();
@@ -107,41 +104,42 @@ public class OrderPageController {
         }
     }
 
-    public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
-        if (datePickerDate.getValue() == null || cmbItemId.getValue() == null || cartList.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Please complete the form and add items to cart.");
-            return;
-        }
-
-        OrderDTO order = new OrderDTO(
-                lblOrderrid.getText(),
-                lblPaymentId.getText(),
-                Date.valueOf(datePickerDate.getValue()),
-                Customerdetails.getText(),
-                cmbItemId.getValue()
-        );
-
-        ArrayList<CartDTO> cartDTOList = new ArrayList<>();
-        for (CartTM tm : cartList) {
-            CartDTO dto = new CartDTO(tm.getItemId(), tm.getName(), tm.getQuantity(), tm.getUnitPrice(), tm.getTotal());
-            cartDTOList.add(dto);
-        }
-
-        try {
-            boolean isPlaced = orderModel.saveOrder(order, cartDTOList);
-            if (isPlaced) {
-                showAlert(Alert.AlertType.INFORMATION, "Order placed successfully!");
-                clearFields();
-                setNextOrderId();
-                setNextPaymentId();
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Failed to place order.");
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            showAlert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
-        }
-    }
-
+//    public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
+//        if (datePickerDate.getValue() == null || cmbItemId.getValue() == null || cartList.isEmpty()) {
+//            showAlert(Alert.AlertType.WARNING, "Please complete the form and add items to cart.");
+//            return;
+//        }
+//
+//        OrderDTO order = new OrderDTO(
+//                lblOrderrid.getText(),
+//                lblPaymentId.getText(),
+//                Date.valueOf(datePickerDate.getValue()),
+//                Customerdetails.getText(),
+//                cmbItemId.getValue(),
+//
+//        );
+//
+//        ArrayList<CartDTO> cartDTOList = new ArrayList<>();
+//        for (CartTM tm : cartList) {
+//            CartDTO dto = new CartDTO(tm.getItemId(), tm.getName(), tm.getQuantity(), tm.getUnitPrice(), tm.getTotal());
+//            cartDTOList.add(dto);
+//        }
+//
+//        try {
+//            boolean isPlaced = orderModel.saveOrder(order, cartDTOList);
+//            if (isPlaced) {
+//                showAlert(Alert.AlertType.INFORMATION, "Order placed successfully!");
+//                clearFields();
+//                setNextOrderId();
+//                setNextPaymentId();
+//            } else {
+//                showAlert(Alert.AlertType.ERROR, "Failed to place order.");
+//            }
+//        } catch (SQLException | ClassNotFoundException e) {
+//            showAlert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
+//        }
+//    }
+//
     private void calculateTotal() {
         double total = 0;
         for (CartTM tm : cartList) {
@@ -165,11 +163,11 @@ public class OrderPageController {
     }
 
     public void btnSearchItemOnAction(ActionEvent actionEvent) {
-      if(cmbItemId.getSelectionModel().getSelectedItem().equals("Plant Order")) {
-          nevigateTo("/view/PlantCartPage.fxml");
-      } else if (cmbItemId.getSelectionModel().getSelectedItem().equals( "Fish Order")) {
-         nevigateTo("/view/FishCartPage.fxml");
-      }
+        if(cmbItemId.getSelectionModel().getSelectedItem().equals("Plant Order")) {
+            nevigateTo("/view/PlantCartPage.fxml");
+        } else if (cmbItemId.getSelectionModel().getSelectedItem().equals( "Fish Order")) {
+            nevigateTo("/view/FishCartPage.fxml");
+        }
     }
 
     public void btnCheckBalanceOnAction(ActionEvent actionEvent) {
@@ -185,23 +183,39 @@ public class OrderPageController {
         }
     }
 
-    public void btnAddtoCartOnAction(ActionEvent actionEvent) {
+//    public void btnAddtoCartOnAction(ActionEvent actionEvent) {
+//
+//        Button btn = new Button("Remove");
+//        CartTM cartTM = new CartTM(itemId, name, qty, unitPrice, total, btn);
+//        cartList.add(cartTM);
+//
+//        btn.setOnAction(e -> {
+//            cartList.remove(cartTM);
+//            calculateTotal();
+//        });
+//
+//        calculateTotal();
+//    }
 
+
+    public void btnAddtoCartOnAction(ActionEvent actionEvent) {
         String itemId = "PL001";
         String name = "Anubias";
         int qty = 2;
         double unitPrice = 150.0;
         double total = qty * unitPrice;
-
         Button btn = new Button("Remove");
         CartTM cartTM = new CartTM(itemId, name, qty, unitPrice, total, btn);
         cartList.add(cartTM);
-
         btn.setOnAction(e -> {
             cartList.remove(cartTM);
             calculateTotal();
         });
 
         calculateTotal();
+    }
+
+
+    public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
     }
 }

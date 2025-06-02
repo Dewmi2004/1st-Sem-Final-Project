@@ -9,9 +9,10 @@ public class PlantCartPageController {
 
     public ComboBox cmbPlantId;
     public Label lblName;
-    public Label lblUnitPrice;
-    public TextField txtQty;
+    public Label lblUnitplantPrice;
+    public TextField txtplantQty;
 
-    public void btnSearchOnAction(ActionEvent actionEvent) {
+
+    public void btnSearchplantOnAction(ActionEvent actionEvent) {
     }
 }

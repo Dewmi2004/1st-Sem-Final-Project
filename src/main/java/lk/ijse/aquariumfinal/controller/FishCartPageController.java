@@ -12,6 +12,8 @@ public class FishCartPageController {
     public Label lblName;
     public Label lblUnitePrice;
 
-    public void btnSearchOnAction(ActionEvent actionEvent) {
+
+
+    public void btnSearchfishOnAction(ActionEvent actionEvent) {
     }
 }

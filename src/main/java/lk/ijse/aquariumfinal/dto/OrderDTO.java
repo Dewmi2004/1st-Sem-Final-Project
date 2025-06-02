@@ -2,6 +2,7 @@ package lk.ijse.aquariumfinal.dto;
 
 import lombok.*;
 
+
 import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,7 +15,11 @@ public class OrderDTO {
     private String paymentId;
     private Date date;
     private String customerId;
-    private String item;
-
+    private String itemType;
+    private String payment_Id;
+   private String method;
+   private String amount;
+   private String fishId;
+   private String plantId;
 
 }
