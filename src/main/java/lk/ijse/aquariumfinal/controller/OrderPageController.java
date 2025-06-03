@@ -7,11 +7,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.aquariumfinal.dto.CartDTO;
 import lk.ijse.aquariumfinal.dto.CustomerDTO;
+import lk.ijse.aquariumfinal.dto.OrderDTO;
 import lk.ijse.aquariumfinal.dto.tm.CartTM;
 import lk.ijse.aquariumfinal.model.CustomerModel;
 import lk.ijse.aquariumfinal.model.OrderModel;
+
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class OrderPageController {
@@ -42,6 +47,7 @@ public class OrderPageController {
 
     private final OrderModel orderModel = new OrderModel();
     private final ObservableList<CartTM> cartList = FXCollections.observableArrayList();
+    public Label CustomerId;
 
 
     public void initialize() throws SQLException, ClassNotFoundException {
@@ -93,7 +99,7 @@ public class OrderPageController {
         try {
             CustomerDTO customer = CustomerModel.searchCustomerByPhone(phone);
             if (customer != null) {
-                Customerdetails.setText(customer.getId());
+                CustomerId.setText(customer.getId());
                 lblCustomerName.setText(customer.getName());
                 showAlert(Alert.AlertType.INFORMATION, "Customer Found");
             } else {
@@ -104,42 +110,41 @@ public class OrderPageController {
         }
     }
 
-//    public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
-//        if (datePickerDate.getValue() == null || cmbItemId.getValue() == null || cartList.isEmpty()) {
-//            showAlert(Alert.AlertType.WARNING, "Please complete the form and add items to cart.");
-//            return;
-//        }
-//
-//        OrderDTO order = new OrderDTO(
-//                lblOrderrid.getText(),
-//                lblPaymentId.getText(),
-//                Date.valueOf(datePickerDate.getValue()),
-//                Customerdetails.getText(),
-//                cmbItemId.getValue(),
-//
-//        );
-//
-//        ArrayList<CartDTO> cartDTOList = new ArrayList<>();
-//        for (CartTM tm : cartList) {
-//            CartDTO dto = new CartDTO(tm.getItemId(), tm.getName(), tm.getQuantity(), tm.getUnitPrice(), tm.getTotal());
-//            cartDTOList.add(dto);
-//        }
-//
-//        try {
-//            boolean isPlaced = orderModel.saveOrder(order, cartDTOList);
-//            if (isPlaced) {
-//                showAlert(Alert.AlertType.INFORMATION, "Order placed successfully!");
-//                clearFields();
-//                setNextOrderId();
-//                setNextPaymentId();
-//            } else {
-//                showAlert(Alert.AlertType.ERROR, "Failed to place order.");
-//            }
-//        } catch (SQLException | ClassNotFoundException e) {
-//            showAlert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
-//        }
-//    }
-//
+    public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
+        if (datePickerDate.getValue() == null || cmbItemId.getValue() == null || cartList.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Please complete the form and add items to cart.");
+            return;
+        }
+
+        OrderDTO order = new OrderDTO(
+                lblOrderrid.getText(),
+                lblPaymentId.getText(),
+                Date.valueOf(datePickerDate.getValue()),
+                CustomerId.getText(),
+                cmbItemId.getValue()
+        );
+
+        ArrayList<CartDTO> cartDTOList = new ArrayList<>();
+        for (CartTM tm : cartList) {
+            CartDTO dto = new CartDTO(tm.getItemId(), tm.getName(), tm.getQuantity(), tm.getUnitPrice(), tm.getTotal());
+            cartDTOList.add(dto);
+        }
+
+        try {
+            boolean isPlaced = orderModel.saveOrder(order, cartDTOList);
+            if (isPlaced) {
+                showAlert(Alert.AlertType.INFORMATION, "Order placed successfully!");
+                clearFields();
+                setNextOrderId();
+                setNextPaymentId();
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Failed to place order.");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            showAlert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
+        }
+    }
+
     private void calculateTotal() {
         double total = 0;
         for (CartTM tm : cartList) {
@@ -152,7 +157,7 @@ public class OrderPageController {
         datePickerDate.setValue(null);
         cmbItemId.getSelectionModel().clearSelection();
         txtCustomerPhone.clear();
-        Customerdetails.setText("Customer ID");
+        CustomerId.setText("Customer ID");
         lblCustomerName.setText("Customer Name");
         cartList.clear();
         lblTotalAmount.setText("Rs. 0.00");
@@ -214,8 +219,8 @@ public class OrderPageController {
 
         calculateTotal();
     }
-
-
-    public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
-    }
+//
+//
+//    public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
+//    }
 }

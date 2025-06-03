@@ -22,4 +22,12 @@ public class OrderDTO {
    private String fishId;
    private String plantId;
 
+    public OrderDTO(String orderId, String paymentId, Date date, String customerId, String itemType) {
+        this.orderId = orderId;
+        this.paymentId = paymentId;
+        this.date = date;
+        this.customerId = customerId;
+        this.itemType = itemType;
+
+    }
 }

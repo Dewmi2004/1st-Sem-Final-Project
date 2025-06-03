@@ -190,7 +190,6 @@ public class TicketPageController {
     }
 
     public void btnGenarateROnAction(ActionEvent actionEvent) {
-        // To be implemented later
     }
     public void btnSearchCustomerOnAction(ActionEvent actionEvent) {
         String customerPhone = txtCustomerPhone.getText();
