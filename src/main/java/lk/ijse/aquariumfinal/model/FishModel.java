@@ -17,6 +17,15 @@ public class FishModel {
         return CrudUtil.execute("update fish set name = ?,size = ?,tank_Id = ?,gender = ?,water_Type = ? ,country = ? ,colour = ?  where fish_Id = ?",fishDto.getName(),fishDto.getSize(),fishDto.getTankId(),fishDto.getGender(),fishDto.getWaterType(),fishDto.getCountry(),fishDto.getColour(),fishDto.getFishId());
     }
 
+    public static ObservableList getAllFishIDS() throws SQLException, ClassNotFoundException {
+        ResultSet rs = CrudUtil.execute("select fish_Id from fish");
+        ObservableList<String> fishDtoArrayList = FXCollections.observableArrayList();
+        while (rs.next()) {
+            fishDtoArrayList.add(rs.getString("fish_Id"));
+        }
+        return  fishDtoArrayList;
+    }
+
     public ArrayList<FishDTO> getAllFish() throws SQLException, ClassNotFoundException {
         ResultSet rs = CrudUtil.execute("select * from fish");
         ArrayList<FishDTO> fishDtoArrayList = new ArrayList<>();

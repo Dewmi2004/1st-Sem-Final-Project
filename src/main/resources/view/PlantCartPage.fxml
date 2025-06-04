@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="141.0" prefWidth="820.0" style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.PlantCartPageController">
+<AnchorPane prefHeight="141.0" prefWidth="820.0" style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.OrderPageController">
 
     <children>
         <AnchorPane layoutX="8.0" layoutY="33.0">
@@ -21,7 +21,7 @@
                         <Button mnemonicParsing="false" onAction="#btnSearchplantOnAction" text="Search" />
 
                         <Label prefHeight="25.0" prefWidth="94.0" style="-fx-font-size: 16px; -fx-text-fill: #2c3e50;" text="  Name:" />
-                        <Label fx:id="lblName" prefHeight="27.0" prefWidth="193.0" text="Label" />
+                        <Label fx:id="lblPlantName" prefHeight="27.0" prefWidth="193.0" text="Label" />
                     </children>
                 </HBox>
             </children>

@@ -12,7 +12,9 @@ import lk.ijse.aquariumfinal.dto.CustomerDTO;
 import lk.ijse.aquariumfinal.dto.OrderDTO;
 import lk.ijse.aquariumfinal.dto.tm.CartTM;
 import lk.ijse.aquariumfinal.model.CustomerModel;
+import lk.ijse.aquariumfinal.model.FishModel;
 import lk.ijse.aquariumfinal.model.OrderModel;
+import lk.ijse.aquariumfinal.model.PlantModel;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -42,12 +44,19 @@ public class OrderPageController {
     public Button btnAddToCart;
     public Button btnSearchItem;
     public ComboBox<String> cmbItemId;
-    public Label Customerdetails;
     public Label lblCustomerName;
 
     private final OrderModel orderModel = new OrderModel();
     private final ObservableList<CartTM> cartList = FXCollections.observableArrayList();
     public Label CustomerId;
+    public ComboBox<String> cmbFishId;
+    public Label lblName;
+    public Label lblUnitePrice;
+    public TextField txtQty;
+    public ComboBox<String> cmbPlantId;
+    public Label lblUnitplantPrice;
+    public TextField txtplantQty;
+    public Label lblPlantName;
 
 
     public void initialize() throws SQLException, ClassNotFoundException {
@@ -57,9 +66,11 @@ public class OrderPageController {
         setupTableColumns();
     }
 
-    private void loadItemTypes() {
+    private void loadItemTypes() throws SQLException, ClassNotFoundException {
         cmbItemId.setItems(FXCollections.observableArrayList("Plant Order", "Fish Order"));
         cmbMethod.setItems(FXCollections.observableArrayList("Card", "Cash"));
+        cmbFishId.setItems(FishModel.getAllFishIDS());
+        cmbPlantId.setItems(PlantModel.getAllPlantIDS());
     }
     private void nevigateTo(String s) {
         try {
@@ -121,7 +132,11 @@ public class OrderPageController {
                 lblPaymentId.getText(),
                 Date.valueOf(datePickerDate.getValue()),
                 CustomerId.getText(),
-                cmbItemId.getValue()
+                cmbItemId.getValue(),
+                cmbMethod.getValue(),
+                lblTotalAmount.getText()
+
+
         );
 
         ArrayList<CartDTO> cartDTOList = new ArrayList<>();
@@ -170,6 +185,7 @@ public class OrderPageController {
     public void btnSearchItemOnAction(ActionEvent actionEvent) {
         if(cmbItemId.getSelectionModel().getSelectedItem().equals("Plant Order")) {
             nevigateTo("/view/PlantCartPage.fxml");
+
         } else if (cmbItemId.getSelectionModel().getSelectedItem().equals( "Fish Order")) {
             nevigateTo("/view/FishCartPage.fxml");
         }
@@ -218,6 +234,12 @@ public class OrderPageController {
         });
 
         calculateTotal();
+    }
+
+    public void btnSearchfishOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnSearchplantOnAction(ActionEvent actionEvent) {
     }
 //
 //

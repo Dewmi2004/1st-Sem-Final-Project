@@ -45,6 +45,15 @@ public class PlantModel {
         return list;
     }
 
+    public static ObservableList getAllPlantIDS() throws SQLException, ClassNotFoundException {
+        ResultSet rs = CrudUtil.execute("select plant_Id from plant");
+        ObservableList<String> plantDtoArrayList = FXCollections.observableArrayList();
+        while (rs.next()) {
+            plantDtoArrayList.add(rs.getString("plant_Id"));
+        }
+        return  plantDtoArrayList;
+    }
+
     public String getNextPlantId() throws SQLException, ClassNotFoundException {
         String sql = "SELECT plant_Id FROM plant ORDER BY plant_Id DESC LIMIT 1";
         ResultSet rs = CrudUtil.execute(sql);
