@@ -20,6 +20,7 @@ public class SupplierModel {
 
     }
 
+
     public ArrayList<SupplierDTO> getAllSupplier() throws SQLException, ClassNotFoundException {
         ResultSet rs = CrudUtil.execute("select * from supplier");
         ArrayList<SupplierDTO> supplierDtoArrayList = new ArrayList<>();
@@ -58,14 +59,6 @@ public class SupplierModel {
                     "Tank Supplier"
             );
         }
-    public static ObservableList getAllSupplierId() throws SQLException, ClassNotFoundException {
-        ResultSet rs = CrudUtil.execute("select sup_Id from supplier");
-        ObservableList<String> supplierDtoArrayList = FXCollections.observableArrayList();
-        while (rs.next()) {
-            supplierDtoArrayList.add(rs.getString("sup_Id"));
-        }
-        return  supplierDtoArrayList;
-    }
 
     public boolean hasInventoryReferences(String id) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = CrudUtil.execute("SELECT sup_Id FROM inventory WHERE sup_Id = ?", id);

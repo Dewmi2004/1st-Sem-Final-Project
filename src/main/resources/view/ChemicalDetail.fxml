@@ -15,7 +15,7 @@
                 <HBox prefHeight="39.0" prefWidth="805.0">
                     <children>
 
-                        <Label prefHeight="39.0" prefWidth="61.0" style="-fx-font-size: 16px; -fx-text-fill: #2c3e50;" text="Chemical ID:" />
+                        <Label prefHeight="39.0" prefWidth="125.0" style="-fx-font-size: 16px; -fx-text-fill: #2c3e50;" text="Chemical ID:" />
                         <ComboBox fx:id="cmbchemicalId" prefWidth="300" />
                         <Label prefHeight="17.0" prefWidth="44.0" />
                     </children>

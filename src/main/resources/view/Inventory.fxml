@@ -36,7 +36,7 @@
             <HBox spacing="10.0">
                 <Label prefHeight="17.0" prefWidth="79.0" text="Supplier" textFill="#34495e" />
                 <TextField fx:id="txtSupplierPhone" prefHeight="25.0" prefWidth="206.0" />
-                <Button fx:id="btnSearchCustomer" onAction="#btnSearchCustomerOnAction" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #4b7bec; -fx-text-fill: white; -fx-background-radius: 8;" text="Search" />
+                <Button fx:id="btnSearchCustomer" onAction="#btnSearchSupplierOnAction" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #4b7bec; -fx-text-fill: white; -fx-background-radius: 8;" text="Search" />
                 <Label fx:id="SupplierId" prefWidth="103.0" text="Supplier ID" textFill="#2f3542" />
                 <Label fx:id="lblSupplierName" prefWidth="108.0" text="Supplier Name" />
             </HBox>

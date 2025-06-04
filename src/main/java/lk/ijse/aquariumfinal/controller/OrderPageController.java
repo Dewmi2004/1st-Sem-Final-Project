@@ -64,13 +64,8 @@ public class OrderPageController {
     private final ObservableList<CartTM> cartList = FXCollections.observableArrayList();
     public Label CustomerId;
     public ComboBox<String> cmbFishId;
-    public Label lblName;
-    public Label lblUnitePrice;
-    public TextField txtQty;
     public ComboBox<String> cmbPlantId;
-    public Label lblUnitplantPrice;
-    public TextField txtplantQty;
-    public Label lblPlantName;
+
 
     private PlantCartPageController plantCartController;
     private FishCartPageController fishCartController;
@@ -95,21 +90,7 @@ public class OrderPageController {
             cmbPlantId.setItems(PlantModel.getAllPlantIDS());
         }
     }
-    private void nevigateTo(String s) {
-        try {
-            itemUiLoadPane.getChildren().clear();
-            AnchorPane pane = FXMLLoader.load(getClass().getResource(s));
 
-            pane.prefWidthProperty().bind(itemUiLoadPane.widthProperty());
-            pane.prefHeightProperty().bind(itemUiLoadPane.heightProperty());
-
-            itemUiLoadPane.getChildren().add(pane);
-        }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,"Page Not Found!" + e.getMessage()).show();
-            e.printStackTrace();
-
-        }
-    }
     private void setupTableColumns() {
         colItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -214,14 +195,11 @@ public class OrderPageController {
 
         switch (selectedItem) {
             case "Plant Order" -> {
-//                nevigateTo("/view/PlantCartPage.fxml");
 
                 System.out.println("Plant Order");
                 try {
-                    // replaced the simple method call nevigateTo();
 
                     itemUiLoadPane.getChildren().clear();
-                    //AnchorPane pane = FXMLLoader.load(getClass().getResource("/view/PlantCartPage.fxml"));
 
                     FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/PlantCartPage.fxml"));
                     plantCartController = fxmlLoader.getController();
@@ -238,14 +216,11 @@ public class OrderPageController {
                 }
             }
             case "Fish Order" ->{
-//                nevigateTo("/view/PlantCartPage.fxml");
 
                 System.out.println("fish Order");
                 try {
-                    // replaced the simple method call nevigateTo();
 
                     itemUiLoadPane.getChildren().clear();
-                    //AnchorPane pane = FXMLLoader.load(getClass().getResource("/view/PlantCartPage.fxml"));
 
                     FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FishCartPage.fxml"));
                     plantCartController = fxmlLoader.getController();

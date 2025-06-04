@@ -4,184 +4,186 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import lk.ijse.aquariumfinal.AppInitializer;
 import lk.ijse.aquariumfinal.dto.InventoryDTO;
+import lk.ijse.aquariumfinal.dto.SupplierDTO;
 import lk.ijse.aquariumfinal.dto.tm.InventryTM;
 import lk.ijse.aquariumfinal.model.InventoryModel;
-import lk.ijse.aquariumfinal.model.SupplierModel;
 
+
+import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class InventoryPageController {
-    private final InventoryModel Imodel = new InventoryModel();
-    public DatePicker DPDate;
-    public TableView<InventryTM> tblInventry;
-    public ComboBox<String> CboxSupplier;
-    public Label lblInventryid;
-    public TableColumn<?,?> clmInventryId;
-    public TableColumn<?,?> clmSupplierId;
-    public TableColumn<?,?> clmDate;
-    public Button btnSave1;
-    public Button btnReset1;
-    public Button btnDelete1;
-    public Button btnUpdate1;
-    public Button btnGenarateR1;
+
+    @FXML
+    private Label SupplierId;
+
+    @FXML
+    private Button btnAddToCart, btnPlaceOrder, btnSearchCustomer, btnSearchItem;
+
+    @FXML
+    private ComboBox<String> cmbItemId;
+
+    @FXML
+    private TableColumn<InventryTM, String> colInventoryId, colItemId;
+
+    @FXML
+    private TableColumn<InventryTM, Integer> colQty;
+
+    @FXML
+    private TableColumn<InventryTM, Button> colRemove;
+
+    @FXML
+    private TableColumn<InventryTM, Double> colUnitPrice;
+
+    @FXML
+    private DatePicker datePickerDate;
+
+    @FXML
+    private AnchorPane itemUiLoadPane;
+
+    @FXML
+    private Label lblInventoryId, lblSupplierName;
+
+    @FXML
+    private TableView<InventryTM> tblCart;
+
+    @FXML
+    private TextField txtSupplierPhone;
+
+    private final InventoryModel inventoryModel = new InventoryModel();
+    private final ObservableList<InventryTM> cartList = FXCollections.observableArrayList();
 
     public void initialize() throws SQLException, ClassNotFoundException {
-        setCellValueFactory();
-        setNextId();
-     CboxSupplier.setItems(SupplierModel.getAllSupplierId());
-        loadtable();
+        setNextInventoryId();
+        loadItemTypes();
+        setupTableColumns();
     }
 
-    private void loadtable() throws SQLException, ClassNotFoundException {
-        ArrayList<InventoryDTO> inventrys = Imodel.getAllInventry();
-        ObservableList<InventryTM> obc = FXCollections.observableArrayList();
-        for (InventoryDTO Inventry : inventrys) {
-            InventryTM ITM = new InventryTM(
-                    Inventry.getInventoryId(),
-                    Inventry.getSupId(),
-                    Inventry.getDate()
-
-            );
-            obc.add(ITM);
-        }
-        tblInventry.setItems(obc);
+    private void setupTableColumns() {
+        colInventoryId.setCellValueFactory(new PropertyValueFactory<>("inventoryId"));
+        colItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colRemove.setCellValueFactory(new PropertyValueFactory<>("btn"));
+        tblCart.setItems(cartList);
     }
 
-    private void setNextId() throws SQLException, ClassNotFoundException {
-        String nextiD = Imodel.getNextInventry();
-        lblInventryid.setText(nextiD);
-    }
-    private void setCellValueFactory() {
-        clmInventryId.setCellValueFactory(new PropertyValueFactory<>("inventoryId"));
-        clmSupplierId.setCellValueFactory(new PropertyValueFactory<>("supId"));
-        clmDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+    private void loadItemTypes() throws SQLException, ClassNotFoundException {
+        cmbItemId.setItems(FXCollections.observableArrayList("Plant", "Fish", "Chemical","Food"));
     }
 
-    public void btnGenarateROnAction(ActionEvent actionEvent) {
+    private void setNextInventoryId() throws SQLException, ClassNotFoundException {
+        lblInventoryId.setText(inventoryModel.generateNextInventoryId());
     }
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        String id = lblInventryid.getText();
-        String supid =  String.valueOf(CboxSupplier.getValue());
-        String date = String.valueOf(String.valueOf(DPDate.getValue()));
-
-
-        InventoryDTO inventryDTO = new InventoryDTO(
-                id,supid,date
-        );
-        Boolean isUpdate = Imodel.updateInventry(inventryDTO);
-
-        if (isUpdate) {
-            loadtable();
-            setNextId();
-            clearFields();
-            new Alert(Alert.AlertType.INFORMATION, "Inventory Updated", ButtonType.OK).show();
-        }else {
-            new Alert(Alert.AlertType.ERROR, "Inventory Not Updated", ButtonType.OK).show();
+    @FXML
+    void btnSearchSupplierOnAction(ActionEvent event) {
+        String phone = txtSupplierPhone.getText();
+        SupplierDTO supplier = InventoryModel. searchSupplierByPhone(phone);
+        if (supplier != null) {
+            SupplierId.setText(supplier.getSupId());
+            lblSupplierName.setText(supplier.getName());
+            showAlert(Alert.AlertType.INFORMATION, "Supplier Found");
+        } else {
+            showAlert(Alert.AlertType.WARNING, "Supplier Not Found");
         }
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-            String id = lblInventryid.getText();
+    @FXML
+    void btnSearchItemOnAction(ActionEvent event) {
+        String selectedItem = cmbItemId.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            showAlert(Alert.AlertType.WARNING, "Please select an item type first.");
+            return;
+        }
 
-            if (id.isEmpty()) {
-                new Alert(Alert.AlertType.WARNING, "Please select a Inventory to delete").show();
-                return;
+        try {
+            itemUiLoadPane.getChildren().clear();
+            FXMLLoader fxmlLoader;
+
+            if ("Plant".equals(selectedItem)) {
+                fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/PlantDetail.fxml"));
+            } else if ("Fish".equals(selectedItem)) {
+                fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FishDetail.fxml"));
+            } else if ("Chemical".equals(selectedItem)) {
+                fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/ChemicalDetail.fxml"));
+            }else {
+                fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FoodDetail.fxml"));
             }
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this Inventory ?");
-            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-            alert.getButtonTypes().setAll(no, yes);
+            AnchorPane pane = fxmlLoader.load();
+            pane.prefWidthProperty().bind(itemUiLoadPane.widthProperty());
+            pane.prefHeightProperty().bind(itemUiLoadPane.heightProperty());
 
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.isPresent() && result.get() == yes) {
-                try {
-                    boolean isDeleted = Imodel.deleteInventry(id);
-
-                    if (isDeleted) {
-                        loadtable();
-                        clearFields();
-                        new Alert(Alert.AlertType.INFORMATION, "Inventory Deleted").show();
-                    } else {
-                        new Alert(Alert.AlertType.ERROR, "Inventory Not Deleted").show();
-                    }
-                } catch (SQLException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                    new Alert(Alert.AlertType.ERROR, "Error occurred while deleting Inventory").show();
-                }
-            }else{
-                new Alert(Alert.AlertType.WARNING, " Inventory is not deleted !").show();
-            }
-        }
-
-        private void clearFields() throws SQLException, ClassNotFoundException {
-
-            CboxSupplier.getSelectionModel().clearSelection();
-         DPDate.getEditor().clear();
-            setNextId();
-        }
-
-        @FXML
-        void btnResetOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
-            CboxSupplier.getSelectionModel().clearSelection();
-            DPDate.getEditor().clear();
-
-            setNextId();
-
-            btnSave1.setDisable(false);
-            btnUpdate1.setDisable(true);
-            btnDelete1.setDisable(true);
-
-            tblInventry.getSelectionModel().clearSelection();
-
-
-        }
-    public void btnSaveOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-        String id = lblInventryid.getText();
-        String suppid = String.valueOf(CboxSupplier.getValue());
-        String date = String.valueOf(DPDate.getValue());
-
-
-        InventoryDTO inventoryDTO = new InventoryDTO(
-                id,suppid,date
-        );
-        boolean isSave = Imodel.saveInventry(inventoryDTO);
-
-        if (isSave) {
-            loadtable();
-            setNextId();
-            clearFields();
-            new Alert(Alert.AlertType.INFORMATION, "Inventory Saved", ButtonType.OK).show();
-        }else {
-            new Alert(Alert.AlertType.ERROR, "Inventory Not Saved", ButtonType.OK).show();
+            itemUiLoadPane.getChildren().add(pane);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public void clickOnAction(MouseEvent mouseEvent) {
-        InventryTM selectedItem =  tblInventry.getSelectionModel().getSelectedItem();
+    @FXML
+    void btnAddtoCartOnAction(ActionEvent event) {
+        String inventoryId = lblInventoryId.getText();
+        String itemId = "PL001"; // placeholder
+        String qty = String.valueOf((10)); // placeholder
+        String unitPrice = String.valueOf((100.0)); // placeholder
 
-        if (selectedItem != null) {
-            lblInventryid.setText(selectedItem.getInventoryId());
-            CboxSupplier.setValue(selectedItem.getSupId());
-            DPDate.setValue(LocalDate.parse(selectedItem.getDate()));
+        Button btn = new Button("Remove");
+        InventryTM tm = new InventryTM(inventoryId, itemId, qty, unitPrice, btn);
 
+        btn.setOnAction(e -> {
+            cartList.remove(tm);
+        });
 
+        cartList.add(tm);
+    }
 
-            // save button disable
-            btnSave1.setDisable(true);
-
-            // update, delete button enable
-            btnUpdate1.setDisable(false);
-            btnDelete1.setDisable(false);
+    @FXML
+    void btnPlaceOrderOnAction(ActionEvent event) {
+        if (datePickerDate.getValue() == null || cartList.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Please select a date and add items to the cart.");
+            return;
         }
+
+        InventoryDTO inventory = new InventoryDTO(
+                lblInventoryId.getText(),
+                Date.valueOf(datePickerDate.getValue()),
+                SupplierId.getText()
+        );
+
+        ArrayList<InventryTM> itemList = new ArrayList<>(cartList);
+
+        try {
+            boolean isSaved = inventoryModel.saveInventory(inventory, itemList);
+            if (isSaved) {
+                showAlert(Alert.AlertType.INFORMATION, "Inventory placed successfully!");
+                clearFields();
+                setNextInventoryId();
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Failed to place inventory.");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            showAlert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
+        }
+    }
+
+    private void clearFields() {
+        datePickerDate.setValue(null);
+        cmbItemId.getSelectionModel().clearSelection();
+        txtSupplierPhone.clear();
+        SupplierId.setText("Supplier ID");
+        lblSupplierName.setText("Supplier Name");
+        cartList.clear();
+    }
+
+    private void showAlert(Alert.AlertType type, String msg) {
+        new Alert(type, msg).show();
     }
 }
