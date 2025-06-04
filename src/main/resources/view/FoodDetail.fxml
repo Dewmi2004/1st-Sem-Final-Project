@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="141.0" prefWidth="820.0" style="-fx-background-color: linear-gradient(to bottom right, #d1d8e0, #a3b1c6);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.aquariumfinal.controller.FoodDetailPageController">
+
+    <children>
+        <AnchorPane layoutX="8.0" layoutY="33.0">
+            <children>
+                <HBox prefHeight="39.0" prefWidth="805.0">
+                    <children>
+
+                        <Label prefHeight="39.0" prefWidth="61.0" style="-fx-font-size: 16px; -fx-text-fill: #2c3e50;" text="Food ID:" />
+                        <ComboBox fx:id="cmbfoodId" prefWidth="300" />
+                        <Label prefHeight="17.0" prefWidth="44.0" />
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+        <HBox layoutY="87.0" prefHeight="53.0" prefWidth="820.0">
+            <children>
+
+                <Label prefHeight="25.0" prefWidth="100.0" style="-fx-font-size: 16px; -fx-text-fill: #2c3e50;" text=" Unit Price:" />
+                <TextField fx:id="txtUnitPrice" prefHeight="25.0" prefWidth="204.0" />
+
+                <Label prefHeight="25.0" prefWidth="110.0" style="-fx-font-size: 16px; -fx-text-fill: #2c3e50;" text="Quantity:">
+                    <HBox.margin>
+                        <Insets left="30.0" />
+                    </HBox.margin></Label>
+                <TextField fx:id="txtfoodQty" prefWidth="300" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

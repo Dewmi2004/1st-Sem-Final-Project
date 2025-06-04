@@ -38,7 +38,7 @@ if (isPaymentSaved) {
 
             isQuantityUpdated = CrudUtil.execute(
                     "UPDATE fish_detail SET quantity = quantity - ? WHERE fish_Id = ?",
-                   cartList.get(0).getQuantity(), cartList.get(0).getFishId()
+                   cartList.get(1).getQuantity(), cartList.get(0).getFishId()
             );
 
         } else if (dto.getItemType().equals("Plant Order")) {
@@ -49,7 +49,7 @@ if (isPaymentSaved) {
 
             isQuantityUpdated = CrudUtil.execute(
                     "UPDATE plant_detail SET quantity = quantity - ? WHERE plant_Id = ?",
-                    cartList.get(0).getQuantity(), cartList.get(0).getPlantId()
+                    cartList.get(1).getQuantity(), cartList.get(0).getPlantId()
             );
         }
         con.commit();
