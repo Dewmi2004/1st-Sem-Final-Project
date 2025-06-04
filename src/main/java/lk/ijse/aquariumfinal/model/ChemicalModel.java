@@ -21,6 +21,15 @@ public class ChemicalModel {
                 dto.getAcidOrBase(), dto.getConcentration(), dto.getStoreType(), dto.getName(), dto.getChemicalId());
     }
 
+    public static ObservableList<String> getChemicalId() throws SQLException, ClassNotFoundException {
+        ResultSet rs = CrudUtil.execute("select chemical_Id from chemical");
+        ObservableList<String> chemicalDtoArrayList = FXCollections.observableArrayList();
+        while (rs.next()) {
+            chemicalDtoArrayList.add(rs.getString("chemical_Id"));
+        }
+        return  chemicalDtoArrayList ;
+    }
+
     public boolean deleteChemical(String id) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("DELETE FROM chemical WHERE chemical_Id = ?", id);
     }
