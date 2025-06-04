@@ -14,6 +14,8 @@ public class CartDTO {
      private double UnitPrice;
      private double Total;
      private Button btn ;
+     private String fishId;
+     private String plantId;
 
      public CartDTO(String itemId, String name, int quantity, double unitPrice, double total) {
           this.ItemId = itemId;

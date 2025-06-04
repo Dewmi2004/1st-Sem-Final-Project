@@ -19,10 +19,10 @@ public class OrderDTO {
     private String payment_Id;
    private String method;
    private String amount;
-   private String fishId;
-   private String plantId;
+
 
     public OrderDTO(String orderId, String paymentId, Date date, String customerId, String itemType,String method, String amount) {
+
         this.orderId = orderId;
         this.paymentId = paymentId;
         this.date = date;
@@ -30,9 +30,6 @@ public class OrderDTO {
         this.itemType = itemType;
         this.method = method;
         this.amount = amount;
-//        this.fishId = fishId;
-//        this.plantId = plantId;
-//
 
     }
 }

@@ -33,23 +33,23 @@ if (isPaymentSaved) {
         if (dto.getItemType().equals("Fish Order")) {
             isItemOrderSaved = CrudUtil.execute(
                     "INSERT INTO order_fish(order_Id, fish_Id) VALUES (?, ?)",
-                    dto.getOrderId(),dto.getFishId()
+                    dto.getOrderId(),cartList.get(0).getFishId()
             );
 
             isQuantityUpdated = CrudUtil.execute(
                     "UPDATE fish_detail SET quantity = quantity - ? WHERE fish_Id = ?",
-                   cartList.get(0).getQuantity(), dto.getFishId()
+                   cartList.get(0).getQuantity(), cartList.get(0).getFishId()
             );
 
         } else if (dto.getItemType().equals("Plant Order")) {
             isItemOrderSaved = CrudUtil.execute(
                     "INSERT INTO order_plant(order_Id, plant_Id) VALUES (?, ?)",
-                    dto.getOrderId(),dto.getPlantId()
+                    dto.getOrderId(),cartList.get(0).getPlantId()
             );
 
             isQuantityUpdated = CrudUtil.execute(
                     "UPDATE plant_detail SET quantity = quantity - ? WHERE plant_Id = ?",
-                    cartList.get(0).getQuantity(), dto.getPlantId()
+                    cartList.get(0).getQuantity(), cartList.get(0).getPlantId()
             );
         }
         con.commit();

@@ -3,10 +3,12 @@ package lk.ijse.aquariumfinal.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.aquariumfinal.AppInitializer;
 import lk.ijse.aquariumfinal.dto.CartDTO;
 import lk.ijse.aquariumfinal.dto.CustomerDTO;
 import lk.ijse.aquariumfinal.dto.OrderDTO;
@@ -22,12 +24,25 @@ import java.util.ArrayList;
 
 
 public class OrderPageController {
+    @FXML
     public TextField txtCustomerPhone;
-    public Label lblOrderrid;
+
+    @FXML
+    private Label lblOrderrid;
+
+    @FXML
     public Label lblPaymentId;
+
+    @FXML
     public Button btnSearchCustomer;
+
+    @FXML
     public Button btnPlaceOrder;
+
+    @FXML
     public DatePicker datePickerDate;
+
+    @FXML
     public Label lblChange;
     public Button btnCheckBalance;
     public TextField txtPaidAmount;
@@ -45,7 +60,6 @@ public class OrderPageController {
     public Button btnSearchItem;
     public ComboBox<String> cmbItemId;
     public Label lblCustomerName;
-
     private final OrderModel orderModel = new OrderModel();
     private final ObservableList<CartTM> cartList = FXCollections.observableArrayList();
     public Label CustomerId;
@@ -58,6 +72,9 @@ public class OrderPageController {
     public TextField txtplantQty;
     public Label lblPlantName;
 
+    private PlantCartPageController plantCartController;
+    private FishCartPageController fishCartController;
+
 
     public void initialize() throws SQLException, ClassNotFoundException {
         setNextOrderId();
@@ -69,8 +86,14 @@ public class OrderPageController {
     private void loadItemTypes() throws SQLException, ClassNotFoundException {
         cmbItemId.setItems(FXCollections.observableArrayList("Plant Order", "Fish Order"));
         cmbMethod.setItems(FXCollections.observableArrayList("Card", "Cash"));
-        cmbFishId.setItems(FishModel.getAllFishIDS());
-        cmbPlantId.setItems(PlantModel.getAllPlantIDS());
+
+        if (cmbFishId != null) {
+            cmbFishId.setItems(FishModel.getAllFishIDS());
+        }
+
+        if (cmbPlantId != null) {
+            cmbPlantId.setItems(PlantModel.getAllPlantIDS());
+        }
     }
     private void nevigateTo(String s) {
         try {
@@ -82,7 +105,7 @@ public class OrderPageController {
 
             itemUiLoadPane.getChildren().add(pane);
         }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,"Page Not Found!").show();
+            new Alert(Alert.AlertType.ERROR,"Page Not Found!" + e.getMessage()).show();
             e.printStackTrace();
 
         }
@@ -98,7 +121,7 @@ public class OrderPageController {
     }
 
     private void setNextOrderId() throws SQLException, ClassNotFoundException {
-        lblOrderrid.setText(orderModel.generateNextOrderId());
+         lblOrderrid.setText(orderModel.generateNextOrderId());
     }
 
     private void setNextPaymentId() throws SQLException, ClassNotFoundException {
@@ -183,13 +206,64 @@ public class OrderPageController {
     }
 
     public void btnSearchItemOnAction(ActionEvent actionEvent) {
-        if(cmbItemId.getSelectionModel().getSelectedItem().equals("Plant Order")) {
-            nevigateTo("/view/PlantCartPage.fxml");
+        String selectedItem = cmbItemId.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            showAlert(Alert.AlertType.WARNING, "Please select an item type first.");
+            return;
+        }
 
-        } else if (cmbItemId.getSelectionModel().getSelectedItem().equals( "Fish Order")) {
-            nevigateTo("/view/FishCartPage.fxml");
+        switch (selectedItem) {
+            case "Plant Order" -> {
+//                nevigateTo("/view/PlantCartPage.fxml");
+
+                System.out.println("Plant Order");
+                try {
+                    // replaced the simple method call nevigateTo();
+
+                    itemUiLoadPane.getChildren().clear();
+                    //AnchorPane pane = FXMLLoader.load(getClass().getResource("/view/PlantCartPage.fxml"));
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/PlantCartPage.fxml"));
+                    plantCartController = fxmlLoader.getController();
+
+                    AnchorPane pane = (AnchorPane) fxmlLoader.load();
+
+                    pane.prefWidthProperty().bind(itemUiLoadPane.widthProperty());
+                    pane.prefHeightProperty().bind(itemUiLoadPane.heightProperty());
+
+
+                    itemUiLoadPane.getChildren().add(pane);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            case "Fish Order" ->{
+//                nevigateTo("/view/PlantCartPage.fxml");
+
+                System.out.println("fish Order");
+                try {
+                    // replaced the simple method call nevigateTo();
+
+                    itemUiLoadPane.getChildren().clear();
+                    //AnchorPane pane = FXMLLoader.load(getClass().getResource("/view/PlantCartPage.fxml"));
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FishCartPage.fxml"));
+                    plantCartController = fxmlLoader.getController();
+
+                    AnchorPane pane = (AnchorPane) fxmlLoader.load();
+
+                    pane.prefWidthProperty().bind(itemUiLoadPane.widthProperty());
+                    pane.prefHeightProperty().bind(itemUiLoadPane.heightProperty());
+
+
+                    itemUiLoadPane.getChildren().add(pane);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
+
 
     public void btnCheckBalanceOnAction(ActionEvent actionEvent) {
         try {
@@ -203,21 +277,6 @@ public class OrderPageController {
             showAlert(Alert.AlertType.WARNING, "Invalid amount");
         }
     }
-
-//    public void btnAddtoCartOnAction(ActionEvent actionEvent) {
-//
-//        Button btn = new Button("Remove");
-//        CartTM cartTM = new CartTM(itemId, name, qty, unitPrice, total, btn);
-//        cartList.add(cartTM);
-//
-//        btn.setOnAction(e -> {
-//            cartList.remove(cartTM);
-//            calculateTotal();
-//        });
-//
-//        calculateTotal();
-//    }
-
 
     public void btnAddtoCartOnAction(ActionEvent actionEvent) {
         String itemId = "PL001";
@@ -237,12 +296,11 @@ public class OrderPageController {
     }
 
     public void btnSearchfishOnAction(ActionEvent actionEvent) {
+
     }
+
 
     public void btnSearchplantOnAction(ActionEvent actionEvent) {
     }
-//
-//
-//    public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
-//    }
+
 }
