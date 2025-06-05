@@ -145,6 +145,7 @@ public class OrderPageController {
         try {
             boolean isPlaced = orderModel.saveOrder(order, cartDTOList);
             if (isPlaced) {
+
                 showAlert(Alert.AlertType.INFORMATION, "Order placed successfully!");
                 clearFields();
                 setNextOrderId();
@@ -155,6 +156,7 @@ public class OrderPageController {
         } catch (SQLException | ClassNotFoundException e) {
             showAlert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
         }
+
     }
 
     private void calculateTotal() {

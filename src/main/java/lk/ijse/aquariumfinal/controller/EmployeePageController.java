@@ -176,6 +176,8 @@ private final EmployeeModel Emodel = new EmployeeModel();
         boolean isSave = EmployeeModel.saveEmployee(empdto);
 
         if (isSave) {
+            lk.ijse.aquariumfinal.util.EmailUtil.sendEmployeeWelcomeEmail(email,name );
+
             loadtable();
             setNextId();
             clearFields();

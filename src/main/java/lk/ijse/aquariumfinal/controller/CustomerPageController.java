@@ -198,6 +198,7 @@ CustomerDTO cusDto = new CustomerDTO(
 boolean isSave = CustomerModel.saveCustomer(cusDto);
 
         if (isSave) {
+            lk.ijse.aquariumfinal.util.EmailUtil.sendCustomerWelcomeEmail(email, name);
             loadtable();
             setNextId();
             clearFields();

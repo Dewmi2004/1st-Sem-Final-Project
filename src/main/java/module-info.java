@@ -2,8 +2,10 @@ module lk.ijse.aquariumfinal {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    requires java.desktop;
     requires static lombok;
+    requires com.google.protobuf;
+    requires mysql.connector.j;
+    requires jakarta.mail;
 
 
     opens lk.ijse.aquariumfinal to javafx.fxml;

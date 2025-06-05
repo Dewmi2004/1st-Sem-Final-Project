@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class InventoryModel {
     public static SupplierDTO searchSupplierByPhone(String phone) {
@@ -26,13 +27,24 @@ public class InventoryModel {
         }
         return null;
     }
+    public static String getSupplierEmailById(String supplierId) {
+        String sql = "SELECT Email FROM supplier WHERE sup_Id = ?";
+        try {
+            ResultSet resultSet = CrudUtil.execute(sql, supplierId);
+            if (resultSet.next()) {
+                return resultSet.getString("Email");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-    public boolean saveInventory(InventoryDTO inventory, ArrayList<InventryTM> itemList) throws SQLException, ClassNotFoundException {
+    public boolean saveInventory(InventoryDTO inventory, ArrayList<InventryTM> itemList, Map<String, Integer> updatedQuantities) throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
         con.setAutoCommit(false);
 
         try {
-
             boolean isInventorySaved = CrudUtil.execute(
                     "INSERT INTO inventory (inventory_Id, sup_Id, date) VALUES (?, ?, ?)",
                     inventory.getInventoryId(), inventory.getSupId(), inventory.getDate()
@@ -65,12 +77,14 @@ public class InventoryModel {
                             con.rollback();
                             return false;
                         }
+
                         rs = CrudUtil.execute(
                                 "SELECT total_Quantity FROM plant_detail WHERE plant_id = ? ORDER BY inventoryId DESC LIMIT 1", itemId
                         );
                         existingQty = rs.next() ? Integer.parseInt(rs.getString("total_quantity")) : 0;
                         newQty = existingQty + qtyToAdd;
                         CrudUtil.execute("UPDATE plant_detail SET total_Quantity = ? WHERE plant_id = ?", String.valueOf(newQty), itemId);
+                        updatedQuantities.put(itemId, newQty);
                         break;
 
                     case "Fish":
@@ -82,12 +96,14 @@ public class InventoryModel {
                             con.rollback();
                             return false;
                         }
+
                         rs = CrudUtil.execute(
                                 "SELECT total_Quantity FROM fish_detail WHERE fish_id = ? ORDER BY inventoryId DESC LIMIT 1", itemId
                         );
                         existingQty = rs.next() ? Integer.parseInt(rs.getString("total_quantity")) : 0;
                         newQty = existingQty + qtyToAdd;
                         CrudUtil.execute("UPDATE fish_detail SET total_Quantity = ? WHERE fish_id = ?", String.valueOf(newQty), itemId);
+                        updatedQuantities.put(itemId, newQty);
                         break;
 
                     case "Food":
@@ -99,12 +115,14 @@ public class InventoryModel {
                             con.rollback();
                             return false;
                         }
+
                         rs = CrudUtil.execute(
                                 "SELECT total_Quantity FROM food_detail WHERE food_id = ? ORDER BY inventoryId DESC LIMIT 1", itemId
                         );
                         existingQty = rs.next() ? Integer.parseInt(rs.getString("total_quantity")) : 0;
                         newQty = existingQty + qtyToAdd;
                         CrudUtil.execute("UPDATE food_detail SET total_Quantity = ? WHERE food_id = ?", String.valueOf(newQty), itemId);
+                        updatedQuantities.put(itemId, newQty);
                         break;
 
                     case "Chemical":
@@ -116,12 +134,14 @@ public class InventoryModel {
                             con.rollback();
                             return false;
                         }
+
                         rs = CrudUtil.execute(
                                 "SELECT total_Quantity FROM chemical_detail WHERE chemical_id = ? ORDER BY inventoryId DESC LIMIT 1", itemId
                         );
                         existingQty = rs.next() ? Integer.parseInt(rs.getString("total_quantity")) : 0;
                         newQty = existingQty + qtyToAdd;
                         CrudUtil.execute("UPDATE chemical_detail SET total_Quantity = ? WHERE chemical_id = ?", String.valueOf(newQty), itemId);
+                        updatedQuantities.put(itemId, newQty);
                         break;
 
                     default:
@@ -141,6 +161,7 @@ public class InventoryModel {
             con.setAutoCommit(true);
         }
     }
+
 
 
 

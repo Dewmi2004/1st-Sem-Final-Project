@@ -6,6 +6,7 @@ import lk.ijse.aquariumfinal.dto.OrderDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -80,6 +81,7 @@ if (isPaymentSaved) {
             return "ORD001";
         }
     }
+
 
     public String generateNextPaymentId() throws SQLException, ClassNotFoundException {
         ResultSet rs = CrudUtil.execute("SELECT payment_Id FROM orders ORDER BY CAST(SUBSTRING(payment_Id, 4) AS UNSIGNED) DESC LIMIT 1");

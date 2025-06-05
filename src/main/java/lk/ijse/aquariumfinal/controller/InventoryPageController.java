@@ -18,6 +18,8 @@ import lk.ijse.aquariumfinal.model.InventoryModel;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InventoryPageController {
 
@@ -234,14 +236,28 @@ private ChemicalDetailPageController chemDetailPageController;
         ArrayList<InventryTM> itemList = new ArrayList<>(cartList);
 
         try {
-            boolean isSaved = inventoryModel.saveInventory(inventory, itemList);
+            Map<String, Integer> updatedQuantities = new HashMap<>();
+            boolean isSaved = inventoryModel.saveInventory(inventory, itemList, updatedQuantities);
+
             if (isSaved) {
-                showAlert(Alert.AlertType.INFORMATION, "Inventory placed successfully!");
-                clearFields();
-                setNextInventoryId();
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Failed to place inventory.");
+                for (Map.Entry<String, Integer> entry : updatedQuantities.entrySet()) {
+                    String itemId = entry.getKey();
+                    int totalQty = entry.getValue();
+                    System.out.println("Item ID: " + itemId + " → Total Quantity: " + totalQty);
+                    String email = InventoryModel.getSupplierEmailById(SupplierId.getText());
+                    String name = lblSupplierName.getText();
+
+
+                    if (email != null && !email.isEmpty()) {
+                        lk.ijse.aquariumfinal.util.EmailUtil.sendSupplierRestockEmail(email, name, totalQty);
+                    }
+
+                    showAlert(Alert.AlertType.INFORMATION, "Inventory placed successfully!");
+                    clearFields();
+                    setNextInventoryId();
+                }
             }
+
         } catch (SQLException | ClassNotFoundException e) {
             showAlert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
         }
