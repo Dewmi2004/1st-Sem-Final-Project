@@ -30,6 +30,15 @@ public class ChemicalModel {
         return  chemicalDtoArrayList ;
     }
 
+    public static ObservableList<?> getAllChemicalIDS() throws SQLException, ClassNotFoundException {
+        ResultSet rs = CrudUtil.execute("SELECT chemical_Id FROM chemical");
+        ObservableList<String> chemicalIdList = FXCollections.observableArrayList();
+        while (rs.next()) {
+            chemicalIdList.add(rs.getString("chemical_Id"));
+        }
+        return chemicalIdList;
+    }
+
     public boolean deleteChemical(String id) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("DELETE FROM chemical WHERE chemical_Id = ?", id);
     }

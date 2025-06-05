@@ -95,10 +95,9 @@ public class InventoryPageController {
             showAlert(Alert.AlertType.WARNING, "Supplier Not Found");
         }
     }
-
-    @FXML
-    void btnSearchItemOnAction(ActionEvent event) {
+    public void btnSearchItemOnAction(ActionEvent actionEvent) {
         String selectedItem = cmbItemId.getSelectionModel().getSelectedItem();
+
         if (selectedItem == null) {
             showAlert(Alert.AlertType.WARNING, "Please select an item type first.");
             return;
@@ -107,26 +106,49 @@ public class InventoryPageController {
         try {
             itemUiLoadPane.getChildren().clear();
             FXMLLoader fxmlLoader;
+            AnchorPane pane;
 
-            if ("Plant".equals(selectedItem)) {
-                fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/PlantDetail.fxml"));
-            } else if ("Fish".equals(selectedItem)) {
-                fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FishDetail.fxml"));
-            } else if ("Chemical".equals(selectedItem)) {
-                fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/ChemicalDetail.fxml"));
-            }else {
-                fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FoodDetail.fxml"));
+            switch (selectedItem) {
+                case "Plant" -> {
+                    fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/PlantDetail.fxml"));
+                    pane = fxmlLoader.load();
+                    PlantDetailPageController controller = fxmlLoader.getController();
+                    controller.loadPlantIds();
+                }
+                case "Fish" -> {
+                    fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FishDetail.fxml"));
+                    pane = fxmlLoader.load();
+                    FishDetailPageController controller = fxmlLoader.getController();
+                    controller.loadFishIds();
+                }
+                case "Chemical" -> {
+                    fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/ChemicalDetail.fxml"));
+                    pane = fxmlLoader.load();
+                    ChemicalDetailPageController controller = fxmlLoader.getController();
+                    controller.loadChemicalIds();
+                }
+                case "Food" -> {
+                    fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FoodDetail.fxml"));
+                    pane = fxmlLoader.load();
+                    FoodDetailPageController controller = fxmlLoader.getController();
+                    controller.loadFoodIds();
+                }
+                default -> {
+                    showAlert(Alert.AlertType.WARNING, "Invalid item type selected.");
+                    return;
+                }
             }
 
-            AnchorPane pane = fxmlLoader.load();
             pane.prefWidthProperty().bind(itemUiLoadPane.widthProperty());
             pane.prefHeightProperty().bind(itemUiLoadPane.heightProperty());
-
             itemUiLoadPane.getChildren().add(pane);
+
         } catch (Exception e) {
             e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error loading the selected item page.");
         }
     }
+
 
     @FXML
     void btnAddtoCartOnAction(ActionEvent event) {
