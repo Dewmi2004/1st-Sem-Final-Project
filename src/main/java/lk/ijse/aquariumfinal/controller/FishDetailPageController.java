@@ -26,4 +26,17 @@ public class FishDetailPageController {
             e.printStackTrace();
         }
     }
+    public String getSelectedFishId() {
+        return cmbfishId.getValue();
+    }
+
+    public String getQuantity() {
+        return txtUnitPrice.getText();
+    }
+
+    public String getUnitPrice() {
+        return txtUnitPrice.getText();
+    }
+
+
 }

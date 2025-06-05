@@ -59,7 +59,10 @@ public class InventoryPageController {
 
     private final InventoryModel inventoryModel = new InventoryModel();
     private final ObservableList<InventryTM> cartList = FXCollections.observableArrayList();
-
+private PlantDetailPageController plantDetailPageController;
+private FishDetailPageController fishDetailPageController;
+private FoodDetailPageController foodDetailPageController;
+private ChemicalDetailPageController chemDetailPageController;
     public void initialize() throws SQLException, ClassNotFoundException {
         setNextInventoryId();
         loadItemTypes();
@@ -112,26 +115,26 @@ public class InventoryPageController {
                 case "Plant" -> {
                     fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/PlantDetail.fxml"));
                     pane = fxmlLoader.load();
-                    PlantDetailPageController controller = fxmlLoader.getController();
-                    controller.loadPlantIds();
+                    plantDetailPageController  = fxmlLoader.getController();
+                    plantDetailPageController.loadPlantIds();
                 }
                 case "Fish" -> {
                     fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FishDetail.fxml"));
                     pane = fxmlLoader.load();
-                    FishDetailPageController controller = fxmlLoader.getController();
-                    controller.loadFishIds();
+                    fishDetailPageController  = fxmlLoader.getController();
+                    fishDetailPageController.loadFishIds();
                 }
                 case "Chemical" -> {
                     fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/ChemicalDetail.fxml"));
                     pane = fxmlLoader.load();
-                    ChemicalDetailPageController controller = fxmlLoader.getController();
-                    controller.loadChemicalIds();
+                    chemDetailPageController  = fxmlLoader.getController();
+                    chemDetailPageController.loadChemicalIds();
                 }
                 case "Food" -> {
                     fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FoodDetail.fxml"));
                     pane = fxmlLoader.load();
-                    FoodDetailPageController controller = fxmlLoader.getController();
-                    controller.loadFoodIds();
+                    foodDetailPageController  = fxmlLoader.getController();
+                    foodDetailPageController.loadFoodIds();
                 }
                 default -> {
                     showAlert(Alert.AlertType.WARNING, "Invalid item type selected.");
@@ -149,23 +152,71 @@ public class InventoryPageController {
         }
     }
 
-
     @FXML
     void btnAddtoCartOnAction(ActionEvent event) {
         String inventoryId = lblInventoryId.getText();
-        String itemId = "PL001"; // placeholder
-        String qty = String.valueOf((10)); // placeholder
-        String unitPrice = String.valueOf((100.0)); // placeholder
+        String selectedItem = cmbItemId.getSelectionModel().getSelectedItem();
 
-        Button btn = new Button("Remove");
-        InventryTM tm = new InventryTM(inventoryId, itemId, qty, unitPrice, btn);
+        if (selectedItem == null) {
+            showAlert(Alert.AlertType.WARNING, "Please select an item type first.");
+            return;
+        }
 
-        btn.setOnAction(e -> {
-            cartList.remove(tm);
-        });
+        String itemId = null;
+        String qty = null;
+        String unitPrice = null;
 
-        cartList.add(tm);
+        try {
+            switch (selectedItem) {
+                case "Plant" -> {
+                    if (plantDetailPageController == null) {
+                        showAlert(Alert.AlertType.ERROR, "Plant UI not loaded.");
+                        return;
+                    }
+                    itemId = plantDetailPageController.getSelectedPlantId();
+                    qty = plantDetailPageController.getQuantity();
+                    unitPrice = plantDetailPageController.getUnitPrice();
+                }
+                case "Fish" -> {
+                    if (fishDetailPageController == null) {
+                        showAlert(Alert.AlertType.ERROR, "Fish UI not loaded.");
+                        return;
+                    }
+                    itemId = fishDetailPageController.getSelectedFishId();
+                    qty = fishDetailPageController.getQuantity();
+                    unitPrice = fishDetailPageController.getUnitPrice();
+                }
+                case "Chemical" -> {
+                    if (chemDetailPageController == null) {
+                        showAlert(Alert.AlertType.ERROR, "Chemical UI not loaded.");
+                        return;
+                    }
+                    itemId = chemDetailPageController.getSelectedChemicalId();
+                    qty = chemDetailPageController.getQuantity();
+                    unitPrice = chemDetailPageController.getUnitPrice();
+                }
+                case "Food" -> {
+                    if (foodDetailPageController == null) {
+                        showAlert(Alert.AlertType.ERROR, "Food UI not loaded.");
+                        return;
+                    }
+                    itemId = foodDetailPageController.getSelectedFoodId();
+                    qty = foodDetailPageController.getQuantity();
+                    unitPrice = foodDetailPageController.getUnitPrice();
+                }
+            }
+
+            Button btn = new Button("Remove");
+            InventryTM tm = new InventryTM(inventoryId, itemId, qty, unitPrice, btn);
+            btn.setOnAction(e -> cartList.remove(tm));
+            cartList.add(tm);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error adding item to cart.");
+        }
     }
+
 
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) {

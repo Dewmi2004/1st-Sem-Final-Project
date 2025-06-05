@@ -27,19 +27,26 @@ public class PHChemicalModel {
     }
 
     public boolean savePHChemical(PHChemicalDTO dto) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("INSERT INTO ph_chemical VALUES (?, ?, ?, ?, ?)",
-                dto.getPhLevel(),dto.getTankId(),dto.getTime(),dto.getChemicalId(),dto.getDate());
-
+        System.out.println("Saving: " + dto);
+        String sql = "INSERT INTO ph_chemical (ph_Level ,tank_Id , check_In_Time , chemical_Id , date) VALUES (?, ?, ?, ?, ?)";
+        return CrudUtil.execute(sql,
+                dto.getPhLevel(),
+                dto.getTankId(),
+                dto.getTime(),
+                dto.getChemicalId(),
+                dto.getDate()
+        );
     }
+
 
     public boolean updatePHChemical(PHChemicalDTO dto) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("UPDATE ph_chemical SET tank_Id = ? ,check_In_Time = ? ,chemical_Id = ? , date = ? WHERE ph_Level = ?",
-                dto.getTankId(),dto.getTime(),dto.getChemicalId(),dto.getDate(),dto.getPhLevel());
+        return CrudUtil.execute("UPDATE ph_chemical SET ph_Level = ? ,check_In_Time = ? ,chemical_Id = ? , date = ? WHERE tank_Id = ?",
+                dto.getPhLevel(),dto.getTime(),dto.getChemicalId(),dto.getDate(),dto.getTankId());
 
     }
 
-    public boolean deletePHChemical(String chemicalId) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("DELETE FROM ph_chemical WHERE tank_Id = ?", chemicalId);
+    public boolean deletePHChemical(String date) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("DELETE FROM ph_chemical WHERE date = ?", date);
 
     }
 }

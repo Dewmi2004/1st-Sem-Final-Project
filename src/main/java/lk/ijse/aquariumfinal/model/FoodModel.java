@@ -1,5 +1,7 @@
 package lk.ijse.aquariumfinal.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lk.ijse.aquariumfinal.dto.FoodDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
 
@@ -16,6 +18,15 @@ public class FoodModel {
     public static boolean updateFood(FoodDTO dto) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("UPDATE food SET name = ?, fish_Type = ?, ex_Date = ? WHERE food_Id = ?",
                 dto.getName(), dto.getFishType(), dto.getExDate(),  dto.getFoodId());
+    }
+
+    public static Object getAllFoodIDS() throws SQLException, ClassNotFoundException {
+        ResultSet rs = CrudUtil.execute("SELECT food_Id FROM food");
+        ObservableList<String> foodIdList = FXCollections.observableArrayList();
+        while (rs.next()) {
+            foodIdList.add(rs.getString("food_Id"));
+        }
+        return foodIdList;
     }
 
     public ArrayList<FoodDTO> getAllFoods() throws SQLException, ClassNotFoundException {

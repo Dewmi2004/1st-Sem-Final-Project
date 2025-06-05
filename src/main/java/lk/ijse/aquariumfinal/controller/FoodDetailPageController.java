@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import lk.ijse.aquariumfinal.model.ChemicalModel;
+import lk.ijse.aquariumfinal.model.FoodModel;
 
 import java.sql.SQLException;
 
@@ -22,7 +23,7 @@ public class FoodDetailPageController {
 
     public void loadFoodIds() {
         try {
-            ObservableList<String> foodIds = (ObservableList<String>) ChemicalModel.getAllChemicalIDS();
+            ObservableList<String> foodIds = (ObservableList<String>) FoodModel.getAllFoodIDS();
             if (foodIds != null && !foodIds.isEmpty()) {
                 cmbfoodId.setItems(foodIds);
             } else {
@@ -37,4 +38,16 @@ public class FoodDetailPageController {
     private void showAlert(Alert.AlertType alertType, String s) {
         new Alert(alertType, s).show();
     }
+    public String getSelectedFoodId() {
+        return cmbfoodId.getValue();
+    }
+
+    public String getQuantity() {
+        return txtUnitPrice.getText();
+    }
+
+    public String getUnitPrice() {
+        return txtUnitPrice.getText();
+    }
+
 }

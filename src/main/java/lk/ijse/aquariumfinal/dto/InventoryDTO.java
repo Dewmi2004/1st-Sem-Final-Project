@@ -15,7 +15,10 @@ public class InventoryDTO {
     private String supId;
     private String date;
     private Button btn;
+    @Getter
     private String itemType;
+    private String totalqty;
+    private String quantity;
 
 
     public InventoryDTO(String inventoryId, Date date, String supId) {

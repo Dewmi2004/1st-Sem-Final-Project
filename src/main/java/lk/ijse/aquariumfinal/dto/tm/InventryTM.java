@@ -12,18 +12,18 @@ public class InventryTM {
     private String supId;
     private String date;
     private Button btn;
-    private String qty;
+    private String quantity;
     private String unitPrice;
     private String itemId;
     private String fishId;
     private String foodId;
     private String chemicalId;
     private String plantId;
-    public InventryTM(String inventoryId, String itemId, String qty, String unitPrice, Button btn) {
+    public InventryTM(String inventoryId, String itemId, String quantity, String unitPrice, Button btn) {
 
         this.inventoryId = inventoryId;
         this.btn = btn;
-        this.qty = qty;
+        this.quantity = quantity;
         this.unitPrice = unitPrice;
         this.itemId = itemId;
 

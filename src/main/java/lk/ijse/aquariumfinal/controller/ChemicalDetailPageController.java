@@ -33,6 +33,17 @@ public class ChemicalDetailPageController {
             showAlert(Alert.AlertType.ERROR, "Failed to load chemical IDs: " + e.getMessage());
         }
     }
+    public String getSelectedChemicalId() {
+        return cmbchemicalId.getValue();
+    }
+
+    public String getQuantity() {
+        return txtchemicalQty.getText();
+    }
+
+    public String getUnitPrice() {
+        return txtUnitPrice.getText();
+    }
 
     private void showAlert(Alert.AlertType alertType, String s) {
         new Alert(alertType, s).show();

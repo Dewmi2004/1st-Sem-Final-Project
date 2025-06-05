@@ -25,4 +25,16 @@ public class PlantDetailPageController {
             e.printStackTrace();
         }
     }
+    public String getSelectedPlantId() {
+        return cmbPlantId.getValue();
+    }
+
+    public String getQuantity() {
+        return txtplantQty.getText();
+    }
+
+    public String getUnitPrice() {
+        return txtUnitPrice.getText();
+    }
+
 }
