@@ -49,11 +49,16 @@
                <font>
                   <Font name="System Bold Italic" size="14.0" />
                </font></Button>
-            <ImageView fitHeight="150.0" fitWidth="179.0" layoutX="28.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ebf3f4;">
+            <ImageView fitHeight="150.0" fitWidth="179.0" layoutX="23.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #ebf3f4;">
                <image>
                   <Image url="@../image/Aqua%20image.jpg" />
                </image>
             </ImageView>
+            <Button layoutX="24.0" layoutY="431.0" mnemonicParsing="false" onAction="#btnPHLevelOnAction" prefHeight="30.0" prefWidth="181.0" style="-fx-background-color: #4b5b64;" text="PH Level" textFill="#ebe3e3" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="ancPanal" layoutX="212.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />

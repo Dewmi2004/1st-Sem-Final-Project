@@ -10,14 +10,14 @@ import lombok.*;
 public class CartDTO {
      private String ItemId;
      private String Name;
-     private int Quantity;
-     private double UnitPrice;
-     private double Total;
+     private String Quantity;
+     private String UnitPrice;
+     private String Total;
      private Button btn ;
      private String fishId;
      private String plantId;
 
-     public CartDTO(String itemId, String name, int quantity, double unitPrice, double total) {
+     public CartDTO(String itemId, String name, String quantity, String unitPrice, String total) {
           this.ItemId = itemId;
           this.Name = name;
           this.Quantity = quantity;
@@ -25,4 +25,8 @@ public class CartDTO {
           this.Total = total;
 
      }
+
+    public CartDTO(String Quantity) {
+          this.Quantity = Quantity;
+    }
 }

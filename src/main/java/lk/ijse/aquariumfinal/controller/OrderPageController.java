@@ -63,12 +63,12 @@ public class OrderPageController {
     private final OrderModel orderModel = new OrderModel();
     private final ObservableList<CartTM> cartList = FXCollections.observableArrayList();
     public Label CustomerId;
-    public ComboBox<String> cmbFishId;
-    public ComboBox<String> cmbPlantId;
+
 
 
     private PlantCartPageController plantCartController;
     private FishCartPageController fishCartController;
+
 
 
     public void initialize() throws SQLException, ClassNotFoundException {
@@ -82,13 +82,6 @@ public class OrderPageController {
         cmbItemId.setItems(FXCollections.observableArrayList("Plant Order", "Fish Order"));
         cmbMethod.setItems(FXCollections.observableArrayList("Card", "Cash"));
 
-        if (cmbFishId != null) {
-            cmbFishId.setItems(FishModel.getAllFishIDS());
-        }
-
-        if (cmbPlantId != null) {
-            cmbPlantId.setItems(PlantModel.getAllPlantIDS());
-        }
     }
 
     private void setupTableColumns() {
@@ -165,7 +158,7 @@ public class OrderPageController {
     }
 
     private void calculateTotal() {
-        double total = 0;
+        String total = String.valueOf(0);
         for (CartTM tm : cartList) {
             total += tm.getTotal();
         }
@@ -196,46 +189,41 @@ public class OrderPageController {
         switch (selectedItem) {
             case "Plant Order" -> {
 
-                System.out.println("Plant Order");
                 try {
-
                     itemUiLoadPane.getChildren().clear();
 
                     FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/PlantCartPage.fxml"));
+                    AnchorPane pane = fxmlLoader.load();
                     plantCartController = fxmlLoader.getController();
-
-                    AnchorPane pane = (AnchorPane) fxmlLoader.load();
+                    plantCartController.loadPlantIds();
 
                     pane.prefWidthProperty().bind(itemUiLoadPane.widthProperty());
                     pane.prefHeightProperty().bind(itemUiLoadPane.heightProperty());
-
 
                     itemUiLoadPane.getChildren().add(pane);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            case "Fish Order" ->{
+            case "Fish Order" -> {
 
-                System.out.println("fish Order");
                 try {
-
                     itemUiLoadPane.getChildren().clear();
 
                     FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FishCartPage.fxml"));
-                    plantCartController = fxmlLoader.getController();
-
-                    AnchorPane pane = (AnchorPane) fxmlLoader.load();
+                    AnchorPane pane = fxmlLoader.load();
+                    fishCartController = fxmlLoader.getController();
+                    fishCartController.loadFishIds();
 
                     pane.prefWidthProperty().bind(itemUiLoadPane.widthProperty());
                     pane.prefHeightProperty().bind(itemUiLoadPane.heightProperty());
-
 
                     itemUiLoadPane.getChildren().add(pane);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
         }
     }
 
@@ -254,28 +242,74 @@ public class OrderPageController {
     }
 
     public void btnAddtoCartOnAction(ActionEvent actionEvent) {
-        String itemId = "PL001";
-        String name = "Anubias";
-        int qty = 2;
-        double unitPrice = 150.0;
-        double total = qty * unitPrice;
-        Button btn = new Button("Remove");
-        CartTM cartTM = new CartTM(itemId, name, qty, unitPrice, total, btn);
-        cartList.add(cartTM);
-        btn.setOnAction(e -> {
-            cartList.remove(cartTM);
+        String selectedItemType = cmbItemId.getSelectionModel().getSelectedItem();
+
+        if (selectedItemType == null) {
+            showAlert(Alert.AlertType.WARNING, "Please select an item type first.");
+            return;
+        }
+
+        try {
+            String itemId, name, qtyStr, unitPriceStr;
+
+            switch (selectedItemType) {
+                case "Fish Order" -> {
+                    if (fishCartController == null) {
+                        showAlert(Alert.AlertType.WARNING, "Please load the Fish Order form first.");
+                        return;
+                    }
+
+                    itemId = fishCartController.getSelectedFishId();
+                    name = fishCartController.getFishName();
+                    qtyStr = fishCartController.getQuantity();
+                    unitPriceStr = fishCartController.getUnitPrice();
+                }
+
+                case "Plant Order" -> {
+                    if (plantCartController == null) {
+                        showAlert(Alert.AlertType.WARNING, "Please load the Plant Order form first.");
+                        return;
+                    }
+
+                    itemId = plantCartController.getSelectedPlantId();
+                    name = plantCartController.getPlantName();
+                    qtyStr = plantCartController.getQuantity();
+                    unitPriceStr = plantCartController.getUnitPrice();
+                }
+
+                default -> {
+                    showAlert(Alert.AlertType.WARNING, "Unknown item type.");
+                    return;
+                }
+            }
+
+            int quantity = Integer.parseInt(qtyStr);
+            double unitPrice = Double.parseDouble(unitPriceStr);
+            double total = quantity * unitPrice;
+
+            for (CartTM tm : cartList) {
+                if (tm.getItemId().equals(itemId)) {
+                    showAlert(Alert.AlertType.WARNING, "Item already in cart.");
+                    return;
+                }
+            }
+
+            Button btnRemove = new Button("Remove");
+            CartTM cartTM = new CartTM(itemId, name, qtyStr, unitPriceStr, String.valueOf(total), btnRemove);
+
+            btnRemove.setOnAction(e -> {
+                cartList.remove(cartTM);
+                calculateTotal();
+            });
+
+            cartList.add(cartTM);
             calculateTotal();
-        });
 
-        calculateTotal();
-    }
-
-    public void btnSearchfishOnAction(ActionEvent actionEvent) {
-
-    }
-
-
-    public void btnSearchplantOnAction(ActionEvent actionEvent) {
+        } catch (NumberFormatException e) {
+            showAlert(Alert.AlertType.ERROR, "Invalid quantity or unit price.");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error adding item to cart: " + e.getMessage());
+        }
     }
 
 }

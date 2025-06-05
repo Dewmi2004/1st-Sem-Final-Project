@@ -15,4 +15,7 @@ public class PlantDTO {
     private String tankId;
     private String size;
 
+    public PlantDTO(String name) {
+        this.name = name;
+    }
 }

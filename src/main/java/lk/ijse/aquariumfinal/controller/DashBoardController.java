@@ -66,4 +66,8 @@ public class DashBoardController implements Initializable {
     public void btnItemOnAction(ActionEvent actionEvent) {
         nevigateTo("/view/Item.fxml");
     }
+
+    public void btnPHLevelOnAction(ActionEvent actionEvent) {
+        nevigateTo("/view/PHChemical.fxml");
+    }
 }

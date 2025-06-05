@@ -2,6 +2,8 @@ package lk.ijse.aquariumfinal.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lk.ijse.aquariumfinal.dto.CartDTO;
+import lk.ijse.aquariumfinal.dto.CustomerDTO;
 import lk.ijse.aquariumfinal.dto.FishDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
 import java.sql.ResultSet;
@@ -17,13 +19,33 @@ public class FishModel {
         return CrudUtil.execute("update fish set name = ?,size = ?,tank_Id = ?,gender = ?,water_Type = ? ,country = ? ,colour = ?  where fish_Id = ?",fishDto.getName(),fishDto.getSize(),fishDto.getTankId(),fishDto.getGender(),fishDto.getWaterType(),fishDto.getCountry(),fishDto.getColour(),fishDto.getFishId());
     }
 
-    public static ObservableList getAllFishIDS() throws SQLException, ClassNotFoundException {
-        ResultSet rs = CrudUtil.execute("select fish_Id from fish");
-        ObservableList<String> fishDtoArrayList = FXCollections.observableArrayList();
+    public static ObservableList<String> getAllFishIDS() throws SQLException, ClassNotFoundException {
+        ResultSet rs = CrudUtil.execute("SELECT fish_Id FROM fish");
+        ObservableList<String> fishIdList = FXCollections.observableArrayList();
         while (rs.next()) {
-            fishDtoArrayList.add(rs.getString("fish_Id"));
+            fishIdList.add(rs.getString("fish_Id"));
         }
-        return  fishDtoArrayList;
+        return fishIdList;
+    }
+
+    public static FishDTO searchFishByName(String fishId) throws SQLException, ClassNotFoundException {
+        ResultSet rs = CrudUtil.execute("SELECT name FROM fish WHERE fish_Id = ?", fishId);
+        if (rs.next()) {
+            return new FishDTO(
+                    rs.getString("name")
+            );
+        }
+        return null;
+    }
+
+    public static CartDTO searchFishUnitPrice(String fishId) throws SQLException, ClassNotFoundException {
+        ResultSet rs = CrudUtil.execute("SELECT price FROM fish_detail WHERE fish_Id = ?", fishId);
+        if (rs.next()) {
+            return new CartDTO(
+                    rs.getString("price")
+            );
+        }
+        return null;
     }
 
     public ArrayList<FishDTO> getAllFish() throws SQLException, ClassNotFoundException {

@@ -3,6 +3,8 @@ package lk.ijse.aquariumfinal.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lk.ijse.aquariumfinal.dto.CartDTO;
+import lk.ijse.aquariumfinal.dto.FishDTO;
 import lk.ijse.aquariumfinal.dto.PlantDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
 
@@ -45,13 +47,34 @@ public class PlantModel {
         return list;
     }
 
-    public static ObservableList getAllPlantIDS() throws SQLException, ClassNotFoundException {
-        ResultSet rs = CrudUtil.execute("select plant_Id from plant");
-        ObservableList<String> plantDtoArrayList = FXCollections.observableArrayList();
+
+    public static ObservableList<String> getAllPlantIDS() throws SQLException, ClassNotFoundException {
+        ResultSet rs = CrudUtil.execute("SELECT plant_Id FROM plant");
+        ObservableList<String> plantIdList = FXCollections.observableArrayList();
         while (rs.next()) {
-            plantDtoArrayList.add(rs.getString("plant_Id"));
+            plantIdList.add(rs.getString("plant_Id"));
         }
-        return  plantDtoArrayList;
+        return plantIdList;
+    }
+
+    public static PlantDTO searchPlantByName(String plantId) throws SQLException, ClassNotFoundException {
+        ResultSet rs = CrudUtil.execute("SELECT name FROM plant WHERE plant_Id = ?", plantId);
+        if (rs.next()) {
+            return new PlantDTO(
+                    rs.getString("name")
+            );
+        }
+        return null;
+    }
+
+    public static CartDTO searchPlantUnitprice(String plantId) throws SQLException, ClassNotFoundException {
+        ResultSet rs = CrudUtil.execute("SELECT price FROM plant_detail WHERE plant_Id = ?", plantId);
+        if (rs.next()) {
+            return new CartDTO(
+                    rs.getString("price")
+            );
+        }
+        return null;
     }
 
     public String getNextPlantId() throws SQLException, ClassNotFoundException {

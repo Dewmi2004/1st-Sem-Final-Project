@@ -10,9 +10,9 @@ import lombok.*;
 public class CartTM {
     private String ItemId;
     private String Name;
-    private int Quantity;
-    private double UnitPrice;
-private double Total;
+    private String Quantity;
+    private String UnitPrice;
+private String Total;
 private Button btn ;
 
 }

@@ -39,6 +39,8 @@ public class PHChemicalPageController {
 
     private final PHChemicalModel phModel = new PHChemicalModel();
 
+    public TableColumn<?,?> clmPHLevel;
+
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
         loadTable();
@@ -48,7 +50,7 @@ public class PHChemicalPageController {
     private void setCellValueFactory() {
         clmChemicalId.setCellValueFactory(new PropertyValueFactory<>("chemicalId"));
         clmTankId.setCellValueFactory(new PropertyValueFactory<>("tankId"));
-        clmPhLevel.setCellValueFactory(new PropertyValueFactory<>("phLevel"));
+        clmPHLevel.setCellValueFactory(new PropertyValueFactory<>("phLevel"));
         clmDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         clmTime.setCellValueFactory(new PropertyValueFactory<>("time"));
     }

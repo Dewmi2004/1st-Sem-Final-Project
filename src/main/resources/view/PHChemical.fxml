@@ -64,11 +64,11 @@
         <TableView fx:id="tblPHChemical" layoutX="10.0" layoutY="215.0" onMouseClicked="#clickOnAction" prefHeight="181.0" prefWidth="800.0" style="-fx-border-color: #4a4a4a; -fx-background-color: #d9dbdb;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="209.0">
 
             <columns>
-                <TableColumn fx:id="clmFishId" text="Tank ID" />
-                <TableColumn fx:id="clmName" text="Chemical ID" />
-                <TableColumn fx:id="clmSize" text="pH Level" />
-                <TableColumn fx:id="clmTankId" text="Date" />
-                <TableColumn fx:id="clmGender" text="Time" />
+                <TableColumn fx:id="clmTankId" text="Tank ID" />
+                <TableColumn fx:id="clmChemicalId" text="Chemical ID" />
+                <TableColumn fx:id="clmPHLevel" text="pH Level" />
+                <TableColumn fx:id="clmDate" text="Date" />
+                <TableColumn fx:id="clmTime" text="Time" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

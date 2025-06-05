@@ -58,7 +58,7 @@ public class InventoryModel {
         }finally {
             con.setAutoCommit(true);
         }
-return false;//balanna harid kiyl
+return false;
     }
 // plant,food,chemical,fish detail wlt aluth ekk nam inseart wennai,okkoma ek wage item id thiyen ewa  nam quantity update wennai
     public String generateNextInventoryId() throws SQLException, ClassNotFoundException {

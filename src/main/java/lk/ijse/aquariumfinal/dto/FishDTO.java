@@ -17,4 +17,7 @@ public class FishDTO {
     private String country;
     private String colour;
 
+    public FishDTO(String name) {
+        this.name = name;
     }
+}
