@@ -114,6 +114,7 @@ public class InventoryModel {
                                 "INSERT INTO food_detail (food_Id, quantity, price, inventory_Id) VALUES (?, ?, ?, ?)",
                                 itemId, foodquantity, priceStr, inventoryId
                         );
+
                         if (!isSaved) {
                             con.rollback();
                             return false;
