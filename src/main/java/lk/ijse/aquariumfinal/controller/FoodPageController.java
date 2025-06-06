@@ -32,6 +32,8 @@ public class FoodPageController {
     public TableColumn<?, ?> clmName;
     public TableColumn<?, ?> clmFishType;
     public TableColumn<?, ?> dpExDate;
+    public TextField txtQuantity;
+    public TableColumn<?,?> clmQuantity;
 
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
@@ -44,6 +46,7 @@ public class FoodPageController {
         clmName.setCellValueFactory(new PropertyValueFactory<>("name"));
         clmFishType.setCellValueFactory(new PropertyValueFactory<>("fishType"));
         dpExDate.setCellValueFactory(new PropertyValueFactory<>("exDate"));
+        clmQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
     }
 
@@ -53,7 +56,7 @@ public class FoodPageController {
         ObservableList<FoodTM> obList = FXCollections.observableArrayList();
 
         for (FoodDTO dto : list) {
-            obList.add(new FoodTM(dto.getFoodId(), dto.getName(), dto.getFishType(), dto.getExDate()));
+            obList.add(new FoodTM(dto.getFoodId(), dto.getName(), dto.getFishType(), dto.getExDate(),dto.getQuantity()));
         }
         tblFood.setItems(obList);
     }
@@ -67,7 +70,8 @@ public class FoodPageController {
                 lblFoodId.getText(),
                 txtName.getText(),
                 txtFishType.getText(),
-                Date.valueOf(DPExDate.getValue())
+                Date.valueOf(DPExDate.getValue()),
+                txtQuantity.getText()
         );
 
         if (FoodModel.saveFood(dto)) {
@@ -85,7 +89,8 @@ public class FoodPageController {
                 lblFoodId.getText(),
                 txtName.getText(),
                 txtFishType.getText(),
-                Date.valueOf(DPExDate.getValue())
+                Date.valueOf(DPExDate.getValue()),
+                txtQuantity.getText()
         );
 
         if (FoodModel.updateFood(dto)) {
@@ -139,7 +144,7 @@ public class FoodPageController {
         txtName.clear();
         txtFishType.clear();
         DPExDate.setValue(null);
-
+        txtQuantity.clear();
         setNextId();
     }
 
@@ -150,7 +155,7 @@ public class FoodPageController {
             txtName.setText(selected.getName());
             txtFishType.setText(selected.getFishType());
             DPExDate.setValue(selected.getExDate().toLocalDate());
-
+            txtQuantity.setText(String.valueOf(selected.getQuantity()));
 
             btnSave.setDisable(true);
             btnUpdate.setDisable(false);

@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.aquariumfinal.dto.CartDTO;
 import lk.ijse.aquariumfinal.dto.CustomerDTO;
 import lk.ijse.aquariumfinal.dto.FishDTO;
@@ -36,6 +37,8 @@ public class FishCartPageController implements Initializable {
             FishDTO fish = FishModel.searchFishByName(fishId);
             CartDTO cart = FishModel.searchFishUnitPrice(fishId);
 
+            OrderPageController.fishId = fishId;
+
             boolean foundSomething = false;
 
             if (fish != null) {
@@ -46,7 +49,7 @@ public class FishCartPageController implements Initializable {
             }
 
             if (cart != null) {
-                lblUnitePrice.setText(cart.getUnitPrice());
+                lblUnitePrice.setText(cart.getUnitPrice().toString());
                 foundSomething = true;
             } else {
                 lblUnitePrice.setText("N/A");
@@ -86,6 +89,14 @@ public class FishCartPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
        loadFishIds();
+
+        txtQty.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            try {
+//                txtQty validation
+                OrderPageController.fishQty = Integer.parseInt(txtQty.getText());
+            }catch (NumberFormatException e) {
+            }
+        });
     }
 
     public void loadFishIds() {

@@ -12,13 +12,13 @@ import java.util.ArrayList;
 public class ChemicalModel {
 
     public static boolean saveChemical(ChemicalDTO dto) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("INSERT INTO chemical VALUES (?, ?, ?, ?, ?)",
-                dto.getChemicalId(), dto.getAcidOrBase(), dto.getConcentration(), dto.getStoreType(), dto.getName());
+        return CrudUtil.execute("INSERT INTO chemical VALUES (?, ?, ?, ?,?, ?)",
+                dto.getChemicalId(), dto.getAcidOrBase(), dto.getConcentration(), dto.getStoreType(), dto.getName(),dto.getQuantity());
     }
 
     public static boolean updateChemical(ChemicalDTO dto) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("UPDATE chemical SET acid_Or_Base = ?, concentration = ?, store_Type = ?, name = ? WHERE chemical_Id = ?",
-                dto.getAcidOrBase(), dto.getConcentration(), dto.getStoreType(), dto.getName(), dto.getChemicalId());
+        return CrudUtil.execute("UPDATE chemical SET acid_Or_Base = ?, concentration = ?, store_Type = ?, name = ?,quantity =? WHERE chemical_Id = ?",
+                dto.getAcidOrBase(), dto.getConcentration(), dto.getStoreType(), dto.getName(),dto.getQuantity(), dto.getChemicalId());
     }
 
     public static ObservableList<String> getChemicalId() throws SQLException, ClassNotFoundException {
@@ -53,7 +53,8 @@ public class ChemicalModel {
                     rs.getString(2),
                     rs.getString(3),
                     rs.getString(4),
-                    rs.getString(5)
+                    rs.getString(5),
+                    rs.getString(6)
             );
             list.add(dto);
         }

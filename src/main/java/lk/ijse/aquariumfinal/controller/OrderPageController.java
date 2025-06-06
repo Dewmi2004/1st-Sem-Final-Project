@@ -9,9 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.aquariumfinal.AppInitializer;
-import lk.ijse.aquariumfinal.dto.CartDTO;
-import lk.ijse.aquariumfinal.dto.CustomerDTO;
-import lk.ijse.aquariumfinal.dto.OrderDTO;
+import lk.ijse.aquariumfinal.dto.*;
 import lk.ijse.aquariumfinal.dto.tm.CartTM;
 import lk.ijse.aquariumfinal.model.CustomerModel;
 import lk.ijse.aquariumfinal.model.FishModel;
@@ -64,11 +62,15 @@ public class OrderPageController {
     private final ObservableList<CartTM> cartList = FXCollections.observableArrayList();
     public Label CustomerId;
 
+    public static String fishId = "";
+    public static int fishQty = 0;
+
+    public static String plantId = "";
+    public static int plantQty = 0;
 
 
     private PlantCartPageController plantCartController;
     private FishCartPageController fishCartController;
-
 
 
     public void initialize() throws SQLException, ClassNotFoundException {
@@ -95,7 +97,7 @@ public class OrderPageController {
     }
 
     private void setNextOrderId() throws SQLException, ClassNotFoundException {
-         lblOrderrid.setText(orderModel.generateNextOrderId());
+        lblOrderrid.setText(orderModel.generateNextOrderId());
     }
 
     private void setNextPaymentId() throws SQLException, ClassNotFoundException {
@@ -135,6 +137,14 @@ public class OrderPageController {
 
 
         );
+        PlantDTO plant =new PlantDTO();
+        plant.setPlantId(plantId);
+        plant.setQuantity(String.valueOf(plantQty));
+
+        FishDTO fish = new FishDTO();
+        fish.setFishId(fishId);
+        fish.setQuantity(String.valueOf(fishQty));
+
 
         ArrayList<CartDTO> cartDTOList = new ArrayList<>();
         for (CartTM tm : cartList) {
@@ -143,7 +153,7 @@ public class OrderPageController {
         }
 
         try {
-            boolean isPlaced = orderModel.saveOrder(order, cartDTOList);
+            boolean isPlaced = orderModel.saveOrder(order, fish ,plant);
             if (isPlaced) {
 
                 showAlert(Alert.AlertType.INFORMATION, "Order placed successfully!");
@@ -160,12 +170,14 @@ public class OrderPageController {
     }
 
     private void calculateTotal() {
-        String total = String.valueOf(0);
+
+        double total = 0;
         for (CartTM tm : cartList) {
-            total += tm.getTotal();
+            total += Double.parseDouble(tm.getTotal());
         }
         lblTotalAmount.setText(String.format("Rs. %.2f", total));
     }
+
 
     private void clearFields() {
         datePickerDate.setValue(null);

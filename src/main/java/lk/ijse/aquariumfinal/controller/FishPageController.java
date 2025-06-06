@@ -41,6 +41,8 @@ public class FishPageController {
     public TextField txtName;
     public TableColumn<?,?>  clmName;
     public TableColumn<?,?>  clmFishId;
+    public TextField txtQuantity;
+    public TableColumn<?,?> clmQuantity;
 
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
@@ -55,6 +57,7 @@ public class FishPageController {
         cmbGender.setItems(Fmodel.getFishGender());
         cmbWaterType.setItems(Fmodel.getFishWatertype());
         cmbCountry.setItems(Fmodel.getFishCountry());
+
     }
 
     private void setCellValueFactory() {
@@ -66,6 +69,7 @@ public class FishPageController {
         clmWaterType.setCellValueFactory(new PropertyValueFactory<>("waterType"));
         clmCountry.setCellValueFactory(new PropertyValueFactory<>("country"));
         clmColor.setCellValueFactory(new PropertyValueFactory<>("colour"));
+        clmQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
     }
 
 
@@ -81,7 +85,8 @@ public class FishPageController {
                     fish.getGender(),
                     fish.getWaterType(),
                     fish.getCountry(),
-                    fish.getColour()
+                    fish.getColour(),
+                    fish.getQuantity()
             );
             obc.add(FTM);
         }
@@ -103,9 +108,10 @@ public class FishPageController {
         String watertype = (String) cmbWaterType.getValue();
         String country = (String) cmbCountry.getValue();
         String colour = txtColor.getText();
+        String quantity =txtQuantity.getText();
 
         FishDTO fishDto = new FishDTO(
-                id,name,size,tankid,gender,watertype,country,colour
+                id,name,size,tankid,gender,watertype,country,colour,quantity
         );
         boolean isUpdate = FishModel.UpdateFish(fishDto);
 
@@ -163,6 +169,7 @@ public class FishPageController {
            cmbWaterType.getSelectionModel().clearSelection();
            cmbCountry.getSelectionModel().clearSelection();
            txtColor.clear();
+           txtQuantity.clear();
             setNextId();
         }
 
@@ -175,9 +182,10 @@ public class FishPageController {
         String watertype = (String) cmbWaterType.getValue();
         String country = (String) cmbCountry.getValue();
         String colour = txtColor.getText();
+        String quantity =txtQuantity.getText();
 
         FishDTO fishDto = new FishDTO(
-                id,name,size,tankid,gender,watertype,country,colour
+                id,name,size,tankid,gender,watertype,country,colour,quantity
         );
         boolean isSave = FishModel.saveFish(fishDto);
 
@@ -204,6 +212,7 @@ public class FishPageController {
             cmbWaterType.setValue(selectedItem.getWaterType());
             cmbCountry.setValue(selectedItem.getCountry());
             txtColor.setText(selectedItem.getColour());
+            txtQuantity.setText(selectedItem.getQuantity());
 
 
             // save button disable

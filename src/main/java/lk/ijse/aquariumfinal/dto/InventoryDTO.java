@@ -17,13 +17,7 @@ public class InventoryDTO {
     private Button btn;
     @Getter
     private String itemType;
-    private String totalqty;
     private String quantity;
 
 
-    public InventoryDTO(String inventoryId, Date date, String supId) {
-        this.inventoryId = inventoryId;
-        this.supId = supId;
-        this.date = date.toString();
-    }
 }

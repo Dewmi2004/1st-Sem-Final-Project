@@ -33,6 +33,8 @@ public class ChemicalPageController {
     public TableColumn<?, ?> clmname;
 
     private final ChemicalModel model = new ChemicalModel();
+    public TableColumn<?,?> clmQuntity;
+    public TextField txtquantity;
 
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
@@ -47,6 +49,7 @@ public class ChemicalPageController {
         clmconcentration.setCellValueFactory(new PropertyValueFactory<>("concentration"));
         clmstoretype.setCellValueFactory(new PropertyValueFactory<>("storeType"));
         clmname.setCellValueFactory(new PropertyValueFactory<>("name"));
+        clmQuntity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
     }
 
     private void loadComboData() {
@@ -58,7 +61,7 @@ public class ChemicalPageController {
         ObservableList<ChemicalTM> obList = FXCollections.observableArrayList();
 
         for (ChemicalDTO dto : list) {
-            obList.add(new ChemicalTM(dto.getChemicalId(), dto.getAcidOrBase(), dto.getConcentration(), dto.getStoreType(), dto.getName()));
+            obList.add(new ChemicalTM(dto.getChemicalId(), dto.getAcidOrBase(), dto.getConcentration(), dto.getStoreType(), dto.getName(), dto.getQuantity()));
         }
         tblChemical.setItems(obList);
     }
@@ -73,7 +76,8 @@ public class ChemicalPageController {
                 cBoxType.getValue(),
                 txtConcentration.getText(),
                 txtStoreType.getText(),
-                txtName.getText()
+                txtName.getText(),
+                txtquantity.getText()
         );
         if (ChemicalModel.saveChemical(dto)) {
             loadTable();
@@ -91,7 +95,8 @@ public class ChemicalPageController {
                 cBoxType.getValue(),
                 txtConcentration.getText(),
                 txtStoreType.getText(),
-                txtName.getText()
+                txtName.getText(),
+                txtquantity.getText()
         );
         if (ChemicalModel.updateChemical(dto)) {
             loadTable();
@@ -134,6 +139,7 @@ public class ChemicalPageController {
         txtConcentration.clear();
         txtStoreType.clear();
         txtName.clear();
+        txtquantity.clear();
         setNextId();
     }
 
@@ -148,6 +154,7 @@ public class ChemicalPageController {
             txtConcentration.setText(selected.getConcentration());
             txtStoreType.setText(selected.getStoreType());
             txtName.setText(selected.getName());
+            txtquantity.setText(selected.getQuantity());
 
             btnSave.setDisable(true);
             btnUpdate.setDisable(false);

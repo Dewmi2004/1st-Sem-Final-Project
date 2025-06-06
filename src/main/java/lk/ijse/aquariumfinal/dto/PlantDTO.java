@@ -14,6 +14,7 @@ public class PlantDTO {
     private String waterType;
     private String tankId;
     private String size;
+    private String quantity;
 
     public PlantDTO(String name) {
         this.name = name;

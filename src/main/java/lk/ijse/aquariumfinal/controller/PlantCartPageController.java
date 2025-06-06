@@ -6,9 +6,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.aquariumfinal.dto.CartDTO;
 import lk.ijse.aquariumfinal.dto.PlantDTO;
 import lk.ijse.aquariumfinal.model.PlantModel;
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -32,6 +34,8 @@ public class PlantCartPageController implements Initializable {
             PlantDTO plant = PlantModel.searchPlantByName(plantId);
             CartDTO cart = PlantModel.searchPlantUnitprice(plantId);
 
+            OrderPageController.plantId = plantId;
+
             boolean foundSomething = false;
 
             if (plant != null) {
@@ -41,8 +45,9 @@ public class PlantCartPageController implements Initializable {
                 lblPlantName.setText("N/A");
             }
 
+
             if (cart != null) {
-                lblUnitplantPrice.setText(cart.getUnitPrice());
+                lblUnitplantPrice.setText(cart.getUnitPrice().toString());
                 foundSomething = true;
             } else {
                 lblUnitplantPrice.setText("N/A");
@@ -55,6 +60,7 @@ public class PlantCartPageController implements Initializable {
             }
 
         } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
         }
     }
@@ -78,9 +84,17 @@ public class PlantCartPageController implements Initializable {
     private void showAlert(Alert.AlertType alertType, String plantFound) {
         new Alert(alertType, plantFound).show();
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadPlantIds();
+
+        txtplantQty.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            try {
+                OrderPageController.plantQty = Integer.parseInt(txtplantQty.getText());
+            } catch (Exception e) {
+            }
+        });
     }
 
     void loadPlantIds() {

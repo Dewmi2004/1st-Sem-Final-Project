@@ -13,5 +13,6 @@ public class PlantTM {
     private String waterType;
     private String tankId;
     private String size;
+    private String quantity;
 
 }

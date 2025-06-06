@@ -32,12 +32,15 @@
 
                     <Label style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Ex Date:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                     <DatePicker fx:id="DPExDate" focusTraversable="false" prefWidth="300" promptText="23/04/2025" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               <TextField fx:id="txtQuantity" focusTraversable="false" layoutX="82.0" layoutY="51.0" prefWidth="300" promptText="100" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0 0 1 0;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               <Label layoutX="10.0" layoutY="96.0" style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;" text="Quantity" GridPane.rowIndex="3" />
                 </children>
             <columnConstraints>
                <ColumnConstraints />
                <ColumnConstraints />
             </columnConstraints>
             <rowConstraints>
+               <RowConstraints />
                <RowConstraints />
                <RowConstraints />
                <RowConstraints />
@@ -57,6 +60,7 @@
                     <TableColumn fx:id="clmName" text="Name" />
                     <TableColumn fx:id="clmFishType" text="Fish Type" />
                     <TableColumn fx:id="dpExDate" text="Ex Date" />
+               <TableColumn fx:id="clmQuantity" prefWidth="75.0" text="Quantity" />
                 </columns>
                 <columnResizePolicy>
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

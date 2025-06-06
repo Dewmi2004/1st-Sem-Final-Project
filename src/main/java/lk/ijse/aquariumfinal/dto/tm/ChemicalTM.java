@@ -14,5 +14,6 @@ public class ChemicalTM{
     private String concentration;
     private String storeType;
     private String name;
+    private String quantity;
 
 }

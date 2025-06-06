@@ -9,7 +9,7 @@ import java.util.Properties;
 public class EmailUtil {
 
     private static final String FROM_EMAIL = "imashadewmi557@gmail.com";
-    private static final String PASSWORD = "id";
+    private static final String PASSWORD = "ywfb gpfo ijtb akur";
 
     private static Session createSession() {
         Properties props = new Properties();

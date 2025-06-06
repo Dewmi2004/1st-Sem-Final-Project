@@ -1,8 +1,7 @@
 package lk.ijse.aquariumfinal.model;
 
 import lk.ijse.aquariumfinal.db.DBConnection;
-import lk.ijse.aquariumfinal.dto.InventoryDTO;
-import lk.ijse.aquariumfinal.dto.SupplierDTO;
+import lk.ijse.aquariumfinal.dto.*;
 import lk.ijse.aquariumfinal.dto.tm.InventryTM;
 import lk.ijse.aquariumfinal.util.CrudUtil;
 
@@ -13,6 +12,10 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class InventoryModel {
+    private PlantDTO plant =new PlantDTO();
+    private FishDTO fish =new FishDTO();
+    private ChemicalDTO chemical = new ChemicalDTO();
+    private FoodDTO food = new FoodDTO();
     public static SupplierDTO searchSupplierByPhone(String phone) {
         try {
             ResultSet rs = CrudUtil.execute("SELECT sup_Id,Name FROM supplier WHERE Contact = ?", phone);
@@ -27,6 +30,7 @@ public class InventoryModel {
         }
         return null;
     }
+
     public static String getSupplierEmailById(String supplierId) {
         String sql = "SELECT Email FROM supplier WHERE sup_Id = ?";
         try {
@@ -60,17 +64,20 @@ public class InventoryModel {
                 String quantityStr = item.getQuantity();
                 String priceStr = item.getUnitPrice();
                 String inventoryId = inventory.getInventoryId();
-                int qtyToAdd = Integer.parseInt(quantityStr);
-
+String plantquantity = plant.getQuantity();
+String fishquantity = fish.getQuantity();
+String chemicalquantity =chemical.getQuantity();
+String foodquantity = food.getQuantity();
                 boolean isSaved;
-                ResultSet rs;
-                int existingQty;
-                int newQty;
+                boolean isUpdated;
+
+
+
 
                 switch (inventory.getItemType()) {
                     case "Plant":
                         isSaved = CrudUtil.execute(
-                                "INSERT INTO plant_detail (plant_id, quantity, price, inventoryId) VALUES (?, ?, ?, ?)",
+                                "INSERT INTO plant_detail (plant_Id, quantity, price, inventory_Id) VALUES (?, ?, ?, ?)",
                                 itemId, quantityStr, priceStr, inventoryId
                         );
                         if (!isSaved) {
@@ -78,70 +85,67 @@ public class InventoryModel {
                             return false;
                         }
 
-                        rs = CrudUtil.execute(
-                                "SELECT total_Quantity FROM plant_detail WHERE plant_id = ? ORDER BY inventoryId DESC LIMIT 1", itemId
-                        );
-                        existingQty = rs.next() ? Integer.parseInt(rs.getString("total_quantity")) : 0;
-                        newQty = existingQty + qtyToAdd;
-                        CrudUtil.execute("UPDATE plant_detail SET total_Quantity = ? WHERE plant_id = ?", String.valueOf(newQty), itemId);
-                        updatedQuantities.put(itemId, newQty);
+                         isUpdated = CrudUtil.execute("UPDATE plant SET quantity = quantity + ? WHERE plant_Id=?",plantquantity, itemId);
+
+                        if (!isUpdated) {
+                            con.rollback();
+                            return false;
+                        }
+                        updatedQuantities.put(itemId, Integer.valueOf(plantquantity));
                         break;
 
                     case "Fish":
                         isSaved = CrudUtil.execute(
-                                "INSERT INTO fish_detail (fish_id, quantity, price, inventoryId) VALUES (?, ?, ?, ?)",
+                                "INSERT INTO fish_detail (fish_Id, quantity, price, inventory_Id) VALUES (?, ?, ?, ?)",
                                 itemId, quantityStr, priceStr, inventoryId
                         );
                         if (!isSaved) {
                             con.rollback();
                             return false;
                         }
+                         isUpdated = CrudUtil.execute("UPDATE fish SET quantity = quantity + ? WHERE fish_Id=?",fishquantity, itemId);
 
-                        rs = CrudUtil.execute(
-                                "SELECT total_Quantity FROM fish_detail WHERE fish_id = ? ORDER BY inventoryId DESC LIMIT 1", itemId
-                        );
-                        existingQty = rs.next() ? Integer.parseInt(rs.getString("total_quantity")) : 0;
-                        newQty = existingQty + qtyToAdd;
-                        CrudUtil.execute("UPDATE fish_detail SET total_Quantity = ? WHERE fish_id = ?", String.valueOf(newQty), itemId);
-                        updatedQuantities.put(itemId, newQty);
+                        if (!isUpdated) {
+                            con.rollback();
+                            return false;
+                        }
+                       updatedQuantities.put(itemId, Integer.valueOf(fishquantity));
                         break;
 
                     case "Food":
                         isSaved = CrudUtil.execute(
-                                "INSERT INTO food_detail (food_id, quantity, price, inventoryId) VALUES (?, ?, ?, ?)",
+                                "INSERT INTO food_detail (food_Id, quantity, price, inventory_Id) VALUES (?, ?, ?, ?)",
                                 itemId, quantityStr, priceStr, inventoryId
                         );
                         if (!isSaved) {
                             con.rollback();
                             return false;
                         }
+                         isUpdated = CrudUtil.execute("UPDATE food SET quantity = quantity + ? WHERE food_Id=?",chemicalquantity, itemId);
 
-                        rs = CrudUtil.execute(
-                                "SELECT total_Quantity FROM food_detail WHERE food_id = ? ORDER BY inventoryId DESC LIMIT 1", itemId
-                        );
-                        existingQty = rs.next() ? Integer.parseInt(rs.getString("total_quantity")) : 0;
-                        newQty = existingQty + qtyToAdd;
-                        CrudUtil.execute("UPDATE food_detail SET total_Quantity = ? WHERE food_id = ?", String.valueOf(newQty), itemId);
-                        updatedQuantities.put(itemId, newQty);
+                        if (!isUpdated) {
+                            con.rollback();
+                            return false;
+                        }
+                      updatedQuantities.put(itemId, Integer.valueOf(chemicalquantity));
                         break;
 
                     case "Chemical":
                         isSaved = CrudUtil.execute(
-                                "INSERT INTO chemical_detail (chemical_id, quantity, price, inventoryId) VALUES (?, ?, ?, ?)",
+                                "INSERT INTO chemical_detail (chemical_Id, quantity, price, inventory_Id) VALUES (?, ?, ?, ?)",
                                 itemId, quantityStr, priceStr, inventoryId
                         );
                         if (!isSaved) {
                             con.rollback();
                             return false;
                         }
+                         isUpdated = CrudUtil.execute("UPDATE chemical SET quantity = quantity + ? WHERE chemical_Id=?",foodquantity, itemId);
 
-                        rs = CrudUtil.execute(
-                                "SELECT total_Quantity FROM chemical_detail WHERE chemical_id = ? ORDER BY inventoryId DESC LIMIT 1", itemId
-                        );
-                        existingQty = rs.next() ? Integer.parseInt(rs.getString("total_quantity")) : 0;
-                        newQty = existingQty + qtyToAdd;
-                        CrudUtil.execute("UPDATE chemical_detail SET total_Quantity = ? WHERE chemical_id = ?", String.valueOf(newQty), itemId);
-                        updatedQuantities.put(itemId, newQty);
+                        if (!isUpdated) {
+                            con.rollback();
+                            return false;
+                        }
+                       updatedQuantities.put(itemId, Integer.valueOf(foodquantity));
                         break;
 
                     default:
@@ -161,9 +165,6 @@ public class InventoryModel {
             con.setAutoCommit(true);
         }
     }
-
-
-
 
 
     public String generateNextInventoryId() throws SQLException, ClassNotFoundException {

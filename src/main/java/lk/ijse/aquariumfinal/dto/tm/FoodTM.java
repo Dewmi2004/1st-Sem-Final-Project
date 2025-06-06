@@ -13,4 +13,5 @@ public class FoodTM {
     private String name;
     private String fishType;
     private Date exDate;
+    private String quantity;
 }

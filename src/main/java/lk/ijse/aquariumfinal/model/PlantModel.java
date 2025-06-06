@@ -4,7 +4,6 @@ package lk.ijse.aquariumfinal.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lk.ijse.aquariumfinal.dto.CartDTO;
-import lk.ijse.aquariumfinal.dto.FishDTO;
 import lk.ijse.aquariumfinal.dto.PlantDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
 
@@ -15,13 +14,13 @@ import java.util.ArrayList;
 public class PlantModel {
 
     public static boolean savePlant(PlantDTO dto) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO plant (plant_Id, name, water_Type, tank_Id, size) VALUES (?, ?, ?, ?, ?)";
-        return CrudUtil.execute(sql, dto.getPlantId(), dto.getName(), dto.getWaterType(), dto.getTankId(), dto.getSize());
+        String sql = "INSERT INTO plant (plant_Id, name, water_Type, tank_Id, size,quantity) VALUES (?, ?, ?, ?, ?,?)";
+        return CrudUtil.execute(sql, dto.getPlantId(), dto.getName(), dto.getWaterType(), dto.getTankId(), dto.getSize(),dto.getQuantity());
     }
 
     public static boolean updatePlant(PlantDTO dto) throws SQLException, ClassNotFoundException {
-        String sql = "UPDATE plant SET name = ?, water_Type = ?, tank_Id = ?, size = ? WHERE plant_Id = ?";
-        return CrudUtil.execute(sql, dto.getName(), dto.getWaterType(), dto.getTankId(), dto.getSize(), dto.getPlantId());
+        String sql = "UPDATE plant SET name = ?, water_Type = ?, tank_Id = ?, size = ?, quantity = ? WHERE plant_Id = ?";
+        return CrudUtil.execute(sql, dto.getName(), dto.getWaterType(), dto.getTankId(), dto.getSize(),dto.getQuantity(), dto.getPlantId());
     }
 
     public static boolean deletePlant(String id) throws SQLException, ClassNotFoundException {
@@ -40,7 +39,8 @@ public class PlantModel {
                     rs.getString("name"),
                     rs.getString("water_Type"),
                     rs.getString("tank_Id"),
-                    rs.getString("size")
+                    rs.getString("size"),
+                    rs.getString("quantity")
             ));
         }
 

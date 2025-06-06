@@ -42,6 +42,8 @@
 
                     <Label style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Color:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                     <TextField fx:id="txtColor" focusTraversable="false" promptText="Enter color" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+               <TextField fx:id="txtQuantity" focusTraversable="false" layoutX="330.0" layoutY="94.0" promptText="Enter Quantity" style="-fx-background-color: #fff; -fx-border-color: #7f8c8d;" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+               <Label layoutX="241.0" layoutY="98.0" style="-fx-font-size: 14px; -fx-text-fill: #34495e;" text="Quantity" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                 </children>
                 <columnConstraints>
                     <ColumnConstraints />
@@ -73,6 +75,7 @@
                     <TableColumn fx:id="clmWaterType" text="Water Type" />
                     <TableColumn fx:id="clmCountry" text="Country" />
                     <TableColumn fx:id="clmColor" text="Color" />
+               <TableColumn fx:id="clmQuantity" prefWidth="75.0" text="Quantity" />
                 </columns>
             <columnResizePolicy>
                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

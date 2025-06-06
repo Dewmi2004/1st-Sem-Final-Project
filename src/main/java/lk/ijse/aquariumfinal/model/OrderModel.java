@@ -2,7 +2,9 @@ package lk.ijse.aquariumfinal.model;
 
 import lk.ijse.aquariumfinal.db.DBConnection;
 import lk.ijse.aquariumfinal.dto.CartDTO;
+import lk.ijse.aquariumfinal.dto.FishDTO;
 import lk.ijse.aquariumfinal.dto.OrderDTO;
+import lk.ijse.aquariumfinal.dto.PlantDTO;
 import lk.ijse.aquariumfinal.util.CrudUtil;
 
 import java.sql.Connection;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 
 public class OrderModel {
 
-    public boolean saveOrder(OrderDTO dto, ArrayList<CartDTO> cartList) throws SQLException, ClassNotFoundException {
+    public boolean saveOrder(OrderDTO dto,FishDTO fish,PlantDTO plant) throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
         con.setAutoCommit(false);
         try {
@@ -34,23 +36,24 @@ if (isPaymentSaved) {
         if (dto.getItemType().equals("Fish Order")) {
             isItemOrderSaved = CrudUtil.execute(
                     "INSERT INTO order_fish(order_Id, fish_Id) VALUES (?, ?)",
-                    dto.getOrderId(),cartList.get(0).getFishId()
+                    dto.getOrderId(),fish.getFishId()
             );
 
             isQuantityUpdated = CrudUtil.execute(
-                    "UPDATE fish_detail SET quantity = quantity - ? WHERE fish_Id = ?",
-                   cartList.get(1).getQuantity(), cartList.get(0).getFishId()
+                    "UPDATE fish SET quantity = quantity - ? WHERE fish_Id = ?",
+                    fish.getQuantity(), fish.getFishId()
+
             );
 
         } else if (dto.getItemType().equals("Plant Order")) {
             isItemOrderSaved = CrudUtil.execute(
                     "INSERT INTO order_plant(order_Id, plant_Id) VALUES (?, ?)",
-                    dto.getOrderId(),cartList.get(0).getPlantId()
+                    dto.getOrderId(),plant.getPlantId()
             );
 
             isQuantityUpdated = CrudUtil.execute(
-                    "UPDATE plant_detail SET quantity = quantity - ? WHERE plant_Id = ?",
-                    cartList.get(1).getQuantity(), cartList.get(0).getPlantId()
+                    "UPDATE plant SET quantity = quantity - ? WHERE plant_Id = ?",
+                    plant.getQuantity(), plant.getPlantId()
             );
         }
         con.commit();
@@ -93,4 +96,6 @@ if (isPaymentSaved) {
             return "PAY001";
         }
     }
+
+
 }

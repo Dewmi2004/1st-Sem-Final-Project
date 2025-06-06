@@ -15,11 +15,11 @@ public class PHChemicalModel {
 
         while (rs.next()) {
             PHChemicalDTO dto = new PHChemicalDTO(
-                    rs.getString(1),
                     rs.getString(2),
-                    rs.getString(3),
                     rs.getString(4),
-                    rs.getString(5)
+                    rs.getString(1),
+                    rs.getString(5),
+                    rs.getString(3)
             );
             list.add(dto);
         }
@@ -28,7 +28,7 @@ public class PHChemicalModel {
 
     public boolean savePHChemical(PHChemicalDTO dto) throws SQLException, ClassNotFoundException {
         System.out.println("Saving: " + dto);
-        String sql = "INSERT INTO ph_chemical (ph_Level ,tank_Id , check_In_Time , chemical_Id , date) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ph_chemical VALUES (?, ?, ?, ?, ?)";
         return CrudUtil.execute(sql,
                 dto.getPhLevel(),
                 dto.getTankId(),

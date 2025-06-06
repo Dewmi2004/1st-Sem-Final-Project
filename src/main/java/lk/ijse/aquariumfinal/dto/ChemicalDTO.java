@@ -14,6 +14,7 @@ public class ChemicalDTO {
     private String concentration;
     private String storeType;
     private String name;
+    private String quantity;
 
 
 }

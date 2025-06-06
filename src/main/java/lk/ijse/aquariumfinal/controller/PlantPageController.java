@@ -34,6 +34,8 @@ public class PlantPageController {
     public TableColumn<?,?> colwaterrtype;
     public TableColumn<?,?> coltankId;
     public TableColumn<?,?> colsize;
+    public TextField txtQuantity;
+    public TableColumn<?,?> colQuantity;
 
     public void initialize() throws SQLException, ClassNotFoundException {
         setCellValueFactory();
@@ -48,6 +50,7 @@ public class PlantPageController {
         colwaterrtype.setCellValueFactory(new PropertyValueFactory<>("waterType"));
         coltankId.setCellValueFactory(new PropertyValueFactory<>("tankId"));
         colsize.setCellValueFactory(new PropertyValueFactory<>("size"));
+        colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
     }
 
     private void loadComboData() throws SQLException, ClassNotFoundException {
@@ -67,7 +70,8 @@ public class PlantPageController {
                     dto.getName(),
                     dto.getWaterType(),
                     dto.getTankId(),
-                    dto.getSize()
+                    dto.getSize(),
+                    dto.getQuantity()
             );
             obList.add(tm);
         }
@@ -85,8 +89,9 @@ public class PlantPageController {
         String waterType = CBoxType.getValue();
         String tankId = CBoxTank.getValue();
         String size = CBoxSize.getValue();
+        String quantity = txtQuantity.getText();
 
-        PlantDTO dto = new PlantDTO(id, name, waterType, tankId, size);
+        PlantDTO dto = new PlantDTO(id, name, waterType, tankId, size, quantity);
         boolean isSaved = PlantModel.savePlant(dto);
 
         if (isSaved) {
@@ -105,8 +110,9 @@ public class PlantPageController {
         String waterType = CBoxType.getValue();
         String tankId = CBoxTank.getValue();
         String size = CBoxSize.getValue();
+        String quantity = txtQuantity.getText();
 
-        PlantDTO dto = new PlantDTO(id, name, waterType, tankId, size);
+        PlantDTO dto = new PlantDTO(id, name, waterType, tankId, size,quantity);
         boolean isUpdated = PlantModel.updatePlant(dto);
 
         if (isUpdated) {
@@ -167,7 +173,7 @@ public class PlantPageController {
             CBoxType.setValue(selected.getWaterType());
             CBoxTank.setValue(selected.getTankId());
             CBoxSize.setValue(selected.getSize());
-
+txtQuantity.setText(selected.getQuantity());
             btnSave1.setDisable(true);
             btnUpdate1.setDisable(false);
             btnDelete1.setDisable(false);
@@ -179,6 +185,7 @@ public class PlantPageController {
         CBoxType.getSelectionModel().clearSelection();
         CBoxTank.getSelectionModel().clearSelection();
         CBoxSize.getSelectionModel().clearSelection();
+        txtQuantity.clear();
         setNextId();
     }
 }

@@ -61,10 +61,11 @@ public class InventoryPageController {
 
     private final InventoryModel inventoryModel = new InventoryModel();
     private final ObservableList<InventryTM> cartList = FXCollections.observableArrayList();
-private PlantDetailPageController plantDetailPageController;
-private FishDetailPageController fishDetailPageController;
-private FoodDetailPageController foodDetailPageController;
-private ChemicalDetailPageController chemDetailPageController;
+    private PlantDetailPageController plantDetailPageController;
+    private FishDetailPageController fishDetailPageController;
+    private FoodDetailPageController foodDetailPageController;
+    private ChemicalDetailPageController chemDetailPageController;
+
     public void initialize() throws SQLException, ClassNotFoundException {
         setNextInventoryId();
         loadItemTypes();
@@ -81,7 +82,7 @@ private ChemicalDetailPageController chemDetailPageController;
     }
 
     private void loadItemTypes() throws SQLException, ClassNotFoundException {
-        cmbItemId.setItems(FXCollections.observableArrayList("Plant", "Fish", "Chemical","Food"));
+        cmbItemId.setItems(FXCollections.observableArrayList("Plant", "Fish", "Chemical", "Food"));
     }
 
     private void setNextInventoryId() throws SQLException, ClassNotFoundException {
@@ -91,7 +92,7 @@ private ChemicalDetailPageController chemDetailPageController;
     @FXML
     void btnSearchSupplierOnAction(ActionEvent event) {
         String phone = txtSupplierPhone.getText();
-        SupplierDTO supplier = InventoryModel. searchSupplierByPhone(phone);
+        SupplierDTO supplier = InventoryModel.searchSupplierByPhone(phone);
         if (supplier != null) {
             SupplierId.setText(supplier.getSupId());
             lblSupplierName.setText(supplier.getName());
@@ -100,6 +101,7 @@ private ChemicalDetailPageController chemDetailPageController;
             showAlert(Alert.AlertType.WARNING, "Supplier Not Found");
         }
     }
+
     public void btnSearchItemOnAction(ActionEvent actionEvent) {
         String selectedItem = cmbItemId.getSelectionModel().getSelectedItem();
 
@@ -117,25 +119,25 @@ private ChemicalDetailPageController chemDetailPageController;
                 case "Plant" -> {
                     fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/PlantDetail.fxml"));
                     pane = fxmlLoader.load();
-                    plantDetailPageController  = fxmlLoader.getController();
+                    plantDetailPageController = fxmlLoader.getController();
                     plantDetailPageController.loadPlantIds();
                 }
                 case "Fish" -> {
                     fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FishDetail.fxml"));
                     pane = fxmlLoader.load();
-                    fishDetailPageController  = fxmlLoader.getController();
+                    fishDetailPageController = fxmlLoader.getController();
                     fishDetailPageController.loadFishIds();
                 }
                 case "Chemical" -> {
                     fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/ChemicalDetail.fxml"));
                     pane = fxmlLoader.load();
-                    chemDetailPageController  = fxmlLoader.getController();
+                    chemDetailPageController = fxmlLoader.getController();
                     chemDetailPageController.loadChemicalIds();
                 }
                 case "Food" -> {
                     fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FoodDetail.fxml"));
                     pane = fxmlLoader.load();
-                    foodDetailPageController  = fxmlLoader.getController();
+                    foodDetailPageController = fxmlLoader.getController();
                     foodDetailPageController.loadFoodIds();
                 }
                 default -> {
@@ -227,11 +229,13 @@ private ChemicalDetailPageController chemDetailPageController;
             return;
         }
 
-        InventoryDTO inventory = new InventoryDTO(
-                lblInventoryId.getText(),
-                Date.valueOf(datePickerDate.getValue()),
-                SupplierId.getText()
-        );
+        InventoryDTO inventory = new InventoryDTO();
+
+        inventory.setInventoryId(lblInventoryId.getText());
+        inventory.setDate(Date.valueOf(datePickerDate.getValue()).toString());
+        inventory.setSupId(SupplierId.getText());
+        inventory.setItemType(cmbItemId.getValue());
+
 
         ArrayList<InventryTM> itemList = new ArrayList<>(cartList);
 

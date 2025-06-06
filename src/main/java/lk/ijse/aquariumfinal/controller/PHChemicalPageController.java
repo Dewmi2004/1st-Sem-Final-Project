@@ -49,8 +49,8 @@ public class PHChemicalPageController {
     }
 
     private void setCellValueFactory() {
-        clmChemicalId.setCellValueFactory(new PropertyValueFactory<>("chemicalId"));
         clmTankId.setCellValueFactory(new PropertyValueFactory<>("tankId"));
+        clmChemicalId.setCellValueFactory(new PropertyValueFactory<>("chemicalId"));
         clmPHLevel.setCellValueFactory(new PropertyValueFactory<>("phLevel"));
         clmDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         clmTime.setCellValueFactory(new PropertyValueFactory<>("time"));
@@ -58,9 +58,7 @@ public class PHChemicalPageController {
 
     private void loadComboData() throws SQLException, ClassNotFoundException {
             ObservableList<String> tankIds = TankModel.getTankId();
-            System.out.println("Loaded Tank IDs: " + tankIds); // Debug log
             cmbTankId.setItems(tankIds);
-
             cmbChemicalId.setItems(ChemicalModel.getChemicalId());
             cmbPhLevel.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"));
         }
@@ -71,8 +69,8 @@ public class PHChemicalPageController {
         ObservableList<PHChemicalTM> obList = FXCollections.observableArrayList();
         for (PHChemicalDTO dto : list) {
             obList.add(new PHChemicalTM(
-                    dto.getChemicalId(),
                     dto.getTankId(),
+                    dto.getChemicalId(),
                     dto.getPhLevel(),
                     dto.getDate(),
                     dto.getTime()
@@ -88,8 +86,8 @@ public class PHChemicalPageController {
         }
 
         PHChemicalDTO dto = new PHChemicalDTO(
-                cmbChemicalId.getValue(),
                 cmbTankId.getValue(),
+                cmbChemicalId.getValue(),
                 cmbPhLevel.getValue(),
                 datePickerdate.getValue().toString(),
                 txtTime.getText()
@@ -108,8 +106,8 @@ public class PHChemicalPageController {
 
     public void btnUpdateOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         PHChemicalDTO dto = new PHChemicalDTO(
-                cmbChemicalId.getValue(),
                 cmbTankId.getValue(),
+                cmbChemicalId.getValue(),
                 cmbPhLevel.getValue(),
                 datePickerdate.getValue().toString(),
                 txtTime.getText()
@@ -159,104 +157,11 @@ public class PHChemicalPageController {
     public void clickOnAction(MouseEvent event) {
         PHChemicalTM selected = tblPHChemical.getSelectionModel().getSelectedItem();
         if (selected != null) {
-            cmbChemicalId.setValue(selected.getChemicalId());
             cmbTankId.setValue(selected.getTankId());
+            cmbChemicalId.setValue(selected.getChemicalId());
             cmbPhLevel.setValue(selected.getPhLevel());
             datePickerdate.setValue(LocalDate.parse(selected.getDate()));
             txtTime.setText(selected.getTime());
         }
     }
 }
-//package lk.ijse.aquarium.model;
-//
-//import lk.ijse.aquarium.db.CrudUtil;
-//import lk.ijse.aquarium.dto.PhChemicalDto;
-//
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//public class PhChemicalModel {
-//
-//    public static boolean save(PhChemicalDto dto) throws SQLException {
-//        String sql = "INSERT INTO ph_chemical (chemical_id, name, brand, size, quantity, supplier_id, price) VALUES (?, ?, ?, ?, ?, ?, ?)";
-//        return CrudUtil.execute(sql,
-//                dto.getChemicalId(),
-//                dto.getName(),
-//                dto.getBrand(),
-//                dto.getSize(),
-//                dto.getQuantity(),
-//                dto.getSupplierId(),
-//                dto.getPrice()
-//        );
-//    }
-//
-//    public static boolean update(PhChemicalDto dto) throws SQLException {
-//        String sql = "UPDATE ph_chemical SET name=?, brand=?, size=?, quantity=?, supplier_id=?, price=? WHERE chemical_id=?";
-//        return CrudUtil.execute(sql,
-//                dto.getName(),
-//                dto.getBrand(),
-//                dto.getSize(),
-//                dto.getQuantity(),
-//                dto.getSupplierId(),
-//                dto.getPrice(),
-//                dto.getChemicalId()
-//        );
-//    }
-//
-//    public static boolean delete(String chemicalId) throws SQLException {
-//        String sql = "DELETE FROM ph_chemical WHERE chemical_id=?";
-//        return CrudUtil.execute(sql, chemicalId);
-//    }
-//
-//    public static PhChemicalDto search(String chemicalId) throws SQLException {
-//        String sql = "SELECT * FROM ph_chemical WHERE chemical_id=?";
-//        ResultSet resultSet = CrudUtil.execute(sql, chemicalId);
-//
-//        if (resultSet.next()) {
-//            return new PhChemicalDto(
-//                    resultSet.getString("chemical_id"),
-//                    resultSet.getString("name"),
-//                    resultSet.getString("brand"),
-//                    resultSet.getString("size"),
-//                    resultSet.getInt("quantity"),
-//                    resultSet.getString("supplier_id"),
-//                    resultSet.getDouble("price")
-//            );
-//        }
-//        return null;
-//    }
-//
-//    public static List<PhChemicalDto> getAll() throws SQLException {
-//        List<PhChemicalDto> list = new ArrayList<>();
-//        String sql = "SELECT * FROM ph_chemical";
-//        ResultSet resultSet = CrudUtil.execute(sql);
-//
-//        while (resultSet.next()) {
-//            list.add(new PhChemicalDto(
-//                    resultSet.getString("chemical_id"),
-//                    resultSet.getString("name"),
-//                    resultSet.getString("brand"),
-//                    resultSet.getString("size"),
-//                    resultSet.getInt("quantity"),
-//                    resultSet.getString("supplier_id"),
-//                    resultSet.getDouble("price")
-//            ));
-//        }
-//        return list;
-//    }
-//
-//    public static String generateNextChemicalId() throws SQLException {
-//        String sql = "SELECT chemical_id FROM ph_chemical ORDER BY chemical_id DESC LIMIT 1";
-//        ResultSet resultSet = CrudUtil.execute(sql);
-//
-//        if (resultSet.next()) {
-//            String lastId = resultSet.getString("chemical_id");
-//            int nextId = Integer.parseInt(lastId.replace("PC", "")) + 1;
-//            return String.format("PC%03d", nextId);
-//        } else {
-//            return "PC001";
-//        }
-//    }
-//}

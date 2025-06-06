@@ -12,11 +12,11 @@ import java.util.ArrayList;
 
 public class FishModel {
     public static boolean saveFish(FishDTO fishDto) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("insert into fish values(?,?,?,?,?,?,?,? )", fishDto.getFishId(),fishDto.getName(),fishDto.getSize(),fishDto.getTankId(),fishDto.getGender(),fishDto.getWaterType(),fishDto.getCountry(),fishDto.getColour());
+        return CrudUtil.execute("insert into fish values(?,?,?,?,?,?,?,?,? )", fishDto.getFishId(),fishDto.getName(),fishDto.getSize(),fishDto.getTankId(),fishDto.getGender(),fishDto.getWaterType(),fishDto.getCountry(),fishDto.getColour(),fishDto.getQuantity());
     }
 
     public static boolean UpdateFish(FishDTO fishDto) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("update fish set name = ?,size = ?,tank_Id = ?,gender = ?,water_Type = ? ,country = ? ,colour = ?  where fish_Id = ?",fishDto.getName(),fishDto.getSize(),fishDto.getTankId(),fishDto.getGender(),fishDto.getWaterType(),fishDto.getCountry(),fishDto.getColour(),fishDto.getFishId());
+        return CrudUtil.execute("update fish set name = ?,size = ?,tank_Id = ?,gender = ?,water_Type = ? ,country = ? ,colour = ? , quantity = ? where fish_Id = ?",fishDto.getName(),fishDto.getSize(),fishDto.getTankId(),fishDto.getGender(),fishDto.getWaterType(),fishDto.getCountry(),fishDto.getColour(),fishDto.getQuantity(),fishDto.getFishId());
     }
 
     public static ObservableList<String> getAllFishIDS() throws SQLException, ClassNotFoundException {
@@ -52,7 +52,7 @@ public class FishModel {
         ResultSet rs = CrudUtil.execute("select * from fish");
         ArrayList<FishDTO> fishDtoArrayList = new ArrayList<>();
         while (rs.next()) {
-            FishDTO fishDto = new FishDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
+            FishDTO fishDto = new FishDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
             fishDtoArrayList.add(fishDto);
         }
         return fishDtoArrayList;
