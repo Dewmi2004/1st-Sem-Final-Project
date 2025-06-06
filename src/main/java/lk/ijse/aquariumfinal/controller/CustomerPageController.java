@@ -19,7 +19,7 @@ import java.util.Optional;
 
 
 public class CustomerPageController {
-private final CustomerModel Cmodel = new CustomerModel();
+    private final CustomerModel Cmodel = new CustomerModel();
     public Button btnGReport;
     public Button btnUpdate;
     public Button btnDelete;
@@ -69,39 +69,80 @@ private final CustomerModel Cmodel = new CustomerModel();
 
     @FXML
     private TextField txtName;
-public void initialize() throws SQLException, ClassNotFoundException {
-    setCellValueFactory();
-    setNextId();
-loadtable();
-}
+
+    public void initialize() throws SQLException, ClassNotFoundException {
+        setCellValueFactory();
+        setNextId();
+        loadtable();
+    }
+    private boolean validateInputs() {
+        StringBuilder errors = new StringBuilder();
+
+        String namePattern = "^[A-Za-z ]{2,50}$";
+        String addressPattern = "^[\\w\\s,.-]{5,100}$";
+        String genderPattern = "^(?i)(Male|Female|Other)$";
+        String emailPattern = "^[\\w.-]+@[\\w.-]+\\.[A-Za-z]{2,}$";
+        String contactPattern = "^[0-9]{10}$";
+
+        if (!txtName.getText().matches(namePattern)) {
+            errors.append("Invalid name. Only letters and spaces allowed (2–50 chars).\n");
+        }
+
+        if (!txtAddress.getText().matches(addressPattern)) {
+            errors.append("Invalid address. Use letters, digits, commas, periods, and hyphens (5–100 chars).\n");
+        }
+
+        if (!txtGender.getText().matches(genderPattern)) {
+            errors.append("Invalid gender. Must be 'Male', 'Female', or 'Other'.\n");
+        }
+
+        if (dpCustomer.getValue() == null) {
+            errors.append("Date of birth is required.\n");
+        }
+
+        if (!txtEmail.getText().matches(emailPattern)) {
+            errors.append("Invalid email format.\n");
+        }
+
+        if (!txtContact.getText().matches(contactPattern)) {
+            errors.append("Invalid contact. Must be a 10-digit number.\n");
+        }
+
+        if (errors.length() > 0) {
+            new Alert(Alert.AlertType.WARNING, errors.toString()).show();
+            return false;
+        }
+
+        return true;
+    }
 
     private void loadtable() throws SQLException, ClassNotFoundException {
-    ArrayList<CustomerDTO> customers = Cmodel.getAllCustomer();
-    ObservableList<CustomerTM> obc = FXCollections.observableArrayList();
-    for (CustomerDTO customer : customers) {
-        CustomerTM CTM = new CustomerTM(
-                customer.getId(),
-                customer.getName(),
-                customer.getAddress(),
-                customer.getGender(),
-                customer.getDob(),
-                customer.getEmail(),
-                customer.getContact()
-        );
-       obc.add(CTM);
-    }
-    tblCustomer.setItems(obc);
+        ArrayList<CustomerDTO> customers = Cmodel.getAllCustomer();
+        ObservableList<CustomerTM> obc = FXCollections.observableArrayList();
+        for (CustomerDTO customer : customers) {
+            CustomerTM CTM = new CustomerTM(
+                    customer.getId(),
+                    customer.getName(),
+                    customer.getAddress(),
+                    customer.getGender(),
+                    customer.getDob(),
+                    customer.getEmail(),
+                    customer.getContact()
+            );
+            obc.add(CTM);
+        }
+        tblCustomer.setItems(obc);
     }
 
 
     private void setNextId() throws SQLException, ClassNotFoundException {
-    String nextiD = Cmodel.getNextCustomer();
-    lblCusId.setText(nextiD);
+        String nextiD = Cmodel.getNextCustomer();
+        lblCusId.setText(nextiD);
 
     }
 
     private void setCellValueFactory() {
-    clmCusId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        clmCusId.setCellValueFactory(new PropertyValueFactory<>("id"));
         clmName.setCellValueFactory(new PropertyValueFactory<>("name"));
         clmAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         clmGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
@@ -110,6 +151,9 @@ loadtable();
         clmContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
 
     }
+
+
+
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
@@ -184,6 +228,7 @@ loadtable();
 
     @FXML
     void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+      if(!validateInputs())return;
 String id = lblCusId.getText();
 String name = txtName.getText();
 String address = txtAddress.getText();
@@ -212,6 +257,8 @@ boolean isSave = CustomerModel.saveCustomer(cusDto);
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        if(!validateInputs())return;
+
         String id = lblCusId.getText();
         String name = txtName.getText();
         String address = txtAddress.getText();

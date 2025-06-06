@@ -55,6 +55,49 @@ private final EmployeeModel Emodel = new EmployeeModel();
         setNextId();
         loadtable();
     }
+    private boolean isValidInput() {
+        String nameRegex = "^[A-Za-z\\s]{3,}$";
+        String addressRegex = "^[\\w\\s,.-]{5,}$";
+        String genderRegex = "^(?i)(male|female|other)$";
+        String emailRegex = "^[\\w.-]+@[\\w.-]+\\.\\w{2,}$";
+        String contactRegex = "^(\\+\\d{1,3}[- ]?)?\\d{10}$";
+
+        if (!txtName.getText().matches(nameRegex)) {
+            showAlert("Invalid Name! Only letters and spaces, minimum 3 characters.");
+            return false;
+        }
+
+        if (!txtAddress.getText().matches(addressRegex)) {
+            showAlert("Invalid Address! Minimum 5 characters.");
+            return false;
+        }
+
+        if (!txtGender.getText().matches(genderRegex)) {
+            showAlert("Invalid Gender! Use Male, Female, or Other.");
+            return false;
+        }
+
+        if (dpEmployee.getValue() == null) {
+            showAlert("Please select a valid Date of Birth.");
+            return false;
+        }
+
+        if (!txtEmail.getText().matches(emailRegex)) {
+            showAlert("Invalid Email format!");
+            return false;
+        }
+
+        if (!txtContact.getText().matches(contactRegex)) {
+            showAlert("Invalid Contact Number! Should be 10 digits or with country code.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void showAlert(String message) {
+        new Alert(Alert.AlertType.WARNING, message).show();
+    }
 
     private void loadtable() throws SQLException, ClassNotFoundException {
         ArrayList<EmployeeDTO> employees = Emodel.getAllEmployee();
@@ -162,6 +205,7 @@ private final EmployeeModel Emodel = new EmployeeModel();
 
     @FXML
     void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        if (!isValidInput()) return;
         String id = lblEmployeeid.getText();
         String name = txtName.getText();
         String address = txtAddress.getText();
@@ -189,6 +233,8 @@ private final EmployeeModel Emodel = new EmployeeModel();
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        if (!isValidInput()) return;
+
         String id = lblEmployeeid.getText();
         String name = txtName.getText();
         String address = txtAddress.getText();

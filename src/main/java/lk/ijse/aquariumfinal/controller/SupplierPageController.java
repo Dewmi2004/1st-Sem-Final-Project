@@ -41,6 +41,42 @@ public class SupplierPageController {
         CBoxSupplyType.setItems(Smodel.getSupplyTypes());
         loadtable();
     }
+    private boolean validateInputs() {
+        String nameRegex = "^[A-Za-z ]{2,30}$";
+        String contactRegex = "^0[0-9]{9}$";
+        String addressRegex = "^[\\w\\s,.-]{3,50}$";
+        String emailRegex = "^[\\w.-]+@[\\w.-]+\\.[A-Za-z]{2,6}$";
+
+        if (!txtName.getText().matches(nameRegex)) {
+            showAlert("Invalid Name. Use 2–30 letters only.");
+            return false;
+        }
+        if (!txtContact.getText().matches(contactRegex)) {
+            showAlert("Invalid Contact. Use a 10-digit number starting with 0.");
+            return false;
+        }
+        if (!txtAddress.getText().matches(addressRegex)) {
+            showAlert("Invalid Address. Must be 3–50 characters.");
+            return false;
+        }
+        if (CBoxSupplyType.getValue() == null) {
+            showAlert("Please select a Supply Type.");
+            return false;
+        }
+        if (!txtEmail.getText().matches(emailRegex)) {
+            showAlert("Invalid Email format.");
+            return false;
+        }
+
+        return true;
+    }
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Validation Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
     private void loadtable() throws SQLException, ClassNotFoundException {
         ArrayList<SupplierDTO> suppliers = Smodel.getAllSupplier();
@@ -131,6 +167,7 @@ public class SupplierPageController {
 
     @FXML
    public void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        if(!validateInputs()) return;
         String id = lblSupplierId.getText();
         String name = txtName.getText();
         String contact = txtContact.getText();
@@ -158,6 +195,8 @@ public class SupplierPageController {
 
     @FXML
    public void btnUpdateOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        if(!validateInputs()) return;
+
         String id = lblSupplierId.getText();
         String name = txtName.getText();
         String contact = txtContact.getText();

@@ -35,6 +35,36 @@ public class TankPageCotroller {
         loadComboData();
         loadTable();
     }
+    private boolean validateInputs() {
+        String glassTypeRegex = "^[A-Za-z ]{3,30}$";
+        String tankTypeRegex = "^[A-Za-z ]{3,30}$";
+        String waterTypeRegex = "^[A-Za-z ]{3,50}$";
+
+        if (CBoxGlass.getValue() == null || !CBoxGlass.getValue().matches(glassTypeRegex)) {
+            showAlert("Invalid Glass Type. Use 3–30 letters only.");
+            return false;
+        }
+
+        if (CBoxTank.getValue() == null || !CBoxTank.getValue().matches(tankTypeRegex)) {
+            showAlert("Invalid Tank Type. Use 3–30 letters only.");
+            return false;
+        }
+
+        if (CBoxWater.getValue() == null || !CBoxWater.getValue().matches(waterTypeRegex)) {
+            showAlert("Invalid Water Type. Use 3–30 letters only.");
+            return false;
+        }
+
+        return true;
+    }
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Validation Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     private void loadComboData() {
         CBoxGlass.setItems(Tmodel.getGlassTypes());
         CBoxTank.setItems(Tmodel.getTankTypes());
@@ -66,6 +96,7 @@ public class TankPageCotroller {
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        if (!validateInputs()) return;
         TankDTO dto = new TankDTO(
                 lblTankId.getText(),
                 CBoxGlass.getValue(),
@@ -113,6 +144,7 @@ public class TankPageCotroller {
         setNextId();
     }
     public void btnSaveOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        if (!validateInputs()) return;
         TankDTO dto = new TankDTO(
                 lblTankId.getText(),
                 CBoxGlass.getValue(),

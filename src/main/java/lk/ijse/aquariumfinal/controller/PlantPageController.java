@@ -43,7 +43,37 @@ public class PlantPageController {
         loadComboData();
         loadTable();
     }
-    
+    private boolean validateInputs() {
+        String nameRegex = "^[A-Za-z ]{2,30}$";
+        String quantityRegex = "^[1-9][0-9]*$";
+
+        if (!txtName.getText().matches(nameRegex)) {
+            showAlert("Invalid Name. Use 2–30 letters only.");
+            return false;
+        }
+        if (CBoxType.getValue() == null) {
+            showAlert("Please select a Water Type.");
+            return false;
+        }
+        if (CBoxTank.getValue() == null) {
+            showAlert("Please select a Tank.");
+            return false;
+        }
+        if (CBoxSize.getValue() == null) {
+            showAlert("Please select a Size.");
+            return false;
+        }
+        if (!txtQuantity.getText().matches(quantityRegex)) {
+            showAlert("Invalid Quantity. Use positive whole numbers only.");
+            return false;
+        }
+
+        return true;
+    }
+    private void showAlert(String msg) {
+        new Alert(Alert.AlertType.WARNING, msg).show();
+    }
+
     private void setCellValueFactory() {
         colplantId.setCellValueFactory(new PropertyValueFactory<>("plantId"));
         colname.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -84,6 +114,7 @@ public class PlantPageController {
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+       if ( !validateInputs()) return;
         String id = lblPlantId.getText();
         String name = txtName.getText();
         String waterType = CBoxType.getValue();
@@ -105,6 +136,8 @@ public class PlantPageController {
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        if ( !validateInputs()) return;
+
         String id = lblPlantId.getText();
         String name = txtName.getText();
         String waterType = CBoxType.getValue();
@@ -173,7 +206,7 @@ public class PlantPageController {
             CBoxType.setValue(selected.getWaterType());
             CBoxTank.setValue(selected.getTankId());
             CBoxSize.setValue(selected.getSize());
-txtQuantity.setText(selected.getQuantity());
+            txtQuantity.setText(selected.getQuantity());
             btnSave1.setDisable(true);
             btnUpdate1.setDisable(false);
             btnDelete1.setDisable(false);
