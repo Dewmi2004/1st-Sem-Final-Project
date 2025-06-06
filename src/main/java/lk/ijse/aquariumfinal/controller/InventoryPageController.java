@@ -9,8 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.aquariumfinal.AppInitializer;
-import lk.ijse.aquariumfinal.dto.InventoryDTO;
-import lk.ijse.aquariumfinal.dto.SupplierDTO;
+import lk.ijse.aquariumfinal.dto.*;
 import lk.ijse.aquariumfinal.dto.tm.InventryTM;
 import lk.ijse.aquariumfinal.model.InventoryModel;
 
@@ -58,7 +57,10 @@ public class InventoryPageController {
 
     @FXML
     private TextField txtSupplierPhone;
-
+    public static int fishQty = 0;
+    public static int plantQty = 0;
+    public static int chemicalQty = 0;
+    public static int foodQty = 0;
     private final InventoryModel inventoryModel = new InventoryModel();
     private final ObservableList<InventryTM> cartList = FXCollections.observableArrayList();
     private PlantDetailPageController plantDetailPageController;
@@ -236,12 +238,20 @@ public class InventoryPageController {
         inventory.setSupId(SupplierId.getText());
         inventory.setItemType(cmbItemId.getValue());
 
+         PlantDTO plant =new PlantDTO();
+         plant.setQuantity(String.valueOf(plantQty));
+         FishDTO fish =new FishDTO();
+         fish.setQuantity(String.valueOf(fishQty));
+         ChemicalDTO chemical = new ChemicalDTO();
+         chemical.setQuantity(String.valueOf(chemicalQty));
+         FoodDTO food = new FoodDTO();
+         food.setQuantity(String.valueOf(foodQty));
 
         ArrayList<InventryTM> itemList = new ArrayList<>(cartList);
 
         try {
             Map<String, Integer> updatedQuantities = new HashMap<>();
-            boolean isSaved = inventoryModel.saveInventory(inventory, itemList, updatedQuantities);
+            boolean isSaved = inventoryModel.saveInventory(inventory, itemList, updatedQuantities,fish,plant,chemical,food);
 
             if (isSaved) {
                 for (Map.Entry<String, Integer> entry : updatedQuantities.entrySet()) {
@@ -274,6 +284,10 @@ public class InventoryPageController {
         SupplierId.setText("Supplier ID");
         lblSupplierName.setText("Supplier Name");
         cartList.clear();
+        fishQty = 0;
+        plantQty =0;
+        chemicalQty =0;
+        foodQty =0;
     }
 
     private void showAlert(Alert.AlertType type, String msg) {

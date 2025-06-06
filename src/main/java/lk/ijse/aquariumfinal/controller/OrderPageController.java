@@ -187,6 +187,12 @@ public class OrderPageController {
         lblCustomerName.setText("Customer Name");
         cartList.clear();
         lblTotalAmount.setText("Rs. 0.00");
+
+        fishId = "";
+        plantId="";
+
+        fishQty = 0;
+        plantQty = 0;
     }
 
     private void showAlert(Alert.AlertType type, String msg) {

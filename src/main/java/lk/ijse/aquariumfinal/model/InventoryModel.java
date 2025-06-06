@@ -12,10 +12,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class InventoryModel {
-    private PlantDTO plant =new PlantDTO();
-    private FishDTO fish =new FishDTO();
-    private ChemicalDTO chemical = new ChemicalDTO();
-    private FoodDTO food = new FoodDTO();
+
     public static SupplierDTO searchSupplierByPhone(String phone) {
         try {
             ResultSet rs = CrudUtil.execute("SELECT sup_Id,Name FROM supplier WHERE Contact = ?", phone);
@@ -44,7 +41,7 @@ public class InventoryModel {
         return null;
     }
 
-    public boolean saveInventory(InventoryDTO inventory, ArrayList<InventryTM> itemList, Map<String, Integer> updatedQuantities) throws SQLException, ClassNotFoundException {
+    public boolean saveInventory(InventoryDTO inventory, ArrayList<InventryTM> itemList, Map<String, Integer> updatedQuantities,FishDTO fish,PlantDTO plant,ChemicalDTO chemical,FoodDTO food) throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
         con.setAutoCommit(false);
 
@@ -61,13 +58,12 @@ public class InventoryModel {
 
             for (InventryTM item : itemList) {
                 String itemId = item.getItemId();
-                String quantityStr = item.getQuantity();
                 String priceStr = item.getUnitPrice();
                 String inventoryId = inventory.getInventoryId();
-String plantquantity = plant.getQuantity();
-String fishquantity = fish.getQuantity();
-String chemicalquantity =chemical.getQuantity();
-String foodquantity = food.getQuantity();
+               String plantquantity = plant.getQuantity();
+               String chemicalquantity = chemical.getQuantity();
+               String foodquantity = food.getQuantity();
+               String fishquantity = fish.getQuantity();
                 boolean isSaved;
                 boolean isUpdated;
 
@@ -78,7 +74,7 @@ String foodquantity = food.getQuantity();
                     case "Plant":
                         isSaved = CrudUtil.execute(
                                 "INSERT INTO plant_detail (plant_Id, quantity, price, inventory_Id) VALUES (?, ?, ?, ?)",
-                                itemId, quantityStr, priceStr, inventoryId
+                                itemId, plantquantity, priceStr, inventoryId
                         );
                         if (!isSaved) {
                             con.rollback();
@@ -97,7 +93,7 @@ String foodquantity = food.getQuantity();
                     case "Fish":
                         isSaved = CrudUtil.execute(
                                 "INSERT INTO fish_detail (fish_Id, quantity, price, inventory_Id) VALUES (?, ?, ?, ?)",
-                                itemId, quantityStr, priceStr, inventoryId
+                                itemId, fishquantity, priceStr, inventoryId
                         );
                         if (!isSaved) {
                             con.rollback();
@@ -113,9 +109,10 @@ String foodquantity = food.getQuantity();
                         break;
 
                     case "Food":
+                        System.out.println(itemId+" "+ foodquantity+" "+ priceStr+" "+ inventoryId);
                         isSaved = CrudUtil.execute(
                                 "INSERT INTO food_detail (food_Id, quantity, price, inventory_Id) VALUES (?, ?, ?, ?)",
-                                itemId, quantityStr, priceStr, inventoryId
+                                itemId, foodquantity, priceStr, inventoryId
                         );
                         if (!isSaved) {
                             con.rollback();
@@ -133,7 +130,7 @@ String foodquantity = food.getQuantity();
                     case "Chemical":
                         isSaved = CrudUtil.execute(
                                 "INSERT INTO chemical_detail (chemical_Id, quantity, price, inventory_Id) VALUES (?, ?, ?, ?)",
-                                itemId, quantityStr, priceStr, inventoryId
+                                itemId, chemicalquantity, priceStr, inventoryId
                         );
                         if (!isSaved) {
                             con.rollback();
