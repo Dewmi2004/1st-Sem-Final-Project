@@ -40,6 +40,34 @@ public class FoodPageController {
         setNextId();
         loadTable();
     }
+    private boolean validateInputs() {
+        String nameRegex = "^[A-Za-z ]{2,30}$";
+        String fishTypeRegex = "^[A-Za-z ]{2,20}$";
+        String quantityRegex = "^[1-9][0-9]*$";
+
+        if (!txtName.getText().matches(nameRegex)) {
+            showAlert("Invalid Name. Use 2–30 letters only.");
+            return false;
+        }
+        if (!txtFishType.getText().matches(fishTypeRegex)) {
+            showAlert("Invalid Fish Type. Use 2–20 letters only.");
+            return false;
+        }
+        if (DPExDate.getValue() == null) {
+            showAlert("Please select an expiry date.");
+            return false;
+        }
+        if (!txtQuantity.getText().matches(quantityRegex)) {
+            showAlert("Invalid Quantity. Use positive whole numbers only.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void showAlert(String msg) {
+        new Alert(Alert.AlertType.WARNING, msg).show();
+    }
 
     private void setCellValueFactory() {
         clmFoodId.setCellValueFactory(new PropertyValueFactory<>("foodId"));
@@ -66,6 +94,7 @@ public class FoodPageController {
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+       if(!validateInputs()) return;
         FoodDTO dto = new FoodDTO(
                 lblFoodId.getText(),
                 txtName.getText(),
@@ -85,6 +114,8 @@ public class FoodPageController {
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        if(!validateInputs()) return;
+
         FoodDTO dto = new FoodDTO(
                 lblFoodId.getText(),
                 txtName.getText(),

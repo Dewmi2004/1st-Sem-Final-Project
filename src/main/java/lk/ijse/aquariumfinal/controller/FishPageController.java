@@ -50,6 +50,58 @@ public class FishPageController {
         ComboDataSet();
         loadtable();
     }
+    private boolean isValidInput() {
+        String nameRegex = "^[A-Za-z\\s]{3,}$";
+        String colorRegex = "^[A-Za-z\\s]{3,}$";
+        String quantityRegex = "^\\d+$";
+        String genderRegex = "^(?i)(male|female|other)$";
+
+        if (!txtName.getText().matches(nameRegex)) {
+            showAlert("Invalid Name! Only letters and spaces, minimum 3 characters.");
+            return false;
+        }
+
+        if (cmbSize.getValue() == null) {
+            showAlert("Please select a valid Fish Size.");
+            return false;
+        }
+
+        if (cmbTankId.getValue() == null) {
+            showAlert("Please select a valid Tank ID.");
+            return false;
+        }
+
+        if (cmbGender.getValue() == null || !cmbGender.getValue().matches(genderRegex)) {
+            showAlert("Invalid Gender! Use Male, Female, or Other.");
+            return false;
+        }
+
+        if (cmbWaterType.getValue() == null) {
+            showAlert("Please select a valid Water Type.");
+            return false;
+        }
+
+        if (cmbCountry.getValue() == null) {
+            showAlert("Please select a valid Country.");
+            return false;
+        }
+
+        if (!txtColor.getText().matches(colorRegex)) {
+            showAlert("Invalid Color! Only letters and spaces, minimum 3 characters.");
+            return false;
+        }
+
+        if (!txtQuantity.getText().matches(quantityRegex)) {
+            showAlert("Invalid Quantity! Must be a number.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void showAlert(String message) {
+        new Alert(Alert.AlertType.WARNING, message).show();
+    }
 
     private void ComboDataSet() throws SQLException, ClassNotFoundException {
         cmbSize.setItems(Fmodel.getFishSize());
@@ -100,6 +152,7 @@ public class FishPageController {
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+       if(!isValidInput()) return;
         String id = lblFishId.getText();
         String name = txtName.getText();
         String size = (String) cmbSize.getValue();
@@ -174,6 +227,8 @@ public class FishPageController {
         }
 
     public void btnSaveOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        if(!isValidInput()) return;
+
         String id = lblFishId.getText();
         String name = txtName.getText();
         String size = (String) cmbSize.getValue();
@@ -215,10 +270,8 @@ public class FishPageController {
             txtQuantity.setText(selectedItem.getQuantity());
 
 
-            // save button disable
             btnSave.setDisable(true);
 
-            // update, delete button enable
             btnUpdate.setDisable(false);
             btnDelete.setDisable(false);
         }

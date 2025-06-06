@@ -84,7 +84,7 @@ public class TankModel {
         return FXCollections.observableArrayList(
                 "Fresh Water",
                 "Brackish Water",
-                "Salt Water (Marine)",
+                "Salt Water",
                 "Soft Water",
                 "Hard Water",
                 "Cold Water",

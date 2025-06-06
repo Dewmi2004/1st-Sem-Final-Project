@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport name="ph_chemical_report" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d9e763c1-fc68-45a1-98a8-5de4fc064c2f">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="AquariumDB"/>
+
+    <parameter name="P_DATE" class="java.lang.String"/>
+
+    <queryString language="SQL">
+        <![CDATA[SELECT * FROM ph_chemical]]>
+    </queryString>
+
+    <field name="tank_id" class="java.lang.String"/>
+    <field name="chemical_id" class="java.lang.String"/>
+    <field name="ph_level" class="java.lang.String"/>
+    <field name="date" class="java.lang.String"/>
+    <field name="time" class="java.lang.String"/>
+
+    <title>
+        <band height="60">
+            <staticText>
+                <reportElement x="0" y="10" width="555" height="40" uuid="title-1"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="24" isBold="true"/>
+                </textElement>
+                <text><![CDATA[PH Chemical Report]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="30">
+            <staticText>
+                <reportElement x="0" y="0" width="111" height="30" uuid="header-tank"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Tank ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="111" y="0" width="111" height="30" uuid="header-chemical"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Chemical ID]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="222" y="0" width="74" height="30" uuid="header-ph"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[PH Level]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="296" y="0" width="130" height="30" uuid="header-date"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Date]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="426" y="0" width="129" height="30" uuid="header-time"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Time]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="30">
+            <textField>
+                <reportElement x="0" y="0" width="111" height="30" uuid="detail-tank"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{tank_id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="111" y="0" width="111" height="30" uuid="detail-chemical"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{chemical_id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="222" y="0" width="74" height="30" uuid="detail-ph"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{ph_level}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="296" y="0" width="130" height="30" uuid="detail-date"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="426" y="0" width="129" height="30" uuid="detail-time"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{time}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+</jasperReport>

@@ -42,6 +42,48 @@ public class ChemicalPageController {
         loadComboData();
         loadTable();
     }
+    private boolean validateInputs() {
+        StringBuilder errorMsg = new StringBuilder();
+
+        String namePattern = "^[A-Za-z ]{2,50}$";
+        String concentrationPattern = "^[0-9]+(\\.[0-9]{1,2})?$";
+        String quantityPattern = "^[0-9]{1,5}$";
+        String storeTypePattern = "^[A-Za-z ]{3,50}$";
+        if (cBoxType.getValue() == null || cBoxType.getValue().isEmpty()) {
+            errorMsg.append("Chemical type is required.\n");
+        }
+
+        if (txtConcentration.getText().isEmpty()) {
+            errorMsg.append("Concentration is required.\n");
+        } else if (!txtConcentration.getText().matches(concentrationPattern)) {
+            errorMsg.append("Concentration must be a valid decimal (e.g., 10 or 10.5).\n");
+        }
+
+        if (txtStoreType.getText().isEmpty()) {
+            errorMsg.append("Store type is required.\n");
+        } else if (!txtStoreType.getText().matches(storeTypePattern)) {
+            errorMsg.append("Store type must contain only letters and spaces (3–50 characters).\n");
+        }
+
+        if (txtName.getText().isEmpty()) {
+            errorMsg.append("Chemical name is required.\n");
+        } else if (!txtName.getText().matches(namePattern)) {
+            errorMsg.append("Chemical name must contain only letters and spaces (2–50 characters).\n");
+        }
+
+        if (txtquantity.getText().isEmpty()) {
+            errorMsg.append("Quantity is required.\n");
+        } else if (!txtquantity.getText().matches(quantityPattern)) {
+            errorMsg.append("Quantity must be a valid whole number (e.g., 100).\n");
+        }
+
+        if (errorMsg.length() > 0) {
+            new Alert(Alert.AlertType.WARNING, errorMsg.toString()).show();
+            return false;
+        }
+
+        return true;
+    }
 
     private void setCellValueFactory() {
         clmid.setCellValueFactory(new PropertyValueFactory<>("chemicalId"));
@@ -71,6 +113,8 @@ public class ChemicalPageController {
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        if (!validateInputs()) return;
+
         ChemicalDTO dto = new ChemicalDTO(
                 lblChemicalId.getText(),
                 cBoxType.getValue(),
@@ -90,6 +134,8 @@ public class ChemicalPageController {
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        if (!validateInputs()) return;
+
         ChemicalDTO dto = new ChemicalDTO(
                 lblChemicalId.getText(),
                 cBoxType.getValue(),

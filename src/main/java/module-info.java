@@ -6,6 +6,7 @@ module lk.ijse.aquariumfinal {
     requires com.google.protobuf;
     requires mysql.connector.j;
     requires jakarta.mail;
+    requires jasperreports;
 
 
     opens lk.ijse.aquariumfinal to javafx.fxml;

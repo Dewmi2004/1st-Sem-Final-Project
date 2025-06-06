@@ -27,7 +27,7 @@ public class PHChemicalModel {
     }
 
     public boolean savePHChemical(PHChemicalDTO dto) throws SQLException, ClassNotFoundException {
-        System.out.println("Saving: " + dto);
+
         String sql = "INSERT INTO ph_chemical VALUES (?, ?, ?, ?, ?)";
         return CrudUtil.execute(sql,
                 dto.getPhLevel(),

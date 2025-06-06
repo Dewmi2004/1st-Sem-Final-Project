@@ -6,12 +6,16 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.aquariumfinal.db.DBConnection;
 import lk.ijse.aquariumfinal.dto.PHChemicalDTO;
 import lk.ijse.aquariumfinal.dto.tm.PHChemicalTM;
 import lk.ijse.aquariumfinal.model.PHChemicalModel;
 import lk.ijse.aquariumfinal.model.TankModel;
 import lk.ijse.aquariumfinal.model.ChemicalModel;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -47,6 +51,35 @@ public class PHChemicalPageController {
         loadTable();
 
     }
+    private boolean validateInputs() {
+        String timeRegex = "^([01]\\d|2[0-3]):[0-5]\\d$";
+
+        if (cmbTankId.getValue() == null) {
+            showAlert("Please select a Tank ID.");
+            return false;
+        }
+        if (cmbChemicalId.getValue() == null) {
+            showAlert("Please select a Chemical ID.");
+            return false;
+        }
+        if (cmbPhLevel.getValue() == null) {
+            showAlert("Please select a PH Level.");
+            return false;
+        }
+        if (datePickerdate.getValue() == null) {
+            showAlert("Please select a date.");
+            return false;
+        }
+        if (!txtTime.getText().matches(timeRegex)) {
+            showAlert("Invalid time format. Use HH:mm (e.g., 14:30).");
+            return false;
+        }
+
+        return true;
+    }
+    private void showAlert(String msg) {
+        new Alert(Alert.AlertType.WARNING, msg).show();
+    }
 
     private void setCellValueFactory() {
         clmTankId.setCellValueFactory(new PropertyValueFactory<>("tankId"));
@@ -80,6 +113,7 @@ public class PHChemicalPageController {
     }
 
     public void btnSaveOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        if(!validateInputs())return;
         if (cmbTankId.getValue() == null || cmbChemicalId.getValue() == null) {
             new Alert(Alert.AlertType.WARNING, "Please select valid Chemical ID and Tank ID").show();
             return;
@@ -105,6 +139,8 @@ public class PHChemicalPageController {
 
 
     public void btnUpdateOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        if(!validateInputs())return;
+
         PHChemicalDTO dto = new PHChemicalDTO(
                 cmbTankId.getValue(),
                 cmbChemicalId.getValue(),
@@ -151,6 +187,13 @@ public class PHChemicalPageController {
     }
 
     public void btnGenerateROnAction(ActionEvent event) {
+//        try {
+//            JasperReport jasperReport = JasperCompileManager.compileReport("/reports/ph_chemical_report.jrxml");
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(String.valueOf(jasperReport), null, DBConnection.getInstance().getConnection());
+//            JasperViewer.viewReport(String.valueOf(jasperPrint), false);
+//        } catch (JRException | SQLException | ClassNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
