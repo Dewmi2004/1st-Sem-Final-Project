@@ -15,64 +15,52 @@ import lk.ijse.aquariumfinal.model.CustomerModel;
 import lk.ijse.aquariumfinal.model.FishModel;
 import lk.ijse.aquariumfinal.model.OrderModel;
 import lk.ijse.aquariumfinal.model.PlantModel;
+import lk.ijse.aquariumfinal.util.EmailUtil;
 
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 public class OrderPageController {
-    @FXML
-    public TextField txtCustomerPhone;
 
-    @FXML
-    private Label lblOrderrid;
+    @FXML public TextField txtCustomerPhone;
+    @FXML public Label lblcustomerEmail;
+    @FXML private Label lblOrderrid;
+    @FXML public Label lblPaymentId;
+    @FXML public Button btnSearchCustomer;
+    @FXML public Button btnPlaceOrder;
+    @FXML public DatePicker datePickerDate;
+    @FXML public Label lblChange;
+    @FXML public Button btnCheckBalance;
+    @FXML public TextField txtPaidAmount;
+    @FXML public Label lblTotalAmount;
+    @FXML public ComboBox<String> cmbMethod;
+    @FXML public TableColumn<CartTM, String> colItemId;
+    @FXML public TableColumn<CartTM, String> colName;
+    @FXML public TableColumn<CartTM, Integer> colQty;
+    @FXML public TableColumn<CartTM, Double> colUnitPrice;
+    @FXML public TableColumn<CartTM, Double> colTotal;
+    @FXML public TableColumn<CartTM, Button> colRemove;
+    @FXML public TableView<CartTM> tblCart;
+    @FXML public AnchorPane itemUiLoadPane;
+    @FXML public Button btnAddToCart;
+    @FXML public Button btnSearchItem;
+    @FXML public ComboBox<String> cmbItemId;
+    @FXML public Label lblCustomerName;
+    @FXML public Label CustomerId;
 
-    @FXML
-    public Label lblPaymentId;
-
-    @FXML
-    public Button btnSearchCustomer;
-
-    @FXML
-    public Button btnPlaceOrder;
-
-    @FXML
-    public DatePicker datePickerDate;
-
-    @FXML
-    public Label lblChange;
-    public Button btnCheckBalance;
-    public TextField txtPaidAmount;
-    public Label lblTotalAmount;
-    public ComboBox<String> cmbMethod;
-    public TableColumn<CartTM, String> colItemId;
-    public TableColumn<CartTM, String> colName;
-    public TableColumn<CartTM, Integer> colQty;
-    public TableColumn<CartTM, Double> colUnitPrice;
-    public TableColumn<CartTM, Double> colTotal;
-    public TableColumn<CartTM, Button> colRemove;
-    public TableView<CartTM> tblCart;
-    public AnchorPane itemUiLoadPane;
-    public Button btnAddToCart;
-    public Button btnSearchItem;
-    public ComboBox<String> cmbItemId;
-    public Label lblCustomerName;
     private final OrderModel orderModel = new OrderModel();
     private final ObservableList<CartTM> cartList = FXCollections.observableArrayList();
-    public Label CustomerId;
 
+    public String customerEmail = "";
     public static String fishId = "";
     public static int fishQty = 0;
-
     public static String plantId = "";
     public static int plantQty = 0;
-
+    double total = 0;
 
     private PlantCartPageController plantCartController;
     private FishCartPageController fishCartController;
-
-
     public void initialize() throws SQLException, ClassNotFoundException {
         setNextOrderId();
         setNextPaymentId();
@@ -80,10 +68,9 @@ public class OrderPageController {
         setupTableColumns();
     }
 
-    private void loadItemTypes() throws SQLException, ClassNotFoundException {
+    private void loadItemTypes() {
         cmbItemId.setItems(FXCollections.observableArrayList("Plant Order", "Fish Order"));
         cmbMethod.setItems(FXCollections.observableArrayList("Card", "Cash"));
-
     }
 
     private void setupTableColumns() {
@@ -111,13 +98,22 @@ public class OrderPageController {
             if (customer != null) {
                 CustomerId.setText(customer.getId());
                 lblCustomerName.setText(customer.getName());
+                lblcustomerEmail.setText(customer.getEmail());
                 showAlert(Alert.AlertType.INFORMATION, "Customer Found");
             } else {
                 showAlert(Alert.AlertType.WARNING, "Customer Not Found");
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
         }
+    }
+
+    private void calculateTotal() {
+        total = 0;
+        for (CartTM tm : cartList) {
+            total += Double.parseDouble(tm.getTotal().replace("Rs. ", ""));
+        }
+        lblTotalAmount.setText(String.format("Rs. %.2f", total));
     }
 
     public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
@@ -134,28 +130,21 @@ public class OrderPageController {
                 cmbItemId.getValue(),
                 cmbMethod.getValue(),
                 lblTotalAmount.getText()
-
-
         );
-        PlantDTO plant =new PlantDTO();
-        plant.setPlantId(plantId);
-        plant.setQuantity(String.valueOf(plantQty));
 
-        FishDTO fish = new FishDTO();
-        fish.setFishId(fishId);
-        fish.setQuantity(String.valueOf(fishQty));
-
+        PlantDTO plant = new PlantDTO(plantId, null, null, null, null, null, null, null, String.valueOf(plantQty));
+        FishDTO fish = new FishDTO(fishId, null, null, null, null, null, null, null, String.valueOf(fishQty));
 
         ArrayList<CartDTO> cartDTOList = new ArrayList<>();
         for (CartTM tm : cartList) {
-            CartDTO dto = new CartDTO(tm.getItemId(), tm.getName(), tm.getQuantity(), tm.getUnitPrice(), tm.getTotal());
-            cartDTOList.add(dto);
+            cartDTOList.add(new CartDTO(tm.getItemId(), tm.getName(), tm.getQuantity(), tm.getUnitPrice(), tm.getTotal()));
         }
 
         try {
-            boolean isPlaced = orderModel.saveOrder(order, fish ,plant);
+            boolean isPlaced = orderModel.saveOrder(order, fish, plant);
             if (isPlaced) {
-
+                EmailUtil.sendOrderAllert(total,lblcustomerEmail.getText(), CustomerId.getText());
+                showAlert(Alert.AlertType.CONFIRMATION, "Email sent!");
                 showAlert(Alert.AlertType.INFORMATION, "Order placed successfully!");
                 clearFields();
                 setNextOrderId();
@@ -163,21 +152,10 @@ public class OrderPageController {
             } else {
                 showAlert(Alert.AlertType.ERROR, "Failed to place order.");
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
         }
-
     }
-
-    private void calculateTotal() {
-
-        double total = 0;
-        for (CartTM tm : cartList) {
-            total += Double.parseDouble(tm.getTotal());
-        }
-        lblTotalAmount.setText(String.format("Rs. %.2f", total));
-    }
-
 
     private void clearFields() {
         datePickerDate.setValue(null);
@@ -187,12 +165,11 @@ public class OrderPageController {
         lblCustomerName.setText("Customer Name");
         cartList.clear();
         lblTotalAmount.setText("Rs. 0.00");
-
         fishId = "";
-        plantId="";
-
         fishQty = 0;
+        plantId = "";
         plantQty = 0;
+
     }
 
     private void showAlert(Alert.AlertType type, String msg) {
@@ -206,56 +183,37 @@ public class OrderPageController {
             return;
         }
 
-        switch (selectedItem) {
-            case "Plant Order" -> {
+        try {
+            itemUiLoadPane.getChildren().clear();
+            FXMLLoader fxmlLoader;
+            AnchorPane pane;
 
-                try {
-                    itemUiLoadPane.getChildren().clear();
-
-                    FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/PlantCartPage.fxml"));
-                    AnchorPane pane = fxmlLoader.load();
-                    plantCartController = fxmlLoader.getController();
-                    plantCartController.loadPlantIds();
-
-                    pane.prefWidthProperty().bind(itemUiLoadPane.widthProperty());
-                    pane.prefHeightProperty().bind(itemUiLoadPane.heightProperty());
-
-                    itemUiLoadPane.getChildren().add(pane);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            case "Fish Order" -> {
-
-                try {
-                    itemUiLoadPane.getChildren().clear();
-
-                    FXMLLoader fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FishCartPage.fxml"));
-                    AnchorPane pane = fxmlLoader.load();
-                    fishCartController = fxmlLoader.getController();
-                    fishCartController.loadFishIds();
-
-                    pane.prefWidthProperty().bind(itemUiLoadPane.widthProperty());
-                    pane.prefHeightProperty().bind(itemUiLoadPane.heightProperty());
-
-                    itemUiLoadPane.getChildren().add(pane);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            if (selectedItem.equals("Plant Order")) {
+                fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/PlantCartPage.fxml"));
+                pane = fxmlLoader.load();
+                plantCartController = fxmlLoader.getController();
+                plantCartController.loadPlantIds();
+            } else {
+                fxmlLoader = new FXMLLoader(AppInitializer.class.getResource("/view/FishCartPage.fxml"));
+                pane = fxmlLoader.load();
+                fishCartController = fxmlLoader.getController();
+                fishCartController.loadFishIds();
             }
 
+            pane.prefWidthProperty().bind(itemUiLoadPane.widthProperty());
+            pane.prefHeightProperty().bind(itemUiLoadPane.heightProperty());
+            itemUiLoadPane.getChildren().add(pane);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
 
     public void btnCheckBalanceOnAction(ActionEvent actionEvent) {
         try {
             double paid = Double.parseDouble(txtPaidAmount.getText());
-            String totalStr = lblTotalAmount.getText().replace("Rs. ", "");
-            double total = Double.parseDouble(totalStr);
-
-            double change = paid - total;
-            lblChange.setText(String.format("Rs. %.2f", change));
+            double total = Double.parseDouble(lblTotalAmount.getText().replace("Rs. ", ""));
+            lblChange.setText(String.format("Rs. %.2f", paid - total));
         } catch (NumberFormatException e) {
             showAlert(Alert.AlertType.WARNING, "Invalid amount");
         }
@@ -272,35 +230,26 @@ public class OrderPageController {
         try {
             String itemId, name, qtyStr, unitPriceStr;
 
-            switch (selectedItemType) {
-                case "Fish Order" -> {
-                    if (fishCartController == null) {
-                        showAlert(Alert.AlertType.WARNING, "Please load the Fish Order form first.");
-                        return;
-                    }
-
-                    itemId = fishCartController.getSelectedFishId();
-                    name = fishCartController.getFishName();
-                    qtyStr = fishCartController.getQuantity();
-                    unitPriceStr = fishCartController.getUnitPrice();
-                }
-
-                case "Plant Order" -> {
-                    if (plantCartController == null) {
-                        showAlert(Alert.AlertType.WARNING, "Please load the Plant Order form first.");
-                        return;
-                    }
-
-                    itemId = plantCartController.getSelectedPlantId();
-                    name = plantCartController.getPlantName();
-                    qtyStr = plantCartController.getQuantity();
-                    unitPriceStr = plantCartController.getUnitPrice();
-                }
-
-                default -> {
-                    showAlert(Alert.AlertType.WARNING, "Unknown item type.");
+            if (selectedItemType.equals("Fish Order")) {
+                if (fishCartController == null) {
+                    showAlert(Alert.AlertType.WARNING, "Please load the Fish Order form first.");
                     return;
                 }
+
+                itemId = fishCartController.getSelectedFishId();
+                name = fishCartController.getFishName();
+                qtyStr = fishCartController.getQuantity();
+                unitPriceStr = fishCartController.getUnitPrice();
+            } else {
+                if (plantCartController == null) {
+                    showAlert(Alert.AlertType.WARNING, "Please load the Plant Order form first.");
+                    return;
+                }
+
+                itemId = plantCartController.getSelectedPlantId();
+                name = plantCartController.getPlantName();
+                qtyStr = plantCartController.getQuantity();
+                unitPriceStr = plantCartController.getUnitPrice();
             }
 
             int quantity = Integer.parseInt(qtyStr);
@@ -325,11 +274,8 @@ public class OrderPageController {
             cartList.add(cartTM);
             calculateTotal();
 
-        } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Invalid quantity or unit price.");
         } catch (Exception e) {
             showAlert(Alert.AlertType.ERROR, "Error adding item to cart: " + e.getMessage());
         }
     }
-
 }

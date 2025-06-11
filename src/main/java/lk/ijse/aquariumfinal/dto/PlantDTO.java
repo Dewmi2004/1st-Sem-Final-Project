@@ -19,4 +19,7 @@ public class PlantDTO {
     public PlantDTO(String name) {
         this.name = name;
     }
+
+    public PlantDTO(String plantId, Object o, Object o1, Object o2, Object o3, Object o4, Object o5, Object o6, String s) {
+    }
 }

@@ -9,7 +9,7 @@ import java.util.Properties;
 public class EmailUtil {
 
     private static final String FROM_EMAIL = "imashadewmi557@gmail.com";
-    private static final String PASSWORD = "ywfb gpfo ijtb akur";
+    private static final String PASSWORD = "ywfbgpfoijtbakur";
 
     private static Session createSession() {
         Properties props = new Properties();
@@ -29,7 +29,7 @@ public class EmailUtil {
         new Thread(() -> {
             try {
                 Message message = new MimeMessage(createSession());
-                message.setFrom(new InternetAddress(FROM_EMAIL, "Aquarium Shop"));
+                message.setFrom(new InternetAddress(FROM_EMAIL, "imashadewmi557@gmail.com"));
                 message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
                 message.setSubject(subject);
                 message.setText(body);
@@ -69,5 +69,22 @@ public class EmailUtil {
                 "Best,\nAquarium Shop Management";
         send(toEmail, subject, body);
     }
+public static void sendOrderAllert( double price, String recipientEmail, String customerId){
 
+//            String senderEmail = FROM_EMAIL;
+//            String senderPassword = PASSWORD;
+            String subject = "Your Order Alert - Aquarium Shop";
+            String body = "Dear Customer,\n\n" +
+                    "This is to inform you that your order has been placed successfully. We will contact you shortly to confirm the details.\n\n" +
+                    "Price: $" + price + "\n" +
+                    "Customer ID: " + customerId + "\n" +
+                    "Customer Email: " + recipientEmail + "\n\n" +
+                    "Thank you for choosing Aquarium Shop.\n" +
+                    "Best regards,\nAquarium Shop Team";
+
+                createSession();
+           send(recipientEmail, subject, body);
+
+
+    }
 }

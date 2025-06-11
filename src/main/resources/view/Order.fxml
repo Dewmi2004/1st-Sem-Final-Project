@@ -39,6 +39,7 @@
                 <Button fx:id="btnSearchCustomer" onAction="#btnSearchCustomerOnAction" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #4b7bec; -fx-text-fill: white; -fx-background-radius: 8;" text="Search" />
                 <Label fx:id="CustomerId" prefWidth="103.0" text="Customer ID" textFill="#2f3542" />
                 <Label fx:id="lblCustomerName" prefWidth="108.0" text="Customer Name" />
+            <Label fx:id="lblcustomerEmail" text="customer Email" />
             </HBox>
 
             <VBox spacing="5.0">

@@ -27,11 +27,12 @@ public class CustomerModel {
 }
 
     public static CustomerDTO searchCustomerByPhone(String phone) throws SQLException, ClassNotFoundException {
-        ResultSet rs = CrudUtil.execute("SELECT customer_Id, customer_Name FROM customer WHERE customer_Contact = ?", phone);
+        ResultSet rs = CrudUtil.execute("SELECT customer_Id, customer_Name,customer_Email FROM customer WHERE customer_Contact = ?", phone);
         if (rs.next()) {
             return new CustomerDTO(
                     rs.getString("customer_Id"),
-                    rs.getString("customer_Name")
+                    rs.getString("customer_Name"),
+                    rs.getString("customer_Email")
             );
         }
         return null;
