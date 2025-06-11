@@ -183,6 +183,7 @@ public class OrderPageController {
             return;
         }
 
+
         try {
             itemUiLoadPane.getChildren().clear();
             FXMLLoader fxmlLoader;
