@@ -71,8 +71,7 @@ public class EmailUtil {
     }
 public static void sendOrderAllert( double price, String recipientEmail, String customerId){
 
-//            String senderEmail = FROM_EMAIL;
-//            String senderPassword = PASSWORD;
+
             String subject = "Your Order Alert - Aquarium Shop";
             String body = "Dear Customer,\n\n" +
                     "This is to inform you that your order has been placed successfully. We will contact you shortly to confirm the details.\n\n" +
