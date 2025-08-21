@@ -1,5 +1,4 @@
 ﻿# 1st-Sem-Final-Project
-i want to add this for all repositeries which means to home page
 # Hi there, I'm Dewmi 👋
 
 
@@ -68,3 +67,4 @@ i want to add this for all repositeries which means to home page
 ---
 
 ![Dewmi's GitHub Stats](https://github-readme-stats.vercel.app/api?username=Dewmi2004&show_icons=true&theme=radical)
+
